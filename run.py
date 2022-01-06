@@ -1,6 +1,7 @@
 """ Project 3 - Python Minigames """
 
 # imports (modules and other needed py libraries)
+import leaderboards as lb
 
 # defining menu dictionary (contains names of game/leaderboard modules)
 menu_dict = {
@@ -9,10 +10,6 @@ menu_dict = {
     '3': 'rock_paper_scissors',
     '4': 'leaderboards'
 }
-
-# quit variable, used to check if user wants to exit a module/program
-# user_quit = None
-
 
 # creating the Player class
 class Player:
@@ -25,11 +22,34 @@ class Player:
     def player_info(self):
         print(f"The user is called: {self.username}, has a current score of: {self.score} and their quit status is: {self.user_quit}")
 
-
 # test instance of Player class and its player_info method
-username = 'charlie'
-current_user = Player(username, 0, None)
-current_user.player_info()
+# username = 'charlie'
+# current_user = Player(username, 0, None)
+# current_user.player_info()
+
+# quit variable, used to check if user wants to exit a module/program
+# user_quit = None
+
+# username selection loop (occurs once per load of program)
+username_choice = input("Enter 'y' to reuse a previous username, or anything to choose a new name: ")
+# retriving the list of usernames from the leaderboards worksheets
+if username_choice.lower() == 'y':
+    print("Previous usernames...")
+# while loop for requesting a valid username from the user
+else:
+    while True:
+        try:
+            username = input("Enter a username (without spaces & less than 15 characters): ")
+            if (len(username) > 15) or (' ' in username):
+                raise ValueError
+            else:
+                break
+        except ValueError:
+            print("Please enter a valid username (no spaces and less than 15 characters)")
+
+print(f"Thank you {username}")
+# print(username_choice)
+
 
 """
 -Asking user if they would like to use an existing username or to choose
