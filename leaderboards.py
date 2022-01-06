@@ -43,7 +43,7 @@ def unique_usernames(sheets):
     usernames_dict = {}
     for i, name in enumerate(usernames):
         usernames_dict[i] = name
-    print(usernames_dict)
+    return usernames_dict
 
 
 # test calling functions
