@@ -97,5 +97,5 @@ To do:
 Features that could be added to expand and improve the program in the future.
 
 to do:
-* menu option to chnage user name without exiting the program
+* menu option to change user name without exiting the program
 * other games to include ...
