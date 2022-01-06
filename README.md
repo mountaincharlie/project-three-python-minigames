@@ -1,31 +1,100 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Python Minigames [to finish]
 
-Welcome Charlie,
+Python Minigames are a collection of ___ well known games, built in Python, including; Minesweeper, __, __ ... The option to set or reuse a username enables the user to personalise their experience and the ability to save and view scores in the leaderboard feature, allows for the games to be played casually, to track progress, or competatively, against others.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+This app provides a fun and quick way to play a few small, popular games, with easy to follow instructions and user feedback allowing all kinds of user's to get started straight away. 
 
-## Reminders
+![Viewing my website on the Am I Responsive site](##IMAGE LOCATION## "Python Minigames website on the Am I Responsive site")
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+[Image made using <a href = "http://ami.responsivedesign.is/">Am I Responsive Website</a>]
 
-## Creating the Heroku app
+## Contents [to finish]
+---
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+* [Technologies Used](https://github.com/mountaincharlie/project-three-python-minigames#technologies-used)
 
-1. `heroku/python`
-2. `heroku/nodejs`
+## Technologies Used 
+---
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+* Python
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+## Features [to finish]
+---
 
-Connect your GitHub repository and deploy as normal.
+To do:
+* descriptions/user value/screenshots 
+* menu/navigation
+* the games [Player Class model!] (link to instructions section)
+* the leaderboard (link to API section)
 
-## Constraints
+## The Games [to finish]
+---
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+To do:
+* instructions and screenshots
+* Minesweeper
+* ...
 
------
-Happy coding!
+## Google Drive and Sheets APIs [to finish]
+---
+
+To do:
+* explain steps/purpose and screenshots 
+* setup?
+* interacting with the leaderboards
+* each leaderboard and read/writing from/to it
+
+## Python Libraries [to finish]
+---
+
+To do:
+* uses and credit for
+* Numpy?
+* PyDictionary?
+
+## User Experience Design [to finish]
+---
+
+To do:
+* interactivity
+* navigation
+* user feedback
+* CI template for console style layout in the browser
+
+## Accessability [to finish]
+---
+
+* ?
+
+## Testing [to finish]
+---
+
+To do:
+### PEP8 Python Validator
+* SHOULD BE: No errors or warnings
+* <a href = ##LINK##>Link to validator results</a>
+
+### Bugs and Fixes
+* any bugs you came across
+    * their solution
+
+### Unfixed Bugs
+* SHOULD BE: No unfixed bugs
+
+## Deployment [to finish]
+---
+
+To do:
+* fully describe process to deploy to Heroku
+
+## Credits [to finish]
+---
+
+* 
+
+## Program Expansion Ideas [to finish]
+
+Features that could be added to expand and improve the program in the future.
+
+to do:
+* other games to include ...
