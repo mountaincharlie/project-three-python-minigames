@@ -13,8 +13,23 @@ menu_dict = {
 # quit variable, used to check if user wants to exit a module/program
 # user_quit = None
 
+
 # creating the Player class
-# class Player:
+class Player:
+    """ Creates an instance of Player """
+    def __init__(self, username, score, user_quit):
+        self.username = username
+        self.score = score
+        self.user_quit = user_quit
+
+    def player_info(self):
+        print(f"The user is called: {self.username}, has a current score of: {self.score} and their quit status is: {self.user_quit}")
+
+
+# test instance of Player class and its player_info method
+username = 'charlie'
+current_user = Player(username, 0, None)
+current_user.player_info()
 
 """
 -Asking user if they would like to use an existing username or to choose
