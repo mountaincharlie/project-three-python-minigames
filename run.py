@@ -85,15 +85,29 @@ thank
 you msg
 """
 
+# while loop to prompt input from menu_dict options until 'quit'
 while current_user.quit_status != 'quit':
+    # while loop to catch value errors and prompt input until 'quit'
+    while True:
+        try:
+            print('Game Menu:')
+            pprint(menu_dict)
+            game_choice = input("Enter a number to select an option (or 'quit' to exit):\n")
+            if game_choice == 'quit':
+                current_user.quit_status = game_choice
+                break
+            elif game_choice in menu_dict:
+                game_choice = menu_dict[game_choice]
+                print(f'Opening {game_choice}')
+                # INSERT function call for calling a game module with current_player instance
+                break
+            else:
+                raise ValueError
+        except ValueError:
+            print("Invalid entry. Enter a number from the options below.\n Or 'quit' to exit")
 
-    print('Game Menu:')
-    pprint(menu_dict)
-
-    game_choice = input("Enter a number to choose a game (or 'quit' to exit):\n")
-
-    current_user.quit_status = game_choice
-    print(f'You chose: {game_choice}')
+    # feedback for choice being applied
+    print(f'\nSuccessfully applying: {game_choice}\n')
 
 # exit thank you message
 print(f'Thank you {username} for playing Python Minigames!')
