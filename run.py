@@ -23,19 +23,19 @@ class Player:
     def player_info(self):
         print(f"The user is called: {self.username}, has a current score of: {self.score} and their quit status is: {self.user_quit}")
 
+    # property decorator for getter/setter methods
+    @property
+    def quit_status(self):
+        return self.user_quit
 
-# test instance of Player class and its player_info method
-# username = 'charlie'
-# current_user = Player(username, 0, None)
-# current_user.player_info()
-
-
-# quit variable, used to check if user wants to exit a module/program
-# user_quit = None
+    @quit_status.setter
+    def quit_status(self, value):
+        self.user_quit = value
 
 
 # username selection loop (occurs once per load of program)
 username_choice = input("Enter 'y' to reuse a previous username, or anything to choose a new name:\n")
+
 # retrieving the list of usernames from the leaderboards worksheets
 if username_choice.lower() == 'y':
     # unpacking the values from manu_dict with * operator
@@ -69,7 +69,7 @@ print(f"Thank you {username}")
 
 # creating the current user's instance of the Player class
 current_user = Player(username, 0, None)
-current_user.player_info() # calling method to check attributes
+# current_user.player_info() # calling method to check attributes
 
 
 """
