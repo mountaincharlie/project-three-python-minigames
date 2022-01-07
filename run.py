@@ -1,8 +1,9 @@
 """ Project 3 - Python Minigames """
 
 # imports (modules and other needed py libraries)
-import leaderboards as lb
 from pprint import pprint
+from modules import leaderboards as lb
+
 
 # defining menu dictionary (contains names of game/leaderboard modules)
 menu_dict = {
@@ -11,6 +12,7 @@ menu_dict = {
     '3': 'rock_paper_scissors',
     '4': 'leaderboards'
 }
+
 
 # creating the Player class
 class Player:
