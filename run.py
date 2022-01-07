@@ -38,7 +38,8 @@ class Player:
     def quit_status(self, value):
         self.user_quit = value
 
-
+# initial welcome message
+print("Welcome to Python Minigames!\nLet's start by setting your username.")
 # username selection loop (occurs once per load of program)
 username_choice = input("Enter 'y' to reuse a previous username, or anything to choose a new name:\n")
 
