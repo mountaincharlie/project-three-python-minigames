@@ -3,9 +3,9 @@
 # imports (modules and other needed py libraries)
 from pprint import pprint
 import importlib as il
-#from modules import minesweeper
-#from modules import hangman
-#from modules import rock_paper_scissors
+# from modules import minesweeper
+# from modules import hangman
+# from modules import rock_paper_scissors
 from modules import leaderboards as lb
 
 
@@ -44,11 +44,13 @@ username_choice = input("Enter 'y' to reuse a previous username, or anything to 
 
 # retrieving the list of usernames from the leaderboards worksheets
 if username_choice.lower() == 'y':
+    print('Finding previous usernames ...')
     # unpacking the values from manu_dict with * operator
     menu_dict_values = [*menu_dict.values()]
     usernames_dict = lb.unique_usernames(menu_dict_values[:-1])
     while True:
         try:
+            print('\nPrevious usernames:')
             pprint(usernames_dict)
             prev_user = int(input("Please enter the number for a previous username:\n"))
             if prev_user in usernames_dict:
