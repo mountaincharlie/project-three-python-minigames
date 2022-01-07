@@ -2,6 +2,10 @@
 
 # imports (modules and other needed py libraries)
 from pprint import pprint
+import importlib as il
+#from modules import minesweeper
+#from modules import hangman
+#from modules import rock_paper_scissors
 from modules import leaderboards as lb
 
 
@@ -94,14 +98,19 @@ while current_user.quit_status != 'quit':
         try:
             print('Game Menu:')
             pprint(menu_dict)
-            game_choice = input("Enter a number to select an option (or 'quit' to exit):\n")
-            if game_choice == 'quit':
-                current_user.quit_status = game_choice
+            menu_choice = input("Enter a number to select an option (or 'quit' to exit):\n")
+            if menu_choice == 'quit':
+                current_user.quit_status = menu_choice
                 break
-            elif game_choice in menu_dict:
-                game_choice = menu_dict[game_choice]
-                print(f'Opening {game_choice}')
-                # INSERT function call for calling a game module with current_player instance
+            elif menu_choice in menu_dict:
+                menu_choice = menu_dict[menu_choice]
+                print(f'Opening {menu_choice} ... \n')
+                # building the string 'package_name.module_name'
+                module_str = 'modules.' + menu_choice
+                # importing the module from the string with importlib
+                module = il.import_module(module_str)
+                # calling the welcome message function in the chosen module
+                module.welcome_msg()
                 break
             else:
                 raise ValueError
@@ -109,7 +118,7 @@ while current_user.quit_status != 'quit':
             print("Invalid entry. Enter a number from the options below.\n Or 'quit' to exit")
 
     # feedback for choice being applied
-    print(f'\nSuccessfully applying: {game_choice}\n')
+    print(f'\nSuccessfully applying: {menu_choice}\n')
 
 # exit thank you message
 print(f'Thank you {username} for playing Python Minigames!')
