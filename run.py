@@ -65,7 +65,7 @@ else:
         except ValueError:
             print("Invalid username")
 
-print(f"Thank you {username}")
+print(f"Welcome to Python Minigames {username}!\n")
 
 # creating the current user's instance of the Player class
 current_user = Player(username, 0, None)
@@ -84,3 +84,16 @@ module.
 thank
 you msg
 """
+
+while current_user.quit_status != 'quit':
+
+    print('Game Menu:')
+    pprint(menu_dict)
+
+    game_choice = input("Enter a number to choose a game (or 'quit' to exit):\n")
+
+    current_user.quit_status = game_choice
+    print(f'You chose: {game_choice}')
+
+# exit thank you message
+print(f'Thank you {username} for playing Python Minigames!')
