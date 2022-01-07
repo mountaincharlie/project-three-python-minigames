@@ -4,7 +4,7 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 # remove at end of project (unless using for project)
-from pprint import pprint
+# from pprint import pprint
 
 # setting up the constant variabels for the API
 SCOPE = [
@@ -30,18 +30,20 @@ SHEET = CLIENT.open("leaderboards")
 # DEFINE 'sheets' in run.py
 # sheets = ['minesweeper', 'hangman']
 
+
 # welcome message function
 def welcome_msg():
     print('Welcome to the Python Minigames Leaderboards!')
+
 
 # finding all unique usernames using a set and | operator
 def unique_usernames(sheets):
     usernames = set()
     # looping through each worksheet in the 'sheets' list
     for sheet in sheets:
-        worksheet = SHEET.worksheet(sheet) # getting the worksheet
-        data = worksheet.col_values(2) # getting the value sin the username col
-        usernames |= set(data[1:]) # creating a union of both sets
+        worksheet = SHEET.worksheet(sheet)  # getting the worksheet
+        data = worksheet.col_values(2)  # getting the values in username col
+        usernames |= set(data[1:])  # creating a union of both sets
 
     # converting the set into dictionary weith number keys
     usernames_dict = {}
