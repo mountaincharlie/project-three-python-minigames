@@ -38,7 +38,9 @@ class Player:
 username_choice = input("Enter 'y' to reuse a previous username, or anything to choose a new name:\n")
 # retrieving the list of usernames from the leaderboards worksheets
 if username_choice.lower() == 'y':
-    usernames_dict = lb.unique_usernames(['minesweeper', 'hangman'])
+    # unpacking the values from manu_dict with * operator
+    menu_dict_values = [*menu_dict.values()]
+    usernames_dict = lb.unique_usernames(menu_dict_values[:-1])
     while True:
         try:
             pprint(usernames_dict)
@@ -65,19 +67,10 @@ else:
 
 print(f"Thank you {username}")
 
-"""
--Asking user if they would like to use an existing username or to choose
-from a previously used one. ('y' for yes to an existing username)
--If 'y', the leaderboards worksheets are checked to see if they contain
-any usernames already. If they do, they are displayed numbered, for the
-user to choose. Else a msg is printed to inform thhe user that there
-are no existing usernames yet and they are invited to enter their own.
--If any other key, the user is asked to enter their own username
--Username MUST be less than 15 characters and contain NO spaces.
-"""
-
 # creating the current user's instance of the Player class
-# current_player = Player(username, 0, None)
+current_user = Player(username, 0, None)
+current_user.player_info() # calling method to check attributes
+
 
 """
 Main while loop for the user to choose from the menu or exit the program.
