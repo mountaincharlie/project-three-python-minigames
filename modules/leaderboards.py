@@ -30,6 +30,10 @@ SHEET = CLIENT.open("leaderboards")
 # DEFINE 'sheets' in run.py
 # sheets = ['minesweeper', 'hangman']
 
+# welcome message function
+def welcome_msg():
+    print('Welcome to the Python Minigames Leaderboards!')
+
 # finding all unique usernames using a set and | operator
 def unique_usernames(sheets):
     usernames = set()
