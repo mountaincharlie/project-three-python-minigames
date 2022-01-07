@@ -26,6 +26,7 @@ class Player:
         self.score = score
         self.user_quit = user_quit
 
+    # REMOVE when not needed for testing
     def player_info(self):
         print(f"The user is called: {self.username}, has a current score of: {self.score} and their quit status is: {self.user_quit}")
 
@@ -37,6 +38,7 @@ class Player:
     @quit_status.setter
     def quit_status(self, value):
         self.user_quit = value
+
 
 # initial welcome message
 print("Welcome to Python Minigames!\nLet's start by setting your username.")
@@ -78,21 +80,6 @@ print(f"Welcome to Python Minigames {username}!\n")
 
 # creating the current user's instance of the Player class
 current_user = Player(username, 0, None)
-# current_user.player_info() # calling method to check attributes
-
-
-"""
-Main while loop for the user to choose from the menu or exit the program.
--Print welcome message
--Print menu_dict
--take menu_choice input from user
--check if menu_choice.lower() != 'quit' and if so, check its a valid menu_dict
-key otherwise keep promting input. Upon valid choice, call the approrpiate
-module.
--else if menu_choice.lower() = 'quit', then break the while loop and print
-thank
-you msg
-"""
 
 # while loop to prompt input from menu_dict options until 'quit'
 while current_user.quit_status != 'quit':
