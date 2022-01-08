@@ -9,10 +9,31 @@ def welcome_msg():
     print('Welcome to the Minesweeper minigame!')
 
 
+# function for checking a coordinates surrounding coordinates for bombs
+def insert_nums(i, j):
+    """ 
+    Takes the coordinates of a point in the 2d array.
+    Creates a 2d array of the point and the coordinates around it, using
+    index slicing and max() inorder to prevent including negative
+    indexes which would access the list from the opposite end.
+    """
+
+    # CREDIT - finding matrix of surrounding coors from MSeifert's solution on stackoverflow "https://stackoverflow.com/questions/36964875/sum-of-8-neighbors-in-2d-array/37026344#37026344"
+    around = hidden_grid[max(0, i-1): i+2, max(0, j-1): j+2]
+    # print(around)
+    # count_nonzero function to find occurances of 'B' in the 2d array
+    bombs_around = np.count_nonzero(around == 'B')
+    # assigning the (i, j) coor with bomb number
+    hidden_grid[i, j] = bombs_around
+
+
 '''
--create the 2d array hidden_grid
--break into functions each process to build and setup the array
+-break code into functions for setting up hidden_grid
 (generate, add bombs, add numbers to other coors)
+-create display_grid
+-user interaction
+-classes
+-access from run.py
 '''
 # gerating a 2d array of zeroes from defined rows and cols
 rows = 7
@@ -43,20 +64,11 @@ for coor in bomb_coors:
 
 print('with bombs:\n', hidden_grid)
 
-# looping through hidden_grid and inserting the correct numbers
-safe_coors = []
-'''
-for row in range(len(hidden_grid)):
-    for col in range(len(hidden_grid[row])):
-        if hidden_grid[row, col] == 'B':
-            b_coors.append([row, col])
-'''
 # using enumerate instead of range(len())
 for i, row in enumerate(hidden_grid):
     for j, col in enumerate(hidden_grid[i]):
         if col != 'B':
-            # safe_coors.append([i, j])
-            hidden_grid[i, j] = 1
+            # calling the function to assign the numbers
+            insert_nums(i, j)
 
-print('with safe coors numbered:\n', hidden_grid)
-# print(f'There are {len(safe_coors)} safe coors and they are: {safe_coors}')
+print('with bomb check number:\n', hidden_grid)
