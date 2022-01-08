@@ -21,27 +21,20 @@ hidden_grid = np.zeros((rows, cols), dtype=str)
 print('initial grid:\n', hidden_grid)
 
 # generate a number of random coordinates to insert bombs
-num_bombs = 4
+num_bombs = 6
 bomb_coors = set()
 
 # while loop to generate enough unique, random coors
 while len(bomb_coors) < num_bombs:
-    # emptying the set at the start of the loop
-    bomb_coors = set()
 
-    # generating random row and col coors and then zipping them
-    bomb_rows = np.random.randint(rows, size=(num_bombs))
-    bomb_cols = np.random.randint(cols, size=(num_bombs))
-    bomb_zip = zip(bomb_rows, bomb_cols)
+    bomb_rows = np.random.randint(rows)
+    bomb_cols = np.random.randint(cols)
 
-    # creating the coors and putting them into a set (so no duplicates)
-    for row, col in bomb_zip:
-        coor = (row, col)
-        bomb_coors.add(coor)
+    coor = (bomb_rows, bomb_cols)
+    bomb_coors.add(coor)
+    # print('coor to add: ', coor)
+    # print('current set of coors: ', bomb_coors)
 
-    # print(bomb_coors)
-    # print('rows', bomb_rows)
-    # print('cols', bomb_cols)
 
 print('bomb coors', bomb_coors)
 
