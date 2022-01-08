@@ -35,7 +35,6 @@ while len(bomb_coors) < num_bombs:
     # print('coor to add: ', coor)
     # print('current set of coors: ', bomb_coors)
 
-
 print('bomb coors', bomb_coors)
 
 # inserting a bomb 'B' at each coor in hidden_grid
@@ -44,4 +43,20 @@ for coor in bomb_coors:
 
 print('with bombs:\n', hidden_grid)
 
-# 
+# looping through hidden_grid and inserting the correct numbers
+safe_coors = []
+'''
+for row in range(len(hidden_grid)):
+    for col in range(len(hidden_grid[row])):
+        if hidden_grid[row, col] == 'B':
+            b_coors.append([row, col])
+'''
+# using enumerate instead of range(len())
+for i, row in enumerate(hidden_grid):
+    for j, col in enumerate(hidden_grid[i]):
+        if col != 'B':
+            # safe_coors.append([i, j])
+            hidden_grid[i, j] = 1
+
+print('with safe coors numbered:\n', hidden_grid)
+# print(f'There are {len(safe_coors)} safe coors and they are: {safe_coors}')
