@@ -113,7 +113,8 @@ def print_grid(grid):
             print('   ', row)
         else:
             for j, col in enumerate(row):
-                grid[i, j] = '#'
+                if grid[i, j] == '':
+                    grid[i, j] = '#'
                 row = str(grid[i])[1:-1]
             print(f"'{m}'", row)
 
@@ -138,6 +139,22 @@ def validate_row_col(num, axis):
             print(f"Invalid {axis}")
 
     return coor
+
+
+def insert_flag(coors, d_grid, h_grid):
+    """
+    Inserts a flag 'F' at the user's coors in the display_grid.
+    If there is a bomb at the coors in the hidden_grid, then
+    its replaced with a 'F'
+    Returns the grid.
+    """
+    d_grid[coors] = 'F'
+
+    if h_grid[coors] == 'B':
+        h_grid[coors] = 'F'
+
+    return d_grid, h_grid
+
 
 
 '''
@@ -174,23 +191,33 @@ def main():
     # print(f'\n{COLS} by {ROWS} Minesweeper grid:\n')
     print_grid(display_grid)
 
-    # user interaction (make function)
+    # MAKE FUNCTION WITH WHILE LOOP (until 'quit') user selection for row and column
     user_row = validate_row_col(ROWS, 'row')
     user_col = validate_row_col(COLS, 'column')
-
     user_coors = (user_row, user_col)
     print(f"Your chosen coordinate is: {user_coors}")
 
+    # check if user wants to insert a flag or reveal location
     flag_or_reveal = input("Enter 'f' to place a flag or anything else to reveal a location:\n")
+
     if flag_or_reveal.lower() == 'f':
-        print(flag_or_reveal)
+        # MAKE FUNCTION
+        print(f'Flag inserted at {user_coors}\n')
+        # function inserts flag into display_grid
+        # and checks if there is a bomb in hidden_grid
+        display_grid, hidden_grid = insert_flag(user_coors, display_grid, hidden_grid)
+        print_grid(display_grid)
+        print('updated hidden_grid:\n', hidden_grid)
     else:
+        # MAKE FUNCTION
         # calling function to check the coors in the hidden_grid
         coor_reveal = hidden_grid[user_coors]
         if coor_reveal == 'B':
-            print("You hit a mine!\nGAME OVER!")
+            print(f"You hit a mine at {user_coors}!\nGAME OVER!")
         else:
-            print("You avoided the mines! This location contains: ", coor_reveal)
+            print(f"You avoided the mines!\n'{coor_reveal}' has been inserted at {user_coors}")
+            display_grid[user_coors] = coor_reveal
+            print_grid(display_grid)
 
 
 # make into a function for user input (they choose easy/med/hard)?
