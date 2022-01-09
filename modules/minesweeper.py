@@ -22,37 +22,37 @@ def generate_grid():
 
 
 # func with while loop to generate enough unique, random coors
-def gen_bomb_coors():
+def gen_mine_coors():
     """
-    Uses the number of bombs, NUM_BOMBS as a condition for the
+    Uses the number of mines, NUM_MINES as a condition for the
     while loop which generates random coordinates with ROWS
-    and COLS and inserts them in the bomb_coors set, to
+    and COLS and inserts them in the mine_coors set, to
     prevent duplicates.
     Returns the set of coordinates.
     """
     coors = set()
-    while len(coors) < NUM_BOMBS:
+    while len(coors) < NUM_MINES:
 
-        bomb_rows = np.random.randint(ROWS)
-        bomb_cols = np.random.randint(COLS)
+        mine_rows = np.random.randint(ROWS)
+        mine_cols = np.random.randint(COLS)
 
-        coor = (bomb_rows, bomb_cols)
+        coor = (mine_rows, mine_cols)
         coors.add(coor)
 
     return coors
 
 
-# function to insert a bomb 'B' at each coor in hidden_grid
-def insert_bombs(coors, hidden_grid):
+# function to insert a mine 'M' at each coor in hidden_grid
+def insert_mines(coors, hidden_grid):
     """
-    Takes the set of bomb coordinates and the hidden_grid
+    Takes the set of mine coordinates and the hidden_grid
     2d array.
-    For each of the coordinates, it inserts a bomb,
-    represented with a 'B'.
+    For each of the coordinates, it inserts a mine,
+    represented with a 'M'.
     Returns the updated hidden_grid.
     """
     for coor in coors:
-        hidden_grid[coor] = 'B'
+        hidden_grid[coor] = 'M'
 
     return hidden_grid
 
@@ -70,11 +70,11 @@ def insert_nums(i, j, hidden_grid):
     # CREDIT - finding matrix of surrounding coors from MSeifert's solution on stackoverflow "https://stackoverflow.com/questions/36964875/sum-of-8-neighbors-in-2d-array/37026344#37026344"
     around = hidden_grid[max(0, i-1): i+2, max(0, j-1): j+2]
 
-    # count_nonzero function to find occurances of 'B' in the 2d array
-    bombs_around = np.count_nonzero(around == 'B')
+    # count_nonzero function to find occurances of 'M' in the 2d array
+    mines_around = np.count_nonzero(around == 'M')
 
-    # assigning the (i, j) coor with bomb number
-    hidden_grid[i, j] = bombs_around
+    # assigning the (i, j) coor with mine number
+    hidden_grid[i, j] = mines_around
 
 
 # function to loop through each coordinate using enumerate instead of range(len()) and call the insert_nums()
@@ -87,7 +87,7 @@ def examine_coors(hidden_grid):
     """
     for i, row in enumerate(hidden_grid):
         for j, col in enumerate(row):
-            if col != 'B':
+            if col != 'M':
                 # calling the function to assign the numbers
                 insert_nums(i, j, hidden_grid)
 
@@ -144,13 +144,13 @@ def validate_row_col(num, axis):
 def insert_flag(coors, d_grid, h_grid):
     """
     Inserts a flag 'F' at the user's coors in the display_grid.
-    If there is a bomb at the coors in the hidden_grid, then
+    If there is a mine at the coors in the hidden_grid, then
     its replaced with a 'F'
     Returns the grid.
     """
     d_grid[coors] = 'F'
 
-    if h_grid[coors] == 'B':
+    if h_grid[coors] == 'M':
         h_grid[coors] = 'F'
 
     return d_grid, h_grid
@@ -173,13 +173,13 @@ def main():
     hidden_grid = generate_grid()
     # print('initial grid:\n', hidden_grid)
 
-    # generating the random and unique bomb coors
-    bomb_coors = gen_bomb_coors()
-    # print('bomb coors', bomb_coors)
+    # generating the random and unique mine coors
+    mine_coors = gen_mine_coors()
+    # print('mine coors', mine_coors)
 
-    # inserting the bombs into the grid
-    hidden_grid = insert_bombs(bomb_coors, hidden_grid)
-    # print('with bombs:\n', hidden_grid)
+    # inserting the mines into the grid
+    hidden_grid = insert_mines(mine_coors, hidden_grid)
+    # print('with mines:\n', hidden_grid)
 
     # looping through the other coors and inserting their number
     print('completed hidden_grid:\n', examine_coors(hidden_grid))
@@ -204,7 +204,7 @@ def main():
         # MAKE FUNCTION
         print(f'Flag inserted at {user_coors}\n')
         # function inserts flag into display_grid
-        # and checks if there is a bomb in hidden_grid
+        # and checks if there is a mine in hidden_grid
         display_grid, hidden_grid = insert_flag(user_coors, display_grid, hidden_grid)
         print_grid(display_grid)
         print('updated hidden_grid:\n', hidden_grid)
@@ -212,8 +212,8 @@ def main():
         # MAKE FUNCTION
         # calling function to check the coors in the hidden_grid
         coor_reveal = hidden_grid[user_coors]
-        if coor_reveal == 'B':
-            print(f"You hit a mine at {user_coors}!\nGAME OVER!")
+        if coor_reveal == 'M':
+            print(f"You hit a mine at {user_coors}!\nGAME OVER")
         else:
             print(f"You avoided the mines!\n'{coor_reveal}' has been inserted at {user_coors}")
             display_grid[user_coors] = coor_reveal
@@ -223,7 +223,7 @@ def main():
 # make into a function for user input (they choose easy/med/hard)?
 ROWS = 9
 COLS = 9
-NUM_BOMBS = 10
+NUM_MINES = 10
 
 # calling the game
 main()
