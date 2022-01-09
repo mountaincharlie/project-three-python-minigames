@@ -85,16 +85,15 @@ def insert_nums(i, j, hidden_grid):
 
     # CREDIT - finding matrix of surrounding coors from MSeifert's solution on stackoverflow "https://stackoverflow.com/questions/36964875/sum-of-8-neighbors-in-2d-array/37026344#37026344"
     around = hidden_grid[max(0, i-1): i+2, max(0, j-1): j+2]
-    # print(around)
+
     # count_nonzero function to find occurances of 'B' in the 2d array
     bombs_around = np.count_nonzero(around == 'B')
+
     # assigning the (i, j) coor with bomb number
     hidden_grid[i, j] = bombs_around
 
 
 '''
--break code into functions for setting up hidden_grid
-(generate, add bombs, add numbers to other coors)
 -create display_grid
 -user interaction
 -classes
@@ -105,16 +104,22 @@ ROWS = 7
 COLS = 9
 NUM_BOMBS = 6
 
-# generating the hidden_grid
-hidden_grid = generate_grid()
-print('initial grid:\n', hidden_grid)
 
-# generating the random and unique bomb coors
-bomb_coors = gen_bomb_coors()
-print('bomb coors', bomb_coors)
+# function containing all the game calls
+def main():
+    # generating the hidden_grid
+    hidden_grid = generate_grid()
+    print('initial grid:\n', hidden_grid)
 
-# inserting the bombs into the grid
-print('with bombs:\n', insert_bombs(bomb_coors, hidden_grid))
+    # generating the random and unique bomb coors
+    bomb_coors = gen_bomb_coors()
+    print('bomb coors', bomb_coors)
 
-# looping through the other coors and inserting their number
-print('with bomb check number:\n', examine_coors(hidden_grid))
+    # inserting the bombs into the grid
+    print('with bombs:\n', insert_bombs(bomb_coors, hidden_grid))
+
+    # looping through the other coors and inserting their number
+    print('with bomb check number:\n', examine_coors(hidden_grid))
+
+
+main()
