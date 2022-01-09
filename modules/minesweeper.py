@@ -118,20 +118,40 @@ def print_grid(grid):
             print(f"'{m}'", row)
 
 
+# function for validating user's input for coordinates
+def validate_row_col(num, axis):
+    """
+    Takes the number of ROWS or COLS and 'row' or 'column'.
+    Keeps asking the user for a row or column number,
+    until a valid entry is given.
+    Returns the valid coordinate.
+    """
+
+    while True:
+        try:
+            coor = int(input(f"Enter {axis} number:\n"))
+            if coor not in range(num):
+                raise ValueError
+            else:
+                break
+        except ValueError:
+            print(f"Invalid {axis}")
+
+    return coor
+
+
 '''
--create display_grid
 -user interaction
 -classes
 -access from run.py
 '''
-# make into a function for user input (they choose easy/med/hard)
-ROWS = 7
-COLS = 9
-NUM_BOMBS = 6
 
 
 def main():
     """ main game function calls """
+    # welcome message
+    welcome_msg()
+
     # generating the hidden_grid
     hidden_grid = generate_grid()
     # print('initial grid:\n', hidden_grid)
@@ -151,8 +171,32 @@ def main():
     display_grid = generate_grid()
 
     # printing the display_grid
-    print(f'\n{COLS} by {ROWS} Minesweeper grid:\n')
+    # print(f'\n{COLS} by {ROWS} Minesweeper grid:\n')
     print_grid(display_grid)
 
+    # user interaction (make function)
+    user_row = validate_row_col(ROWS, 'row')
+    user_col = validate_row_col(COLS, 'column')
 
+    user_coors = (user_row, user_col)
+    print(f"Your chosen coordinate is: {user_coors}")
+
+    flag_or_reveal = input("Enter 'f' to place a flag or anything else to reveal a location:\n")
+    if flag_or_reveal.lower() == 'f':
+        print(flag_or_reveal)
+    else:
+        # calling function to check the coors in the hidden_grid
+        coor_reveal = hidden_grid[user_coors]
+        if coor_reveal == 'B':
+            print("You hit a mine!\nGAME OVER!")
+        else:
+            print("You avoided the mines! This location contains: ", coor_reveal)
+
+
+# make into a function for user input (they choose easy/med/hard)?
+ROWS = 9
+COLS = 9
+NUM_BOMBS = 10
+
+# calling the game
 main()
