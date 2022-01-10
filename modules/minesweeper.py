@@ -2,8 +2,18 @@
 
 # imports
 import numpy as np
-from pprint import pprint
+from run import Player
 
+
+# minesweeper Player subclass
+class MinesweeperPlayer(Player):
+    """ Creates instance of MinesweeperPlayer """
+    def __init__(self, username, score, user_quit, coors):
+        super().__init__(username, score, user_quit)
+        self.coors = coors
+
+
+# ----- WELCOME MESSAGE -----
 
 def welcome_msg():
     """ initial user welcome message """
@@ -13,6 +23,8 @@ def welcome_msg():
 
     return user_choice
 
+
+# ----- GRID GENERATING -----
 
 def generate_grid():
     """
@@ -25,7 +37,6 @@ def generate_grid():
     return grid
 
 
-# func with while loop to generate enough unique, random coors
 def gen_mine_coors():
     """
     Uses the number of mines, NUM_MINES as a condition for the
@@ -46,7 +57,6 @@ def gen_mine_coors():
     return coors
 
 
-# function to insert a mine 'M' at each coor in hidden_grid
 def insert_mines(coors, hidden_grid):
     """
     Takes the set of mine coordinates and the hidden_grid
@@ -81,7 +91,6 @@ def insert_nums(i, j, hidden_grid):
     hidden_grid[i, j] = mines_around
 
 
-# function to loop through each coordinate using enumerate instead of range(len()) and call the insert_nums()
 def examine_coors(hidden_grid):
     """
     Takes the hidden_grid 2d array.
@@ -123,7 +132,8 @@ def print_grid(grid):
             print(f"'{m}'", row)
 
 
-# function for validating user's input for coordinates
+# ----- PROCESSING USER INPUT -----
+
 def validate_row_col(num, axis):
     """
     Takes the number of ROWS or COLS and 'row' or 'column'.
@@ -145,14 +155,16 @@ def validate_row_col(num, axis):
     return coor
 
 
-# update the docstring
 def insert_flag(coors, d_grid, h_grid):
     """
     Takes the coors, display_grid and hidden_grid.
-    Inserts a flag 'F' at the user's coors in the display_grid.
+    Checks if the user has placed their maximum number of
+    flags already.
+    If not, then it inserts a flag 'F' at the user's coors
+    in the display_grid.
     If there is a mine at the coors in the hidden_grid, then
     its replaced with a 'F'
-    Returns the grid.
+    Returns the grids.
     """
     # count_nonzero finding occurances of 'F' in d_grid
     placed_flags = np.count_nonzero(d_grid == 'F')
@@ -190,12 +202,15 @@ def remove_flag(coors, d_grid, h_grid):
     return d_grid, h_grid
 
 
-# update docstring
 def flag_check(coors, d_grid, h_grid):
     """
-    Calls function to insert or remove a flag
+    Takes the coors, display_grid and hidden_grid.
+    Calls function to insert or to remove a flag
+    depending on the user's input.
+    Returns the grids.
     """
     insert_or_remove = input("Hit enter to insert a flag or enter 'r' to remove a flag:\n")
+
     if insert_or_remove.lower() == 'r':
         d_grid, h_grid = remove_flag(coors, d_grid, h_grid)
     else:
@@ -204,7 +219,7 @@ def flag_check(coors, d_grid, h_grid):
     return d_grid, h_grid
 
 
-# game completion functionfinish docstring
+# game completion function finish docstring
 def game_complete():
     """
     """
@@ -301,11 +316,11 @@ def main():
         display_grid = generate_grid()
 
         # printing the display_grid
-        # print(f'\n{COLS} by {ROWS} Minesweeper grid:\n')
         print(f'Your grid is displayed below!\nChoose coordinates to either reveal or\nto place/remove a flag at.\nAttempt to flag each of the {NUM_MINES} mines\nusing the fewest number of reveals.\n(Remember you have only {NUM_MINES} flags)')
+
         print_grid(display_grid)
 
-        # MAKE FUNCTION WITH WHILE LOOP (until 'quit') user selection for row and column
+        # user selection for row and column until 'quit'
         while True:
             user_row = validate_row_col(ROWS, 'row')
             user_col = validate_row_col(COLS, 'column')
