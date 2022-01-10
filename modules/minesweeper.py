@@ -2,9 +2,10 @@
 
 # imports
 import numpy as np
-from run import Player
+# to import run.py from parent directory
 import sys
 sys.path.append('.')
+from run import Player
 
 
 # minesweeper Player subclass
@@ -24,6 +25,12 @@ current_user = Player('mountaincharlie', 0, None)
 
 # example minesweeper_user instance
 minesweeper_user = MinesweeperPlayer.from_current_user(current_user, (0, 0))
+
+# testing class method works
+print(minesweeper_user.username)
+print(minesweeper_user.score)
+print(minesweeper_user.user_quit)
+print(minesweeper_user.coors)
 
 
 # ----- WELCOME MESSAGE -----
