@@ -19,20 +19,6 @@ class MinesweeperPlayer(Player):
     def from_current_user(cls, player_instance, coors):
         return cls(**player_instance.__dict__, coors=coors)
 
-'''
-# example current_user instance (will be carried over from run.py)
-current_user = Player('mountaincharlie', 0, None)
-
-# example minesweeper_user instance
-minesweeper_user = MinesweeperPlayer.from_current_user(current_user, (0, 0))
-
-# testing class method works
-print(minesweeper_user.username)
-print(minesweeper_user.score)
-print(minesweeper_user.user_quit)
-print(minesweeper_user.coors)
-'''
-
 
 # ----- WELCOME MESSAGE -----
 
@@ -41,7 +27,7 @@ def welcome_msg(username):
 
     print(f'Welcome to the Minesweeper minigame {username}!')
     # USE user_quit_status here instead
-    user_choice = input("Hit ENTER to begin or 'quit' to return to the menu:\n")
+    user_choice = input("Hit ENTER to begin or 'quit' to return to the Games Menu:\n")
 
     return user_choice
 
@@ -224,7 +210,7 @@ def remove_flag(coors, d_grid, h_grid):
     return d_grid, h_grid
 
 
-def flag_check(coors, d_grid, h_grid):
+def flag_check(user_coors, d_grid, h_grid):
     """
     Takes the coors, display_grid and hidden_grid.
     Calls function to insert or to remove a flag
@@ -234,9 +220,9 @@ def flag_check(coors, d_grid, h_grid):
     insert_or_remove = input("Hit ENTER to insert a flag or enter 'r' to remove a flag:\n")
 
     if insert_or_remove.lower() == 'r':
-        d_grid, h_grid = remove_flag(coors, d_grid, h_grid)
+        d_grid, h_grid = remove_flag(user_coors, d_grid, h_grid)
     else:
-        d_grid, h_grid = insert_flag(coors, d_grid, h_grid)
+        d_grid, h_grid = insert_flag(user_coors, d_grid, h_grid)
 
     return d_grid, h_grid
 
@@ -251,7 +237,7 @@ def game_complete(user):
     # insert code to compare the score in the SHEET and add at the right place
     print(f"Score saved.\nYou achieved ____ place")
 
-    choice = input("Hit ENTER to play again or 'quit' to return to the Game Menu:\n")
+    choice = input("Hit ENTER to play again or 'quit' to return to the Games Menu:\n")
     # to quit back to game menu or just to restart game
     if choice == 'quit':
         user.quit_status = 'quit'
@@ -276,10 +262,39 @@ def mine_count(user, h_grid):
         return game_complete(user)
 
 
+def coor_reveal(user, user_coors, h_grid, d_grid):
+    """
+    Takes minesweeper_user, minesweeper_user.coors, hidden_grid, display_grid.
+    Checks the contents of the coordinate from in hidden_grid.
+    If the coordinate contains a mine, the game is over, otherwise, a
+    message to the user is displayed and the contents are written into the
+    coordinates in display_grid.
+    """
+    # finding the 'M' or number at user_coors in hidden_grid
+    coor_content = h_grid[user_coors]
+
+    if coor_content == 'M':
+        print(f"Sorry {user.username}, there was a mine at {user_coors}!\nGAME OVER\n")
+        choice = input("Hit ENTER to play again or 'quit' to return to the Games Menu:\n")
+        # to quit back to game menu or just to restart game
+        if choice == 'quit':
+            user.quit_status = 'quit'
+            return user.quit_status
+        else:
+            return 'quit'
+    else:
+        print(f"You avoided the mines!\n'{coor_content}' has been inserted at {user_coors}")
+        # inserting the revealed number and displaying the grid
+        d_grid[user_coors] = coor_content
+        print_grid(d_grid)
+
+
 # function for chekcing flag or reveal
-def flag_or_reveal(user, user_coors, display_grid, hidden_grid):
+def flag_or_reveal(user, display_grid, hidden_grid):
     """  """
     user_choice = input("Hit ENTER to reveal the location or enter 'f' to insert/remove a flag:\n")
+
+    user_coors = user.coors
 
     if user_choice.lower() == 'f':
         # call flag check for deciding insert/remove flag
@@ -293,24 +308,11 @@ def flag_or_reveal(user, user_coors, display_grid, hidden_grid):
         if game_win == 'quit':
             return game_win
 
+        # REMOVE AFTER TESTING
         print('updated hidden_grid:\n', hidden_grid)
     else:
-        # calling function to check the coors in the hidden_grid
-        coor_reveal = hidden_grid[user_coors]
-        if coor_reveal == 'M':
-            print(f"Sorry {user.username}, there was a mine at {user_coors}!\nGAME OVER\n")
-            choice = input("Hit ENTER to play again or 'quit' to return to the Game Menu:\n")
-            # to quit back to game menu or just to restart game
-            if choice == 'quit':
-                user.quit_status = 'quit'
-                return user.quit_status
-            else:
-                return 'quit'
-        else:
-            print(f"You avoided the mines!\n'{coor_reveal}' has been inserted at {user_coors}")
-            # inserting the revealed number and displaying the grid
-            display_grid[user_coors] = coor_reveal
-            print_grid(display_grid)
+        # calling function to check the content of the coor in the hidden_grid
+        return coor_reveal(user, user_coors, hidden_grid, display_grid)
 
 
 
@@ -356,8 +358,8 @@ def main(user):
         # generating the display grid
         display_grid = generate_grid()
 
-        # printing the display_grid
-        print(f'Your grid is displayed below!\nChoose coordinates to either reveal or\nto place/remove a flag at.\nAttempt to flag each of the {NUM_MINES} mines\nusing the fewest number of reveals.\n(Remember you have only {NUM_MINES} flags)')
+        # printing the basic instructions and display_grid
+        print(f'Your grid is displayed below!\nChoose coordinates to either reveal or\nto place/remove a flag at.\nAttempt to flag each of the {NUM_MINES} mines\nusing the fewest number of reveals.\n(Remember you have only {NUM_MINES} flags)\n')
 
         print_grid(display_grid)
 
@@ -365,11 +367,12 @@ def main(user):
         while True:
             user_row = validate_row_col(ROWS, 'ROW')
             user_col = validate_row_col(COLS, 'COLUMN')
-            user_coors = (user_row, user_col)
-            print(f"Your chosen coordinate is: {user_coors}")
+            # user_coors = (user_row, user_col)
+            minesweeper_user.coors = (user_row, user_col)
+            print(f"Your chosen coordinate is: {minesweeper_user.coors}")
 
             # checks if user wants to insert a flag or reveal location
-            f_or_r = flag_or_reveal(minesweeper_user, user_coors, display_grid, hidden_grid)
+            f_or_r = flag_or_reveal(minesweeper_user, display_grid, hidden_grid)
             if f_or_r == 'quit':
                 break
             cont_or_quit = input("Hit ENTER to continue or 'quit' to restart the game:\n")
