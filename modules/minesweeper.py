@@ -7,7 +7,11 @@ from pprint import pprint
 
 def welcome_msg():
     """ initial user welcome message """
+
     print('Welcome to the Minesweeper minigame!')
+    user_choice = input("Enter any key to begin or 'quit' to return to the menu:\n")
+
+    return user_choice
 
 
 def generate_grid():
@@ -185,6 +189,7 @@ def flag_or_reveal(user_coors, display_grid, hidden_grid):
 
 '''
 -user interaction
+-writing scores
 -classes
 -access from run.py
 '''
@@ -192,41 +197,51 @@ def flag_or_reveal(user_coors, display_grid, hidden_grid):
 
 def main():
     """ main game function calls """
-    # welcome message
-    welcome_msg()
 
-    # generating the hidden_grid
-    hidden_grid = generate_grid()
-    # print('initial grid:\n', hidden_grid)
+    # overall while loop for starting the game
+    while True:
+        # welcome message
+        play_or_quit = welcome_msg()
+        if play_or_quit == 'quit':
+            break
+        print('Building the minesweeper grid ...')
 
-    # generating the random and unique mine coors
-    mine_coors = gen_mine_coors()
-    # print('mine coors', mine_coors)
+        # generating the hidden_grid
+        hidden_grid = generate_grid()
+        # print('initial grid:\n', hidden_grid)
 
-    # inserting the mines into the grid
-    hidden_grid = insert_mines(mine_coors, hidden_grid)
-    # print('with mines:\n', hidden_grid)
+        # generating the random and unique mine coors
+        mine_coors = gen_mine_coors()
+        # print('mine coors', mine_coors)
 
-    # looping through the other coors and inserting their number
-    print('completed hidden_grid:\n', examine_coors(hidden_grid))
+        # inserting the mines into the grid
+        hidden_grid = insert_mines(mine_coors, hidden_grid)
+        # print('with mines:\n', hidden_grid)
 
-    # generating the display grid
-    display_grid = generate_grid()
+        # looping through the other coors and inserting their number
+        print('completed hidden_grid:\n', examine_coors(hidden_grid))
 
-    # printing the display_grid
-    # print(f'\n{COLS} by {ROWS} Minesweeper grid:\n')
-    print_grid(display_grid)
+        # generating the display grid
+        display_grid = generate_grid()
 
-    # MAKE FUNCTION WITH WHILE LOOP (until 'quit') user selection for row and column
-    user_row = validate_row_col(ROWS, 'row')
-    user_col = validate_row_col(COLS, 'column')
-    user_coors = (user_row, user_col)
-    print(f"Your chosen coordinate is: {user_coors}")
+        # printing the display_grid
+        # print(f'\n{COLS} by {ROWS} Minesweeper grid:\n')
+        print_grid(display_grid)
 
-    # checks if user wants to insert a flag or reveal location
-    f_or_r = flag_or_reveal(user_coors, display_grid, hidden_grid)
-    # if f_or_r == 'quit':
-        # break
+        # MAKE FUNCTION WITH WHILE LOOP (until 'quit') user selection for row and column
+        user_row = validate_row_col(ROWS, 'row')
+        user_col = validate_row_col(COLS, 'column')
+        user_coors = (user_row, user_col)
+        print(f"Your chosen coordinate is: {user_coors}")
+
+        # checks if user wants to insert a flag or reveal location
+        f_or_r = flag_or_reveal(user_coors, display_grid, hidden_grid)
+        # if f_or_r == 'quit':
+            # break
+
+    print(f'Thank you __ for playing the Minesweeper minigame!')
+
+
 
 
 
