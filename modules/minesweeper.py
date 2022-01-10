@@ -145,17 +145,61 @@ def validate_row_col(num, axis):
     return coor
 
 
+# update the docstring
 def insert_flag(coors, d_grid, h_grid):
     """
+    Takes the coors, display_grid and hidden_grid.
     Inserts a flag 'F' at the user's coors in the display_grid.
     If there is a mine at the coors in the hidden_grid, then
     its replaced with a 'F'
     Returns the grid.
     """
-    d_grid[coors] = 'F'
+    # count_nonzero finding occurances of 'F' in d_grid
+    placed_flags = np.count_nonzero(d_grid == 'F')
+    if int(placed_flags) == NUM_MINES:
+        print(f"You have placed {NUM_MINES}. Please remove a flag first.")
+    else:
+        d_grid[coors] = 'F'
+        print(f'Flag inserted at {coors}\n')
 
-    if h_grid[coors] == 'M':
-        h_grid[coors] = 'F'
+        if h_grid[coors] == 'M':
+            h_grid[coors] = 'F'
+
+    return d_grid, h_grid
+
+
+def remove_flag(coors, d_grid, h_grid):
+    """
+    Takes the coors, display_grid and hidden_grid.
+    If theres a flag in hidden_grid it replaces back the
+    mine 'M'.
+    If theres a flag in display_grid it replaces it with a
+    '#', else it tells the user that there isnt a flag
+    there to remove.
+    Returns the potentially updated d_grid and h_grid
+    """
+    if h_grid[coors] == 'F':
+        h_grid[coors] = 'M'
+
+    if d_grid[coors] == 'F':
+        d_grid[coors] = '#'
+        print(f"Flag removed at {coors}")
+    else:
+        print(f"There is no flag to remove at {coors}")
+
+    return d_grid, h_grid
+
+
+# update docstring
+def flag_check(coors, d_grid, h_grid):
+    """
+    Calls function to insert or remove a flag
+    """
+    insert_or_remove = input("Hit enter to insert a flag or enter 'r' to remove a flag:\n")
+    if insert_or_remove.lower() == 'r':
+        d_grid, h_grid = remove_flag(coors, d_grid, h_grid)
+    else:
+        d_grid, h_grid = insert_flag(coors, d_grid, h_grid)
 
     return d_grid, h_grid
 
@@ -166,14 +210,14 @@ def flag_or_reveal(user_coors, display_grid, hidden_grid):
     user_choice = input("Enter 'f' to place a flag or anything else to reveal a location:\n")
 
     if user_choice.lower() == 'f':
-        print(f'Flag inserted at {user_coors}\n')
-        # insert flag into display_grid and into hidden_grid if there is a mine
-        display_grid, hidden_grid = insert_flag(user_coors, display_grid, hidden_grid)
-        # function call to display display_grid
+        # call flag check for deciding insert/remove flag
+        display_grid, hidden_grid = flag_check(user_coors, display_grid, hidden_grid)
+
+        # displaying display_grid
         print_grid(display_grid)
-        # print('updated hidden_grid:\n', hidden_grid)
+
+        print('updated hidden_grid:\n', hidden_grid)
     else:
-        # MAKE FUNCTION
         # calling function to check the coors in the hidden_grid
         coor_reveal = hidden_grid[user_coors]
         if coor_reveal == 'M':
