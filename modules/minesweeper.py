@@ -204,6 +204,33 @@ def flag_check(coors, d_grid, h_grid):
     return d_grid, h_grid
 
 
+# game completion functionfinish docstring
+def game_complete():
+    """
+    """
+    print(f"YOU WON!\nCongratulations ___! You completed the game with ___ reveals")
+    print("Saving score to the Minesweeper Leaderboard ...")
+    # insert code to access the SHEET
+    # insert code to compare the score in the SHEET and add at the right place
+    print(f"Score saved.\nYou achieved ____ place")
+
+    return 'quit'
+
+
+def mine_count(h_grid):
+    """
+    Takes the hidden_grid.
+    Counts the occurances of 'M' in the grid.
+    If there are no mines remaining (they're all flagged)
+    then the game_complete() function is called.
+    Returns the return of game_complete() (which is 'quit')
+    """
+    mines_remaining = np.count_nonzero(h_grid == 'M')
+
+    if int(mines_remaining) == 0:
+        return game_complete()
+
+
 # function for chekcing flag or reveal
 def flag_or_reveal(user_coors, display_grid, hidden_grid):
     """  """
@@ -216,12 +243,17 @@ def flag_or_reveal(user_coors, display_grid, hidden_grid):
         # displaying display_grid
         print_grid(display_grid)
 
+        # check number of mines
+        game_win = mine_count(hidden_grid)
+        if game_win.lower() == 'quit':
+            return 'quit'
+
         print('updated hidden_grid:\n', hidden_grid)
     else:
         # calling function to check the coors in the hidden_grid
         coor_reveal = hidden_grid[user_coors]
         if coor_reveal == 'M':
-            print(f"You hit a mine at {user_coors}!\nGAME OVER")
+            print(f"You hit a mine at {user_coors}!\nGAME OVER\n")
             return 'quit'
         else:
             print(f"You avoided the mines!\n'{coor_reveal}' has been inserted at {user_coors}")
@@ -232,10 +264,10 @@ def flag_or_reveal(user_coors, display_grid, hidden_grid):
 
 
 '''
--user interaction
+-import player class
 -writing scores
--classes
 -access from run.py
+-instructions
 '''
 
 
@@ -248,7 +280,7 @@ def main():
         play_or_quit = welcome_msg()
         if play_or_quit.lower() == 'quit':
             break
-        print('Building the minesweeper grid ...')
+        print('Building the minesweeper grid ...\n')
 
         # generating the hidden_grid
         hidden_grid = generate_grid()
@@ -282,8 +314,8 @@ def main():
 
             # checks if user wants to insert a flag or reveal location
             f_or_r = flag_or_reveal(user_coors, display_grid, hidden_grid)
-            # if f_or_r == 'quit':
-                # break
+            if f_or_r == 'quit':
+                break
             cont_or_quit = input("Hit enter to continue or 'quit' to restart the game:\n")
             if cont_or_quit.lower() == 'quit':
                 break
@@ -293,8 +325,8 @@ def main():
 
 
 # game constants
-ROWS = 9
-COLS = 9
+ROWS = 8
+COLS = 8
 NUM_MINES = 10
 
 # calling the game
