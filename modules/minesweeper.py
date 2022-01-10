@@ -19,7 +19,7 @@ class MinesweeperPlayer(Player):
     def from_current_user(cls, player_instance, coors):
         return cls(**player_instance.__dict__, coors=coors)
 
-
+'''
 # example current_user instance (will be carried over from run.py)
 current_user = Player('mountaincharlie', 0, None)
 
@@ -31,14 +31,16 @@ print(minesweeper_user.username)
 print(minesweeper_user.score)
 print(minesweeper_user.user_quit)
 print(minesweeper_user.coors)
+'''
 
 
 # ----- WELCOME MESSAGE -----
 
-def welcome_msg():
+def welcome_msg(username):
     """ initial user welcome message """
 
-    print('Welcome to the Minesweeper minigame!')
+    print(f'Welcome to the Minesweeper minigame {username}!')
+    # USE user_quit_status here instead
     user_choice = input("Hit enter to begin or 'quit' to return to the menu:\n")
 
     return user_choice
@@ -305,13 +307,18 @@ def flag_or_reveal(user_coors, display_grid, hidden_grid):
 '''
 
 
-def main():
+def main(user):
     """ main game function calls """
+
+    # instance of MinesweeperPlayer SubClass (no current coors value)
+    minesweeper_user = MinesweeperPlayer.from_current_user(user, None)
 
     # overall while loop for starting the game
     while True:
+        username = minesweeper_user.username
+
         # welcome message
-        play_or_quit = welcome_msg()
+        play_or_quit = welcome_msg(username)
         if play_or_quit.lower() == 'quit':
             break
         print('Building the minesweeper grid ...\n')
