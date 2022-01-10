@@ -9,7 +9,7 @@ def welcome_msg():
     """ initial user welcome message """
 
     print('Welcome to the Minesweeper minigame!')
-    user_choice = input("Enter any key to begin or 'quit' to return to the menu:\n")
+    user_choice = input("Hit enter to begin or 'quit' to return to the menu:\n")
 
     return user_choice
 
@@ -202,7 +202,7 @@ def main():
     while True:
         # welcome message
         play_or_quit = welcome_msg()
-        if play_or_quit == 'quit':
+        if play_or_quit.lower() == 'quit':
             break
         print('Building the minesweeper grid ...')
 
@@ -226,26 +226,29 @@ def main():
 
         # printing the display_grid
         # print(f'\n{COLS} by {ROWS} Minesweeper grid:\n')
+        print(f'Your grid is displayed below!\nChoose coordinates to either reveal or\nto place/remove a flag at.\nAttempt to flag each of the {NUM_MINES} mines\nusing the fewest number of reveals.\n(Remember you have only {NUM_MINES} flags)')
         print_grid(display_grid)
 
         # MAKE FUNCTION WITH WHILE LOOP (until 'quit') user selection for row and column
-        user_row = validate_row_col(ROWS, 'row')
-        user_col = validate_row_col(COLS, 'column')
-        user_coors = (user_row, user_col)
-        print(f"Your chosen coordinate is: {user_coors}")
+        while True:
+            user_row = validate_row_col(ROWS, 'row')
+            user_col = validate_row_col(COLS, 'column')
+            user_coors = (user_row, user_col)
+            print(f"Your chosen coordinate is: {user_coors}")
 
-        # checks if user wants to insert a flag or reveal location
-        f_or_r = flag_or_reveal(user_coors, display_grid, hidden_grid)
-        # if f_or_r == 'quit':
-            # break
+            # checks if user wants to insert a flag or reveal location
+            f_or_r = flag_or_reveal(user_coors, display_grid, hidden_grid)
+            # if f_or_r == 'quit':
+                # break
+            cont_or_quit = input("Hit enter to continue or 'quit' to restart the game:\n")
+            if cont_or_quit.lower() == 'quit':
+                break
 
+    # game exit message
     print(f'Thank you __ for playing the Minesweeper minigame!')
 
 
-
-
-
-# make into a function for user input (they choose easy/med/hard)?
+# game constants
 ROWS = 9
 COLS = 9
 NUM_MINES = 10
