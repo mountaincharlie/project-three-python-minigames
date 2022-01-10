@@ -40,75 +40,82 @@ class Player:
         self.user_quit = value
 
 
-# initial welcome message
-print("Welcome to Python Minigames!\nLet's start by setting your username.")
-# username selection loop (occurs once per load of program)
-username_choice = input("Enter 'y' to reuse a previous username, or anything to choose a new name:\n")
+# wrapping the run.py code in a main() function called at the bottom
+def main():
+    # initial welcome message
+    print("Welcome to Python Minigames!\nLet's start by setting your username.")
+    # username selection loop (occurs once per load of program)
+    username_choice = input("Enter 'y' to reuse a previous username, or anything to choose a new name:\n")
 
-# retrieving the list of usernames from the leaderboards worksheets
-if username_choice.lower() == 'y':
-    print('Finding previous usernames ...')
-    # unpacking the values from manu_dict with * operator
-    menu_dict_values = [*menu_dict.values()]
-    usernames_dict = lb.unique_usernames(menu_dict_values[:-1])
-    while True:
-        try:
-            print('\nPrevious usernames:')
-            pprint(usernames_dict)
-            prev_user = int(input("Please enter the number for a previous username:\n"))
-            if prev_user in usernames_dict:
-                username = usernames_dict[prev_user]
-                break
-            else:
-                raise ValueError
-        except ValueError:
-            print('Invalid entry. Enter a number from the options below.')
+    # retrieving the list of usernames from the leaderboards worksheets
+    if username_choice.lower() == 'y':
+        print('Finding previous usernames ...')
+        # unpacking the values from manu_dict with * operator
+        menu_dict_values = [*menu_dict.values()]
+        usernames_dict = lb.unique_usernames(menu_dict_values[:-1])
+        while True:
+            try:
+                print('\nPrevious usernames:')
+                pprint(usernames_dict)
+                prev_user = int(input("Please enter the number for a previous username:\n"))
+                if prev_user in usernames_dict:
+                    username = usernames_dict[prev_user]
+                    break
+                else:
+                    raise ValueError
+            except ValueError:
+                print('Invalid entry. Enter a number from the options below.')
 
-# while loop for requesting a valid username from the user
-else:
-    while True:
-        try:
-            username = input("Enter a username (without spaces & less than 15 characters):\n")
-            if (len(username) > 15) or (' ' in username):
-                raise ValueError
-            else:
-                break
-        except ValueError:
-            print("Invalid username")
+    # while loop for requesting a valid username from the user
+    else:
+        while True:
+            try:
+                username = input("Enter a username (without spaces & less than 15 characters):\n")
+                if (len(username) > 15) or (' ' in username):
+                    raise ValueError
+                else:
+                    break
+            except ValueError:
+                print("Invalid username")
 
-print(f"Welcome to Python Minigames {username}!\n")
+    print(f"Welcome to Python Minigames {username}!\n")
 
-# creating the current user's instance of the Player class
-current_user = Player(username, 0, None)
+    # creating the current user's instance of the Player class
+    current_user = Player(username, 0, None)
 
-# while loop to prompt input from menu_dict options until 'quit'
-while current_user.quit_status != 'quit':
-    # while loop to catch value errors and prompt input until 'quit'
-    while True:
-        try:
-            print('Game Menu:')
-            pprint(menu_dict)
-            menu_choice = input("Enter a number to select an option (or 'quit' to exit):\n")
-            if menu_choice == 'quit':
-                current_user.quit_status = menu_choice
-                break
-            elif menu_choice in menu_dict:
-                menu_choice = menu_dict[menu_choice]
-                print(f'Opening {menu_choice} ... \n')
-                # building the string 'package_name.module_name'
-                module_str = 'modules.' + menu_choice
-                # importing the module from the string with importlib
-                module = il.import_module(module_str)
-                # calling the welcome message function in the chosen module
-                module.welcome_msg()
-                break
-            else:
-                raise ValueError
-        except ValueError:
-            print("Invalid entry. Enter a number from the options below.\n Or 'quit' to exit")
+    # while loop to prompt input from menu_dict options until 'quit'
+    while current_user.quit_status != 'quit':
+        # while loop to catch value errors and prompt input until 'quit'
+        while True:
+            try:
+                print('Game Menu:')
+                pprint(menu_dict)
+                menu_choice = input("Enter a number to select an option (or 'quit' to exit):\n")
+                if menu_choice == 'quit':
+                    current_user.quit_status = menu_choice
+                    break
+                elif menu_choice in menu_dict:
+                    menu_choice = menu_dict[menu_choice]
+                    print(f'Opening {menu_choice} ... \n')
+                    # building the string 'package_name.module_name'
+                    module_str = 'modules.' + menu_choice
+                    # importing the module from the string with importlib
+                    module = il.import_module(module_str)
+                    # calling the welcome message function in the chosen module
+                    module.main()
+                    break
+                else:
+                    raise ValueError
+            except ValueError:
+                print("Invalid entry. Enter a number from the options below.\n Or 'quit' to exit")
 
-    # feedback for choice being applied
-    print(f'\nSuccessfully applying: {menu_choice}\n')
+        # feedback for choice being applied
+        print(f'\nSuccessfully applying: {menu_choice}\n')
 
-# exit thank you message
-print(f'Thank you {username} for playing Python Minigames!')
+    # exit thank you message
+    print(f'Thank you {username} for playing Python Minigames!')
+
+
+# calling the main() only when run.py is called not imported
+if __name__ == "__main__":
+    main()
