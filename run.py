@@ -101,8 +101,8 @@ def main():
                     module_str = 'modules.' + menu_choice
                     # importing the module from the string with importlib
                     module = il.import_module(module_str)
-                    # calling the welcome message function in the chosen module
-                    module.main()
+                    # calling the chosen module with the current_user instance of Player
+                    module.main(current_user)
                     break
                 else:
                     raise ValueError
