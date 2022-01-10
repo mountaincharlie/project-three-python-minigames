@@ -3,6 +3,8 @@
 # imports
 import numpy as np
 from run import Player
+import sys
+sys.path.append('.')
 
 
 # minesweeper Player subclass
@@ -11,6 +13,17 @@ class MinesweeperPlayer(Player):
     def __init__(self, username, score, user_quit, coors):
         super().__init__(username, score, user_quit)
         self.coors = coors
+
+    @classmethod
+    def from_current_user(cls, player_instance, coors):
+        return cls(**player_instance.__dict__, coors=coors)
+
+
+# example current_user instance (will be carried over from run.py)
+current_user = Player('mountaincharlie', 0, None)
+
+# example minesweeper_user instance
+minesweeper_user = MinesweeperPlayer.from_current_user(current_user, (0, 0))
 
 
 # ----- WELCOME MESSAGE -----
@@ -260,7 +273,7 @@ def flag_or_reveal(user_coors, display_grid, hidden_grid):
 
         # check number of mines
         game_win = mine_count(hidden_grid)
-        if game_win.lower() == 'quit':
+        if game_win == 'quit':
             return 'quit'
 
         print('updated hidden_grid:\n', hidden_grid)
@@ -281,7 +294,6 @@ def flag_or_reveal(user_coors, display_grid, hidden_grid):
 '''
 -import player class
 -writing scores
--access from run.py
 -instructions
 '''
 
@@ -344,5 +356,5 @@ ROWS = 8
 COLS = 8
 NUM_MINES = 10
 
-# calling the game
-main()
+# calling the game (should be done in run.py)
+# main()
