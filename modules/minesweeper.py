@@ -231,7 +231,7 @@ def flag_check(user_coors, d_grid, h_grid):
 def game_complete(user):
     """
     """
-    print(f"YOU WON!\nCongratulations {user.username}! You completed the game with ___ reveals")
+    print(f"YOU WON!\nCongratulations {user.username}! You completed the game with {user.score} reveals")
     print("Saving score to the Minesweeper Leaderboard ...")
     # insert code to access the SHEET
     # insert code to compare the score in the SHEET and add at the right place
@@ -273,6 +273,9 @@ def coor_reveal(user, user_coors, h_grid, d_grid):
     # finding the 'M' or number at user_coors in hidden_grid
     coor_content = h_grid[user_coors]
 
+    # adds one to the user's score (tracks number of reveals)
+    user.score += 1
+
     if coor_content == 'M':
         print(f"Sorry {user.username}, there was a mine at {user_coors}!\nGAME OVER\n")
         choice = input("Hit ENTER to play again or 'quit' to return to the Games Menu:\n")
@@ -283,7 +286,7 @@ def coor_reveal(user, user_coors, h_grid, d_grid):
         else:
             return 'quit'
     else:
-        print(f"You avoided the mines!\n'{coor_content}' has been inserted at {user_coors}")
+        print(f"You avoided the mines!\n'{coor_content}' has been revealed at {user_coors}")
         # inserting the revealed number and displaying the grid
         d_grid[user_coors] = coor_content
         print_grid(d_grid)
