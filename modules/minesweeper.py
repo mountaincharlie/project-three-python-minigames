@@ -25,12 +25,13 @@ class MinesweeperPlayer(Player):
 def welcome_msg(username):
     """ initial user welcome message """
 
-    print(f'Welcome to the Minesweeper minigame {username}!')
+    print(f'Welcome to the Minesweeper minigame {username}!\n')
     # USE user_quit_status here instead
     user_choice = input("Hit ENTER to begin or 'i' to see the Minigame instructions, or 'quit' to return to the Games Menu:\n")
     if user_choice == 'i':
+        print('')
         read_instructions('minesweeper')
-        user_choice = input("Hit ENTER to start the game or 'quit' to return to the Games Menu:\n")
+        user_choice = input("\nHit ENTER to start the game or 'quit' to return to the Games Menu:\n")
 
     return user_choice
 
@@ -293,7 +294,7 @@ def coor_reveal(user, user_coors, h_grid, d_grid):
     user.score += 1
 
     if coor_content == 'M':
-        print(f"Sorry {user.username}, there was a mine at {user_coors}!\nGAME OVER\n")
+        print(f"Sorry {user.username}, there was a mine at {user_coors}!\n\nGAME OVER\n")
         choice = input("Hit ENTER to play again or 'quit' to return to the Games Menu:\n")
         # to quit back to game menu or just to restart game
         if choice == 'quit':
@@ -302,7 +303,7 @@ def coor_reveal(user, user_coors, h_grid, d_grid):
         else:
             return 'quit'
     else:
-        print(f"You avoided the mines!\n'{coor_content}' has been revealed at {user_coors}")
+        print(f"You avoided the mines!\n'{coor_content}' has been revealed at {user_coors}\n")
         # inserting the revealed number and displaying the grid
         d_grid[user_coors] = coor_content
         print_grid(d_grid)
@@ -328,7 +329,7 @@ def flag_or_reveal(user, display_grid, hidden_grid):
             return game_win
 
         # REMOVE AFTER TESTING
-        print('updated hidden_grid:\n', hidden_grid)
+        # print('updated hidden_grid:\n', hidden_grid)
     else:
         # calling function to check the content of the coor in the hidden_grid
         return coor_reveal(user, user_coors, hidden_grid, display_grid)
@@ -363,13 +364,14 @@ def main(user):
         # print('with mines:\n', hidden_grid)
 
         # looping through the other coors and inserting their number
-        print('completed hidden_grid:\n', examine_coors(hidden_grid))
+        # print('completed hidden_grid:\n')
+        examine_coors(hidden_grid)
 
         # generating the display grid
         display_grid = generate_grid()
 
         # printing the basic instructions and display_grid
-        print(f'Your grid is displayed below!\nChoose coordinates to either reveal or\nto place/remove a flag at.\nAttempt to flag each of the {NUM_MINES} mines\nusing the fewest number of reveals.\n(Remember you have only {NUM_MINES} flags)\n')
+        print(f'Your grid is displayed below!\n\nChoose coordinates to either reveal or\nto place/remove a flag at.\nAttempt to flag each of the {NUM_MINES} mines\nusing the fewest number of reveals.\n(Remember you have only {NUM_MINES} flags)\n')
 
         print_grid(display_grid)
 
@@ -379,24 +381,24 @@ def main(user):
             user_col = validate_row_col(COLS, 'COLUMN')
             # user_coors = (user_row, user_col)
             minesweeper_user.coors = (user_row, user_col)
-            print(f"Your chosen coordinate is: {minesweeper_user.coors}")
+            print(f"\nYour chosen coordinate is: {minesweeper_user.coors}\n")
 
             # checks if user wants to insert a flag or reveal location
             f_or_r = flag_or_reveal(minesweeper_user, display_grid, hidden_grid)
             if f_or_r == 'quit':
                 break
-            cont_or_quit = input("Hit ENTER to continue or 'quit' to restart the game:\n")
+            cont_or_quit = input("\nHit ENTER to continue or 'quit' to restart the game:\n")
             if cont_or_quit.lower() == 'quit':
                 break
 
     # game exit message
-    print(f'Thank you {username} for playing the Minesweeper minigame!')
+    print(f'Thank you {username} for playing the Minesweeper minigame!\n')
 
 
 # game constants
 ROWS = 8
 COLS = 8
-NUM_MINES = 1
+NUM_MINES = 10
 
 # calling the game (should be done in run.py)
 # main()
