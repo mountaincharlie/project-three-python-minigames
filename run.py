@@ -21,23 +21,24 @@ menu_dict = {
 # creating the Player class
 class Player:
     """ Creates an instance of Player """
-    def __init__(self, username, score, user_quit):
+    def __init__(self, username, score, user_quit, game_choice):
         self.username = username
         self.score = score
         self.user_quit = user_quit
+        self.game_choice = game_choice
 
     # REMOVE when not needed for testing
     def player_info(self):
         print(f"The user is called: {self.username}, has a current score of: {self.score} and their quit status is: {self.user_quit}")
 
     # function for updating the leaderboard after a game is complete
-    def update_leaderboard(self, sheet):
+    def update_leaderboard(self):
         """
         """
 
         # getting the worksheet
-        print(f"Updating the {sheet} leaderboard ...")
-        leaderboard = lb.SHEET.worksheet(sheet)
+        print(f"\nUpdating the {self.game_choice} leaderboard ...\n")
+        leaderboard = lb.SHEET.worksheet(self.game_choice)
         # getting score values to compare user's score too
         score_list = leaderboard.col_values(3)
         # finding the row number to insert the user's data
@@ -50,9 +51,9 @@ class Player:
         # inserting the data to the row refeshing the rank column
         leaderboard.insert_row(user_list, insert_at_row)
         lb.rank_refresh(leaderboard)
-        print(f"You've been added to the {sheet} leaderboard at {rank} place.\n(You can view the Leaderboards module from the Main Menu)")
+        print(f"You've been added to the {self.game_choice} leaderboard at {rank} place.\n(You can view the Leaderboards module from the Main Menu)\n")
 
-    # property decorator for getter/setter methods
+    # property decorator for quit_status getter/setter methods
     @property
     def quit_status(self):
         return self.user_quit
@@ -60,6 +61,15 @@ class Player:
     @quit_status.setter
     def quit_status(self, value):
         self.user_quit = value
+
+    # property decorator for game_choice getter/setter methods
+    @property
+    def user_game_choice(self):
+        return self.game_choice
+
+    @quit_status.setter
+    def user_game_choice(self, value):
+        self.game_choice = value
 
 
 # wrapping the run.py code in a main() function called at the bottom
@@ -107,7 +117,7 @@ def main():
     print(f"\nWelcome to Python Minigames {username}!\n")
 
     # creating the current user's instance of the Player class
-    current_user = Player(username, 0, None)
+    current_user = Player(username, 0, None, None)
 
     # while loop to prompt input from menu_dict options until 'quit'
     while current_user.quit_status != 'quit':
@@ -123,6 +133,8 @@ def main():
                 elif menu_choice in menu_dict:
                     menu_choice = menu_dict[menu_choice]
                     print(f'\nOpening {menu_choice} ... \n')
+                    # updating user's game_choice
+                    current_user.user_game_choice = menu_choice[5:]
                     # building the string 'package_name.module_name'
                     module_str = 'game_engine.' + menu_choice[5:]
                     # importing the module from the string with importlib

@@ -11,8 +11,8 @@ from run import Player
 # minesweeper Player subclass
 class MinesweeperPlayer(Player):
     """ Creates instance of MinesweeperPlayer """
-    def __init__(self, username, score, user_quit, coors):
-        super().__init__(username, score, user_quit)
+    def __init__(self, username, score, user_quit, game_choice, coors):
+        super().__init__(username, score, user_quit, game_choice)
         self.coors = coors
 
     @classmethod
@@ -22,15 +22,15 @@ class MinesweeperPlayer(Player):
 
 # ----- WELCOME MESSAGE -----
 
-def welcome_msg(username):
+def welcome_msg(user):
     """ initial user welcome message """
 
-    print(f'Welcome to the Minesweeper minigame {username}!\n')
+    print(f'Welcome to the Minesweeper minigame {user.username}!\n')
     # USE user_quit_status here instead
     user_choice = input("Hit ENTER to begin or 'i' to see the Minigame instructions, or 'quit' to return to the Main Menu:\n")
     if user_choice == 'i':
         print('')
-        read_instructions('minesweeper')
+        read_instructions(user.game_choice)
         user_choice = input("\nHit ENTER to start the game or 'quit' to return to the Main Menu:\n")
 
     return user_choice
@@ -251,10 +251,10 @@ def flag_check(coors, d_grid, h_grid):
 def game_complete(user):
     """
     """
-    print(f"YOU WON!\nCongratulations {user.username}! You completed the game with {user.score} reveals")
+    print(f"YOU WON!\nCongratulations {user.username}!\nYou completed the game with {user.score} reveals")
 
     # updating the 'minesweeper' leaderboard with user data
-    user.update_leaderboard('minesweeper')
+    user.update_leaderboard()
 
     choice = input("Hit ENTER to play again or 'quit' to return to the Main Menu:\n")
     # to quit back to main menu or just to restart game
@@ -346,7 +346,7 @@ def main(user):
         username = minesweeper_user.username
 
         # welcome message
-        play_or_quit = welcome_msg(username)
+        play_or_quit = welcome_msg(minesweeper_user)
         if play_or_quit == 'quit':
             break
         print('\nBuilding the minesweeper grid ...\n')
@@ -364,7 +364,7 @@ def main(user):
         # print('with mines:\n', hidden_grid)
 
         # looping through the other coors and inserting their number
-        # print('completed hidden_grid:\n', hidden_grid)
+        print('completed hidden_grid:\n', hidden_grid)
         examine_coors(hidden_grid)
 
         # generating the display grid
@@ -398,7 +398,7 @@ def main(user):
 # game constants
 ROWS = 8
 COLS = 8
-NUM_MINES = 10
+NUM_MINES = 1
 
 # calling the game (should be done in run.py)
 # main()
