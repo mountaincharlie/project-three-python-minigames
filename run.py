@@ -3,10 +3,10 @@
 # imports (modules and other needed py libraries)
 from pprint import pprint
 import importlib as il
-# from modules import minesweeper
-# from modules import hangman
-# from modules import rock_paper_scissors
-from modules import leaderboards as lb
+# from game_engine import minesweeper
+# from game_engine import hangman
+# from game_engine import rock_paper_scissors
+from game_engine import leaderboards as lb
 
 
 # defining menu dictionary (contains names of game/leaderboard modules)
@@ -120,7 +120,7 @@ def main():
                     menu_choice = menu_dict[menu_choice]
                     print(f'\nOpening {menu_choice} ... \n')
                     # building the string 'package_name.module_name'
-                    module_str = 'modules.' + menu_choice
+                    module_str = 'game_engine.' + menu_choice
                     # importing the module from the string with importlib
                     module = il.import_module(module_str)
                     # calling the chosen module with the current_user instance of Player

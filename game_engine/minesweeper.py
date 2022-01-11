@@ -40,7 +40,7 @@ def welcome_msg(username):
 def read_instructions(game):
     """
     """
-    file = 'modules/' + str(game) + '.txt'
+    file = 'game_engine/' + str(game) + '.txt'
 
     try:
         with open(file, 'r') as f:
@@ -364,7 +364,7 @@ def main(user):
         # print('with mines:\n', hidden_grid)
 
         # looping through the other coors and inserting their number
-        # print('completed hidden_grid:\n')
+        # print('completed hidden_grid:\n', hidden_grid)
         examine_coors(hidden_grid)
 
         # generating the display grid
