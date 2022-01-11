@@ -23,58 +23,7 @@ class MinesweeperPlayer(Player):
 
 # testing function for accessing the worksheet
 
-# finding the row number to insert the user's data
-def row_to_insert_at(score_list, user_score):
-    for i in range(1, len(score_list)):
-        # finds the first score its lower than
-        if user_score <= int(score_list[i]):
-            insert_at_row = i+1
-            break
-        # otherwise it will need to be added at the very end
-        insert_at_row = len(score_list)+1
-    return insert_at_row
-
-
-# calculate the user's rank
-def rank_generator(insert_at_row):
-    """ Converts a number into a rank """
-    num = insert_at_row
-    if num in range(11, 14):
-        place = 'th'
-    elif str(num)[-1] == '1':
-        place = 'st'
-    elif str(num)[-1] == '2':
-        place = 'nd'
-    elif str(num)[-1] == '3':
-        place = 'rd'
-    else:
-        place = 'th'
-    rank = str(num) + place
-
-    return rank
-
-
-# fixing the rank column
-def rank_refresh(leaderboard):
-    """
-    Takes the list of rank data.
-    """
-    rank_col = leaderboard.col_values(1)
-    rank_title = rank_col.pop(0)
-    new_rank_col = []
-
-    for i in range(1, len(rank_col)+1):
-        rank = rank_generator(i)
-        new_rank_col.append(rank)
-    new_rank_col.insert(0, rank_title)
-
-    # inserting the new col data
-    for i, rank in enumerate(new_rank_col):
-        row = i+1
-        leaderboard.update_cell(row, 1, rank)
-
-
-# the function calls (make a function update_leaderboard() to put in superClass)
+# put in superClass
 def update_leaderboard():
     """
     """
@@ -82,26 +31,27 @@ def update_leaderboard():
     user_score = 86
     user_name = 'charlie'
     sheet = 'minesweeper'
+
     # getting the worksheet
+    print("Updating the leaderboard ...")
     leaderboard = lb.SHEET.worksheet(sheet)
     # getting score values to compare user's score too
     score_list = leaderboard.col_values(3)
     # finding the row number to insert the user's data
-    insert_at_row = row_to_insert_at(score_list, user_score)
+    insert_at_row = lb.row_to_insert_at(score_list, user_score)
     # calculate the user's rank
-    rank = rank_generator((insert_at_row - 1))
+    rank = lb.rank_generator((insert_at_row - 1))
     # generating the user's list of data
     user_list = [rank, user_name, user_score]
 
     # inserting the data to the row refeshing the rank column
-    print("Updating the leaderboard ...")
     leaderboard.insert_row(user_list, insert_at_row)
-    rank_refresh(leaderboard)
+    lb.rank_refresh(leaderboard)
     print(f"You've been added to the leaderboard at {rank} place.")
 
 
 update_leaderboard()
-# rank_refresh(lb.SHEET.worksheet('minesweeper'))
+# lb.rank_refresh(lb.SHEET.worksheet('minesweeper'))
 
 
 # ----- WELCOME MESSAGE -----
