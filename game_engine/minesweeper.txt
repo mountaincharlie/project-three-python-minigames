@@ -13,7 +13,7 @@ coordinates (if you believe there may be a mine there) or (ii) remove a flag
 from the coordinates (if believe you have placed it there incorrectly)
 4) Continue to enter coordinates and reveal their contents or insert/remove
 flags until you hit a mine or successfully flag all of the mines.
-Successfully flagging all of the mines will complete the game.
-Your score is the number of coordinates you revealed before comlpetion.
+5) Successfully flagging all of the mines will complete the game.
+Your score is the number of coordinates you revealed before completion.
 (The lower the score the better) 
 Enjoy the game!
