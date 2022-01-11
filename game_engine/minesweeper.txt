@@ -1,8 +1,6 @@
 Minesweeper Minigame Instructions
-
 Based on the same basic logic of the full Minesweeper game, to play the
 Minesweeper Minigame, simply:
-
 1) Select a coordinate on the grid by entering a row number,
 followed by a column number, as prompted.
 2) Then, for that coordinate, either choose to (a) reveal its contents (which
@@ -15,9 +13,7 @@ coordinates (if you believe there may be a mine there) or (ii) remove a flag
 from the coordinates (if believe you have placed it there incorrectly)
 4) Continue to enter coordinates and reveal their contents or insert/remove
 flags until you hit a mine or successfully flag all of the mines.
-
 Successfully flagging all of the mines will complete the game.
 Your score is the number of coordinates you revealed before comlpetion.
 (The lower the score the better) 
-
 Enjoy the game!
