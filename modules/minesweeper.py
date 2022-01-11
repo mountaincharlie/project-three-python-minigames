@@ -30,7 +30,7 @@ def welcome_msg(username):
     user_choice = input("Hit ENTER to begin or 'i' to see the Minigame instructions, or 'quit' to return to the Games Menu:\n")
     if user_choice == 'i':
         read_instructions('minesweeper')
-    user_choice = input("Hit ENTER to start the game or 'quit' to return to the Games Menu:\n")
+        user_choice = input("Hit ENTER to start the game or 'quit' to return to the Games Menu:\n")
 
     return user_choice
 
