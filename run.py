@@ -11,10 +11,10 @@ from game_engine import leaderboards as lb
 
 # defining menu dictionary (contains names of game/leaderboard modules)
 menu_dict = {
-    '1': 'minesweeper',
-    '2': 'hangman',
-    '3': 'rock_paper_scissors',
-    '4': 'leaderboards'
+    '1': 'play_minesweeper',
+    '2': 'play_hangman',
+    '3': 'play_rock_paper_scissors',
+    '4': 'view_leaderboards'
 }
 
 
@@ -74,7 +74,11 @@ def main():
         print('\nFinding previous usernames from the Leaderboards...')
         # unpacking the values from manu_dict with * operator
         menu_dict_values = [*menu_dict.values()]
-        usernames_dict = lb.unique_usernames(menu_dict_values[:-1])
+        lb_sheet_names = []
+        for value in menu_dict_values:
+            sheet_name = value[5:]
+            lb_sheet_names.append(sheet_name)
+        usernames_dict = lb.unique_usernames(lb_sheet_names[:-1])
         while True:
             try:
                 print('\nPrevious usernames:')
@@ -120,7 +124,7 @@ def main():
                     menu_choice = menu_dict[menu_choice]
                     print(f'\nOpening {menu_choice} ... \n')
                     # building the string 'package_name.module_name'
-                    module_str = 'game_engine.' + menu_choice
+                    module_str = 'game_engine.' + menu_choice[5:]
                     # importing the module from the string with importlib
                     module = il.import_module(module_str)
                     # calling the chosen module with the current_user instance of Player
