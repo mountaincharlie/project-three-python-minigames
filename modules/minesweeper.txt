@@ -1,1 +1,4 @@
-Minesweeper Minigame Instructions
+Minesweeper Minigame Instructions:
+Another line
+Another line
+Enjoy the game!
