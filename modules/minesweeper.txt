@@ -1,4 +1,13 @@
 Minesweeper Minigame Instructions:
-Another line
-Another line
+The basic logic of the Minesweeper minigame, is identical to the full version of the game. The difference is in how the game is completed.
+Rather than racing against the clock to uncover all of the safe locations, to complete the Minesweeper minigame, you simply need to flag (place an 'F') all of the mines on the grid.
+Your score is the number of coordinates you reveal before you successfully flag all the mines. 
+You only have as many flags as there are mines in the grid, so if you think you may have misplaced one of your flags, you can remove it from that location.
+In order to play
+1) Select a coordinate on the game grid by entering a row number, followed by a column number, as prompted.
+2) You can then either choose to (a) reveal the contents of that corrdinate (which will be either a mine 'M' or a number) or (b) you can choose to insert/remove a flag 'F'.
+3)(a) Revealling the contents of a coordinate will either return that you have hit a mine (causing GAME OVER) or a number, which indicates the number of mines located in any of the 8 coordinates surrounding your chosen one.
+3)(b) Choosing the flag option gives you the further option to either (i) insert a flag at the coordinates (if you believe there may be a mine there) or (ii) remove a flag from the coordinates (if believe you have placed it there incorrectly)
+4) Continue to enter coordinates and reveal locations or insert/remove flags until you hit a mine or successfully flag all of the mines.
+
 Enjoy the game!
