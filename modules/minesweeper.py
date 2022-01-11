@@ -2,7 +2,6 @@
 
 # imports
 import numpy as np
-import leaderboards as lb
 # to import run.py from parent directory
 import sys
 sys.path.append('.')
@@ -19,39 +18,6 @@ class MinesweeperPlayer(Player):
     @classmethod
     def from_current_user(cls, player_instance, coors):
         return cls(**player_instance.__dict__, coors=coors)
-
-
-# testing function for accessing the worksheet
-
-# put in superClass
-def update_leaderboard():
-    """
-    """
-    # user and sheet data
-    user_score = 86
-    user_name = 'charlie'
-    sheet = 'minesweeper'
-
-    # getting the worksheet
-    print("Updating the leaderboard ...")
-    leaderboard = lb.SHEET.worksheet(sheet)
-    # getting score values to compare user's score too
-    score_list = leaderboard.col_values(3)
-    # finding the row number to insert the user's data
-    insert_at_row = lb.row_to_insert_at(score_list, user_score)
-    # calculate the user's rank
-    rank = lb.rank_generator((insert_at_row - 1))
-    # generating the user's list of data
-    user_list = [rank, user_name, user_score]
-
-    # inserting the data to the row refeshing the rank column
-    leaderboard.insert_row(user_list, insert_at_row)
-    lb.rank_refresh(leaderboard)
-    print(f"You've been added to the leaderboard at {rank} place.")
-
-
-update_leaderboard()
-# lb.rank_refresh(lb.SHEET.worksheet('minesweeper'))
 
 
 # ----- WELCOME MESSAGE -----
@@ -266,10 +232,9 @@ def game_complete(user):
     """
     """
     print(f"YOU WON!\nCongratulations {user.username}! You completed the game with {user.score} reveals")
-    print("Saving score to the Minesweeper Leaderboard ...")
-    # insert code to access the SHEET
-    # insert code to compare the score in the SHEET and add at the right place
-    print(f"Score saved.\nYou achieved ____ place")
+
+    # updating the 'minesweeper' leaderboard with user data
+    user.update_leaderboard('minesweeper')
 
     choice = input("Hit ENTER to play again or 'quit' to return to the Games Menu:\n")
     # to quit back to game menu or just to restart game
@@ -415,7 +380,7 @@ def main(user):
                 break
 
     # game exit message
-    print('Thank you {username} for playing the Minesweeper minigame!')
+    print(f'Thank you {username} for playing the Minesweeper minigame!')
 
 
 # game constants

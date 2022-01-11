@@ -30,6 +30,28 @@ class Player:
     def player_info(self):
         print(f"The user is called: {self.username}, has a current score of: {self.score} and their quit status is: {self.user_quit}")
 
+    # function for updating the leaderboard after a game is complete
+    def update_leaderboard(self, sheet):
+        """
+        """
+
+        # getting the worksheet
+        print(f"Updating the {sheet} leaderboard ...")
+        leaderboard = lb.SHEET.worksheet(sheet)
+        # getting score values to compare user's score too
+        score_list = leaderboard.col_values(3)
+        # finding the row number to insert the user's data
+        insert_at_row = lb.row_to_insert_at(score_list, self.score)
+        # calculate the user's rank
+        rank = lb.rank_generator((insert_at_row - 1))
+        # generating the user's list of data
+        user_list = [rank, self.username, self.score]
+
+        # inserting the data to the row refeshing the rank column
+        leaderboard.insert_row(user_list, insert_at_row)
+        lb.rank_refresh(leaderboard)
+        print(f"You've been added to the {sheet} leaderboard at {rank} place.\n(You can view the Leaderboards module from the Games Menu)")
+
     # property decorator for getter/setter methods
     @property
     def quit_status(self):
@@ -49,7 +71,7 @@ def main():
 
     # retrieving the list of usernames from the leaderboards worksheets
     if username_choice.lower() == 'y':
-        print('Finding previous usernames ...')
+        print('Finding previous usernames from the Leaderboards...')
         # unpacking the values from manu_dict with * operator
         menu_dict_values = [*menu_dict.values()]
         usernames_dict = lb.unique_usernames(menu_dict_values[:-1])
@@ -88,7 +110,7 @@ def main():
         # while loop to catch value errors and prompt input until 'quit'
         while True:
             try:
-                print('Game Menu:')
+                print('Games Menu:')
                 pprint(menu_dict)
                 menu_choice = input("Enter a number to select an option (or 'quit' to exit):\n")
                 if menu_choice == 'quit':
