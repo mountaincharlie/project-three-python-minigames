@@ -50,7 +50,7 @@ class Player:
         # inserting the data to the row refeshing the rank column
         leaderboard.insert_row(user_list, insert_at_row)
         lb.rank_refresh(leaderboard)
-        print(f"You've been added to the {sheet} leaderboard at {rank} place.\n(You can view the Leaderboards module from the Games Menu)")
+        print(f"You've been added to the {sheet} leaderboard at {rank} place.\n(You can view the Leaderboards module from the Main Menu)")
 
     # property decorator for getter/setter methods
     @property
@@ -110,7 +110,7 @@ def main():
         # while loop to catch value errors and prompt input until 'quit'
         while True:
             try:
-                print('Games Menu:')
+                print('Main Menu:')
                 pprint(menu_dict)
                 menu_choice = input("\nEnter a number to select an option (or 'quit' to exit):\n")
                 if menu_choice == 'quit':

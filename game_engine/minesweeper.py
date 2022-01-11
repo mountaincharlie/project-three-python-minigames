@@ -27,11 +27,11 @@ def welcome_msg(username):
 
     print(f'Welcome to the Minesweeper minigame {username}!\n')
     # USE user_quit_status here instead
-    user_choice = input("Hit ENTER to begin or 'i' to see the Minigame instructions, or 'quit' to return to the Games Menu:\n")
+    user_choice = input("Hit ENTER to begin or 'i' to see the Minigame instructions, or 'quit' to return to the Main Menu:\n")
     if user_choice == 'i':
         print('')
         read_instructions('minesweeper')
-        user_choice = input("\nHit ENTER to start the game or 'quit' to return to the Games Menu:\n")
+        user_choice = input("\nHit ENTER to start the game or 'quit' to return to the Main Menu:\n")
 
     return user_choice
 
@@ -256,8 +256,8 @@ def game_complete(user):
     # updating the 'minesweeper' leaderboard with user data
     user.update_leaderboard('minesweeper')
 
-    choice = input("Hit ENTER to play again or 'quit' to return to the Games Menu:\n")
-    # to quit back to game menu or just to restart game
+    choice = input("Hit ENTER to play again or 'quit' to return to the Main Menu:\n")
+    # to quit back to main menu or just to restart game
     if choice == 'quit':
         user.quit_status = 'quit'
         return user.quit_status
@@ -295,8 +295,8 @@ def coor_reveal(user, user_coors, h_grid, d_grid):
 
     if coor_content == 'M':
         print(f"Sorry {user.username}, there was a mine at {user_coors}!\n\nGAME OVER\n")
-        choice = input("Hit ENTER to play again or 'quit' to return to the Games Menu:\n")
-        # to quit back to game menu or just to restart game
+        choice = input("Hit ENTER to play again or 'quit' to return to the Main Menu:\n")
+        # to quit back to main menu or just to restart game
         if choice == 'quit':
             user.quit_status = 'quit'
             return user.quit_status
