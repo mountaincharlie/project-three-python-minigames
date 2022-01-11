@@ -128,3 +128,4 @@ Features that could be added to expand and improve the program in the future.
 to do:
 * menu option to change user name without exiting the program
 * other games to include ...
+* easy/med/hard version of the games (change some params of the game e.g. bigger grid and more mines in minesweeper) and seperate leaderboards for each mode OR a multiplier so that hard modes yeild better scores 
