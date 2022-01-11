@@ -27,9 +27,28 @@ def welcome_msg(username):
 
     print(f'Welcome to the Minesweeper minigame {username}!')
     # USE user_quit_status here instead
-    user_choice = input("Hit ENTER to begin or 'quit' to return to the Games Menu:\n")
+    user_choice = input("Hit ENTER to begin or 'i' to see the Minigame instructions, or 'quit' to return to the Games Menu:\n")
+    if user_choice == 'i':
+        read_instructions('minesweeper')
+    user_choice = input("Hit ENTER to start the game or 'quit' to return to the Games Menu:\n")
 
     return user_choice
+
+
+# ----- READING INSTRUCTIONS ----- (move to Player class?)
+def read_instructions(game):
+    """
+    """
+    file = 'modules/' + str(game) + '.txt'
+
+    try:
+        with open(file, 'r') as f:
+            lines = f.readlines()
+            for line in lines:
+                line.strip('\n')
+                print(line)
+    except FileNotFoundError:
+        print(f'Sorry, {file} could not be found.')
 
 
 # ----- GRID GENERATING -----
@@ -315,14 +334,6 @@ def flag_or_reveal(user, display_grid, hidden_grid):
         return coor_reveal(user, user_coors, hidden_grid, display_grid)
 
 
-
-'''
--import player class
--writing scores
--instructions
-'''
-
-
 def main(user):
     """ main game function calls """
 
@@ -330,7 +341,6 @@ def main(user):
     minesweeper_user = MinesweeperPlayer.from_current_user(user, None)
 
     # overall while loop for starting the game
-    # while True:
     while minesweeper_user.quit_status != 'quit':
         username = minesweeper_user.username
 
@@ -338,7 +348,7 @@ def main(user):
         play_or_quit = welcome_msg(username)
         if play_or_quit == 'quit':
             break
-        print('Building the minesweeper grid ...\n')
+        print('\nBuilding the minesweeper grid ...\n')
 
         # generating the hidden_grid
         hidden_grid = generate_grid()
