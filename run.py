@@ -3,9 +3,6 @@
 # imports (modules and other needed py libraries)
 from pprint import pprint
 import importlib as il
-# from game_engine import minesweeper
-# from game_engine import hangman
-# from game_engine import rock_paper_scissors
 from game_engine import leaderboards as lb
 
 
@@ -26,10 +23,6 @@ class Player:
         self.score = score
         self.user_quit = user_quit
         self.game_choice = game_choice
-
-    # REMOVE when not needed for testing
-    def player_info(self):
-        print(f"The user is called: {self.username}, has a current score of: {self.score} and their quit status is: {self.user_quit}")
 
     # function for updating the leaderboard after a game is complete
     def update_leaderboard(self):
@@ -67,7 +60,7 @@ class Player:
     def user_game_choice(self):
         return self.game_choice
 
-    @quit_status.setter
+    @user_game_choice.setter
     def user_game_choice(self, value):
         self.game_choice = value
 
@@ -146,9 +139,6 @@ def main():
                     raise ValueError
             except ValueError:
                 print("Invalid entry. Enter a number from the options below.\n Or 'quit' to exit")
-
-        # feedback for choice being applied
-        # print(f'\nSuccessfully applying: {menu_choice}\n')
 
     # exit thank you message
     print(f'Thank you {username} for playing Python Minigames!')
