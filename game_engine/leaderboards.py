@@ -118,26 +118,34 @@ def print_leaderboard_dict(leaderboards_menu):
 
 
 # choosing a leaderboard option
-def leaderboard_choice(user, leaderboards_menu):
+def leaderboard_choice(user, menu):
     """
     """
     while True:
         try:
             # make a leaderboard print functions?
             print('Leaderboards Menu:')
-            print_leaderboard_dict(leaderboards_menu)
+            print_leaderboard_dict(menu)
 
             leaderboard = input("\nEnter a number to select an option (or 'quit' to exit):\n")
 
             if leaderboard == 'quit':
                 user.quit_status = leaderboard
                 break
-            elif leaderboard in leaderboards_menu:
-                leaderboard_name = leaderboards_menu[leaderboard]
+            elif leaderboard in menu:
+                leaderboard_name = menu[leaderboard][5:]
 
-                print(f'\nOpening {leaderboard_name} ... \n')
+                print(f'\nOpening the {leaderboard_name} leaderboard ...\n')
 
                 # open and display the sheet
+                print(f'{leaderboard_name.upper()} LEADERBOARD:')
+                leaderboard_worksheet = SHEET.worksheet(leaderboard_name)
+                data = leaderboard_worksheet.get_all_values()
+                for row in data:
+                    print(row[0], '--', row[1], '--', row[2])
+                choice = input("\nHit ENTER to return to the Leaderboards Menu or 'quit' to return to the Main Menu:\n")
+                if choice == 'quit':
+                    user.quit_status = choice
                 break
             else:
                 raise ValueError
@@ -158,4 +166,4 @@ def main(user):
     while leaderboard_user.quit_status != 'quit':
         leaderboard_choice(leaderboard_user, leaderboards_menu)
 
-    print(f'\nThank you {username} for using the Python Minigame Leaderboards!\n')
+    print(f'\nThank you for using the Python Minigame Leaderboards {username}!\n')
