@@ -3,8 +3,10 @@
 # imports
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-# remove at end of project (unless using for project)
-# from pprint import pprint
+# to import run.py from parent directory
+import sys
+sys.path.append('.')
+import run
 
 # setting up the constant variabels for the API
 SCOPE = [
@@ -32,8 +34,8 @@ SHEET = CLIENT.open("leaderboards")
 
 
 # welcome message function
-def welcome_msg():
-    print('Welcome to the Python Minigames Leaderboards!')
+def welcome_msg(username):
+    print(f'Welcome to the Python Minigames Leaderboards {username}!\n')
 
 
 # finding all unique usernames using a set and | operator
@@ -103,5 +105,20 @@ def rank_refresh(leaderboard):
         leaderboard.update_cell(row, 1, rank)
 
 
-# test calling functions
-# unique_usernames(sheets)
+def main(user):
+    """
+    """
+    # setting username and calling welcome message
+    username = user.username
+    welcome_msg(username)
+
+    leaderboards_menu = run.menu_dict
+    to_pop = str(len(leaderboards_menu))
+    leaderboards_menu.pop(to_pop)
+
+    print('Leaderboards Menu:')
+    for key in leaderboards_menu:
+        game_name = leaderboards_menu[key][5:]
+        print(key,'-', game_name)
+
+    print(f'\nThank you {username} for using the Python Minigame Leaderboards!\n')
