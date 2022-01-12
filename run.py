@@ -6,7 +6,7 @@ import importlib as il
 from game_engine import leaderboards as lb
 
 
-# defining menu dictionary (contains names of game/leaderboard modules)
+# dictionary of menu options
 menu_dict = {
     '1': 'play_minesweeper',
     '2': 'play_hangman',
@@ -15,7 +15,6 @@ menu_dict = {
 }
 
 
-# creating the Player class
 class Player:
     """ Creates an instance of Player """
     def __init__(self, username, score, user_quit, game_choice):
@@ -80,7 +79,16 @@ class Player:
         self.game_choice = value
 
 
-# setting the username
+def print_dict(dictionary):
+    """
+    Takes a dictionary and for each of its keys it
+    prints the key, a dash and then the dictionary's
+    value at the key.
+    """
+    for key in dictionary:
+        print(key, '-', dictionary[key])
+
+
 def setting_username():
     """
     Prompts the user for a username until a valid option
@@ -117,7 +125,8 @@ def setting_username():
         while True:
             try:
                 print('\nPrevious usernames:')
-                pprint(usernames_dict)
+                print_dict(usernames_dict)
+
                 prev_user = int(input("\nPlease enter the number for a previous username:\n"))
                 if prev_user in usernames_dict:
                     username = usernames_dict[prev_user]
@@ -141,7 +150,6 @@ def setting_username():
     return username
 
 
-# function for prompting the user to choose from Main Menu
 def main_menu_choice(current_user):
     """
     Uses a try/except to prompt the user for an option from
@@ -163,7 +171,7 @@ def main_menu_choice(current_user):
     while True:
         try:
             print('Main Menu:')
-            pprint(menu_dict)
+            print_dict(menu_dict)
 
             menu_choice = input("\nEnter a number to select an option (or 'quit' to exit):\n")
 
@@ -173,11 +181,13 @@ def main_menu_choice(current_user):
             elif menu_choice in menu_dict:
                 menu_choice = menu_dict[menu_choice]
 
-                print(f'\nOpening {menu_choice} ... \n')
+                choice_name = menu_choice[5:]
 
-                current_user.user_game_choice = menu_choice[5:]
+                print(f'\nOpening {choice_name} ... \n')
 
-                module_str = 'game_engine.' + menu_choice[5:]
+                current_user.user_game_choice = choice_name
+
+                module_str = 'game_engine.' + choice_name
 
                 module = il.import_module(module_str)
 
