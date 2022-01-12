@@ -65,10 +65,10 @@ class Player:
         self.game_choice = value
 
 
-# wrapping the run.py code in a main() function called at the bottom
-def main():
-    # initial welcome message
-    print("Welcome to Python Minigames!\n\nLet's start by setting your username.")
+# setting the username
+def setting_username():
+    """
+    """
     # username selection loop (occurs once per load of program)
     username_choice = input("Enter 'y' to reuse a previous username, or anything to choose a new name:\n")
 
@@ -94,7 +94,6 @@ def main():
                     raise ValueError
             except ValueError:
                 print('\nInvalid entry. Enter a number from the options below.')
-
     # while loop for requesting a valid username from the user
     else:
         while True:
@@ -105,8 +104,50 @@ def main():
                 else:
                     break
             except ValueError:
-                print("Invalid username")
+                print("\nInvalid username\n")
 
+    return username
+
+
+# function for prompting the user to choose from Main Menu
+def main_menu_choice(current_user):
+    """
+    """
+    # while loop to catch value errors and prompt input until 'quit'
+    while True:
+        try:
+            print('Main Menu:')
+            pprint(menu_dict)
+            menu_choice = input("\nEnter a number to select an option (or 'quit' to exit):\n")
+            if menu_choice == 'quit':
+                current_user.quit_status = menu_choice
+                break
+            elif menu_choice in menu_dict:
+                menu_choice = menu_dict[menu_choice]
+                print(f'\nOpening {menu_choice} ... \n')
+                # updating user's game_choice
+                current_user.user_game_choice = menu_choice[5:]
+                # building the string 'package_name.module_name'
+                module_str = 'game_engine.' + menu_choice[5:]
+                # importing the module from the string with importlib
+                module = il.import_module(module_str)
+                # calling the chosen module with the current_user instance of Player
+                module.main(current_user)
+                break
+            else:
+                raise ValueError
+        except ValueError:
+            print("Invalid entry. Enter a number from the options below.\n Or 'quit' to exit")
+
+
+# wrapping the run.py code in a main() function called at the bottom
+def main():
+    """
+    """
+    # initial welcome message
+    print("Welcome to Python Minigames!\n\nLet's start by setting your username.")
+    # calling function for setting username
+    username = setting_username()
     print(f"\nWelcome to Python Minigames {username}!\n")
 
     # creating the current user's instance of the Player class
@@ -114,31 +155,9 @@ def main():
 
     # while loop to prompt input from menu_dict options until 'quit'
     while current_user.quit_status != 'quit':
-        # while loop to catch value errors and prompt input until 'quit'
-        while True:
-            try:
-                print('Main Menu:')
-                pprint(menu_dict)
-                menu_choice = input("\nEnter a number to select an option (or 'quit' to exit):\n")
-                if menu_choice == 'quit':
-                    current_user.quit_status = menu_choice
-                    break
-                elif menu_choice in menu_dict:
-                    menu_choice = menu_dict[menu_choice]
-                    print(f'\nOpening {menu_choice} ... \n')
-                    # updating user's game_choice
-                    current_user.user_game_choice = menu_choice[5:]
-                    # building the string 'package_name.module_name'
-                    module_str = 'game_engine.' + menu_choice[5:]
-                    # importing the module from the string with importlib
-                    module = il.import_module(module_str)
-                    # calling the chosen module with the current_user instance of Player
-                    module.main(current_user)
-                    break
-                else:
-                    raise ValueError
-            except ValueError:
-                print("Invalid entry. Enter a number from the options below.\n Or 'quit' to exit")
+
+        # getting user's choice from Main Menu
+        main_menu_choice(current_user)
 
     # exit thank you message
     print(f'Thank you {username} for playing Python Minigames!')
