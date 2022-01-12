@@ -139,7 +139,7 @@ def setting_username():
     else:
         while True:
             try:
-                username = input("Enter a username (without spaces & less than 15 characters):\n")
+                username = input("\nEnter a username (without spaces & less than 15 characters):\n")
                 if (len(username) > 15) or (' ' in username):
                     raise ValueError
                 else:
@@ -196,7 +196,7 @@ def main_menu_choice(current_user):
             else:
                 raise ValueError
         except ValueError:
-            print("Invalid entry. Enter a number from the options below.\n Or 'quit' to exit")
+            print("\nInvalid entry. Enter a number from the options below.\nOr 'quit' to exit\n")
 
 
 def main():
@@ -224,7 +224,7 @@ def main():
     while current_user.quit_status != 'quit':
         main_menu_choice(current_user)
 
-    print(f'Thank you {username} for playing Python Minigames!')
+    print(f'\nThank you for playing Python Minigames {username}!')
 
 
 # calling the main() only when run.py is called not imported
