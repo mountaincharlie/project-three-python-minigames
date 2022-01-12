@@ -9,7 +9,7 @@ from game_engine import leaderboards as lb
 # dictionary of menu options
 menu_dict = {
     '1': 'play_minesweeper',
-    '2': 'play_hangman',
+    '2': 'play_higher_or_lower',
     '3': 'play_rock_paper_scissors',
     '4': 'view_leaderboards'
 }
