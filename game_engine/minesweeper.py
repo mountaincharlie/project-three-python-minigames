@@ -386,13 +386,15 @@ def main(user):
             # checks if user wants to insert a flag or reveal location
             f_or_r = flag_or_reveal(minesweeper_user, display_grid, hidden_grid)
             if f_or_r == 'quit':
+                minesweeper_user.quit_status = f_or_r
                 break
             cont_or_quit = input("\nHit ENTER to continue or 'quit' to restart the game:\n")
             if cont_or_quit.lower() == 'quit':
+                minesweeper_user.quit_status = cont_or_quit
                 break
 
     # game exit message
-    print(f'Thank you {username} for playing the Minesweeper minigame!\n')
+    print(f'\nThank you {username} for playing the Minesweeper minigame!\n')
 
 
 # game constants
