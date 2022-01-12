@@ -23,27 +23,11 @@ SHEET = CLIENT.open("leaderboards")
 leaderboards_menu = run.menu_dict
 leaderboards_menu.pop(str(len(leaderboards_menu)))
 
-# checking it works
-# first_leaderboard = SHEET.worksheet('minesweeper')
-# data = first_leaderboard.get_all_values()
-# pprint(data)
-
-# accessing rows/columns/cells (delete)
-# row = first_leaderboard.row_values(2)
-# col = first_leaderboard.col_values(2)
-# cell = first_leaderboard.cell(2,2).value
-
-# DEFINE 'sheets' in run.py
-# sheets = ['minesweeper', 'hangman']
-
-
-# welcome message function
-def welcome_msg(username):
-    print(f'Welcome to the Python Minigames Leaderboards {username}!\n')
-
 
 # finding all unique usernames using a set and | operator
 def unique_usernames(sheets):
+    """
+    """
     usernames = set()
     # looping through each worksheet in the 'sheets' list
     for sheet in sheets:
@@ -60,6 +44,8 @@ def unique_usernames(sheets):
 
 # finding the row number to insert the user's data
 def row_to_insert_at(score_list, user_score):
+    """
+    """
     for i in range(1, len(score_list)):
         # finds the first score its lower than
         if user_score <= int(score_list[i]):
@@ -160,7 +146,7 @@ def main(user):
     username = user.username
     # creating new instance of Player (so quit status doesnt affect in run.py)
     leaderboard_user = run.Player(username, 0, None, None)
-    welcome_msg(leaderboard_user.username)
+    print(f'Welcome to the Python Minigames Leaderboards {leaderboard_user.username}!\n')
 
     # make leaderboard_choice function and call by
     while leaderboard_user.quit_status != 'quit':
