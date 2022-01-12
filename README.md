@@ -89,6 +89,8 @@ To do:
     * **Solution:** I wrapped the random coordinate generation in a while loop which ran while the number of items in the set (coors) was less than the defined number of mines (NUM_MINES). Because it is a set, 'coors' doesn't allow duplicate values and so if a coordinate was generated in the loop that was already in the set, it would not be added to the set and so the loop would have to run an additional time inorder to generate a different unique coordinate. 
 * **Bug:** when trying to import the Player class from run.py into my game modules, the code in run.py was being triggered in the import.
     * **Solution:** I wrapped all of my non-function/class code in run.py into a function called main() and called it at the end of the script. I also put the function call in an if statement that if __ name __ == __ main() __ inorder to prevent the function being called when run.py was imported. [CREDIT - help from Jeremy's answer on Stack Overflow: <a href = "https://stackoverflow.com/questions/6523791/why-is-python-running-my-module-when-i-import-it-and-how-do-i-stop-it/6523855#6523855">prevent code in the module from being executed when imported</a>]
+* **Bug:** popping the final value from leaderboards_menu dictionary inside the leaderboards module's main() function meant that everytime game_engine.leaderboards.main(current_user) was called from run.py, another value was removed from leaderboards_menu dictionary.
+    * **Solution:** defining leaderboards_menu outside of its main() function so that the last value is removed from its call of run.menu_dict instead of previous stored version of leaderboards_menu.
 * **Bug:**
     * **Solution:**
 
