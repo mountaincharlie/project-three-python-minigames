@@ -19,6 +19,10 @@ CREDS = ServiceAccountCredentials.from_json_keyfile_name("creds.json", SCOPE)
 CLIENT = gspread.authorize(CREDS)
 SHEET = CLIENT.open("leaderboards")
 
+# defining the leaderboards_menu outside main()
+leaderboards_menu = run.menu_dict
+leaderboards_menu.pop(str(len(leaderboards_menu)))
+
 # checking it works
 # first_leaderboard = SHEET.worksheet('minesweeper')
 # data = first_leaderboard.get_all_values()
@@ -105,6 +109,14 @@ def rank_refresh(leaderboard):
         leaderboard.update_cell(row, 1, rank)
 
 
+def print_leaderboard_dict(leaderboards_menu):
+    """
+    """
+    for key in leaderboards_menu:
+        game_name = leaderboards_menu[key][5:]
+        print(key, '-', game_name)
+
+
 # choosing a leaderboard option
 def leaderboard_choice(user, leaderboards_menu):
     """
@@ -113,9 +125,7 @@ def leaderboard_choice(user, leaderboards_menu):
         try:
             # make a leaderboard print functions?
             print('Leaderboards Menu:')
-            for key in leaderboards_menu:
-                game_name = leaderboards_menu[key][5:]
-                print(key, '-', game_name)
+            print_leaderboard_dict(leaderboards_menu)
 
             leaderboard = input("\nEnter a number to select an option (or 'quit' to exit):\n")
 
@@ -143,11 +153,6 @@ def main(user):
     # creating new instance of Player (so quit status doesnt affect in run.py)
     leaderboard_user = run.Player(username, 0, None, None)
     welcome_msg(leaderboard_user.username)
-
-    # make function?
-    leaderboards_menu = run.menu_dict
-    to_pop = str(len(leaderboards_menu))
-    leaderboards_menu.pop(to_pop)
 
     # make leaderboard_choice function and call by
     while leaderboard_user.quit_status != 'quit':
