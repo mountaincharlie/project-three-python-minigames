@@ -60,6 +60,51 @@ class Player:
 
         print(f"You've been added to the {self.game_choice} leaderboard at {rank} place.\n(You can view the Leaderboards module from the Main Menu)\n")
 
+    def welcome_msg(self):
+        """
+        Initial user welcome message for each game.
+        Uses the user's username and game choice to write a personal welcome
+        message.
+        Prompts the user to begin the game (hit ENTER) or view the game
+        instructions (enter 'i') or to quit to Main Menu (enter 'quit').
+        If the user wants to view the instructions, the read_instructions()
+        function is called to display them.
+        The user is then prompted to continue to the game (hit ENTER) or to
+        quit to Main Menu (enter 'quit').
+        Returns the user's quit_status.
+        """
+        print(f'\nWelcome to the {self.game_choice.capitalize()} minigame {self.username}!\n')
+
+        user_choice = input("Hit ENTER to begin or 'i' to see the Minigame instructions, or 'quit' to return to the Main Menu:\n")
+
+        if user_choice == 'i':
+            print()
+            self.read_instructions()
+            user_choice = input("\nHit ENTER to start the game or 'quit' to return to the Main Menu:\n")
+
+        return user_choice
+
+    def read_instructions(self):
+        """
+        Reads a game's instruction txt file and prints it line by line to the
+        user.
+        Creates the string name of the path to the txt file.
+        Uses a try/except to open and read the file and then print each line,
+        after stripping the '\n'.
+        If the txt file cannot be found, the FileNotFoundError is caught and
+        an informative message is displayed to the user.
+        """
+        file = 'game_engine/' + str(self.game_choice) + '.txt'
+
+        try:
+            with open(file, 'r') as f:
+                lines = f.readlines()
+                for line in lines:
+                    line.strip('\n')
+                    print(line)
+        except FileNotFoundError:
+            print(f'Sorry, the {self.game_choice.capitalize()} instructions file could not be found.')
+
     # property decorator for quit_status getter/setter methods
     @property
     def quit_status(self):

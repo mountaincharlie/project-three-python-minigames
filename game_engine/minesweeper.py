@@ -20,39 +20,8 @@ class MinesweeperPlayer(Player):
         return cls(**player_instance.__dict__, coors=coors)
 
 
-# ----- WELCOME MESSAGE -----
-
-def welcome_msg(user):
-    """ initial user welcome message """
-
-    print(f'Welcome to the Minesweeper minigame {user.username}!\n')
-    # USE user_quit_status here instead
-    user_choice = input("Hit ENTER to begin or 'i' to see the Minigame instructions, or 'quit' to return to the Main Menu:\n")
-    if user_choice == 'i':
-        print('')
-        read_instructions(user.game_choice)
-        user_choice = input("\nHit ENTER to start the game or 'quit' to return to the Main Menu:\n")
-
-    return user_choice
-
-
-# ----- READING INSTRUCTIONS ----- (move to Player class?)
-def read_instructions(game):
-    """
-    """
-    file = 'game_engine/' + str(game) + '.txt'
-
-    try:
-        with open(file, 'r') as f:
-            lines = f.readlines()
-            for line in lines:
-                line.strip('\n')
-                print(line)
-    except FileNotFoundError:
-        print(f'Sorry, {file} could not be found.')
-
-
 # ----- GRID GENERATING -----
+
 
 def generate_grid():
     """
@@ -299,9 +268,7 @@ def coor_reveal(user, user_coors, h_grid, d_grid):
         # to quit back to main menu or just to restart game
         if choice == 'quit':
             user.quit_status = 'quit'
-            return user.quit_status
-        else:
-            return 'quit'
+        return 'quit'
     else:
         print(f"You avoided the mines!\n'{coor_content}' has been revealed at {user_coors}\n")
         # inserting the revealed number and displaying the grid
@@ -344,9 +311,12 @@ def main(user):
     # overall while loop for starting the game
     while minesweeper_user.quit_status != 'quit':
         username = minesweeper_user.username
+        # resetting the user's score everytime they play again
+        minesweeper_user.score = 0
 
         # welcome message
-        play_or_quit = welcome_msg(minesweeper_user)
+        # play_or_quit = welcome_msg(minesweeper_user)
+        play_or_quit = minesweeper_user.welcome_msg()
         if play_or_quit == 'quit':
             break
         print('\nBuilding the minesweeper grid ...\n')
@@ -386,11 +356,11 @@ def main(user):
             # checks if user wants to insert a flag or reveal location
             f_or_r = flag_or_reveal(minesweeper_user, display_grid, hidden_grid)
             if f_or_r == 'quit':
-                minesweeper_user.quit_status = f_or_r
+                # minesweeper_user.quit_status = f_or_r
                 break
             cont_or_quit = input("\nHit ENTER to continue or 'quit' to restart the game:\n")
             if cont_or_quit.lower() == 'quit':
-                minesweeper_user.quit_status = cont_or_quit
+                # minesweeper_user.quit_status = cont_or_quit
                 break
 
     # game exit message
