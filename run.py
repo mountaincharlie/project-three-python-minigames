@@ -33,7 +33,7 @@ class Player:
         the leaderboard module's function 'row_to_insert_at()'
         along with the user's score, to find the row the user
         should be inserted at.
-        Uses the leaderboard module's function 'rank_generator()'
+        Uses the leaderboard module's function 'rank_converter()'
         with (insert_at_row - 1) since the 'Rank' heading is at row
         1 and 1st place is at row 2 etc.
         Creates the user's row data and inserts it at the correct
@@ -51,7 +51,7 @@ class Player:
         score_list = leaderboard.col_values(3)
         insert_at_row = lb.row_to_insert_at(score_list, self.score)
 
-        rank = lb.rank_generator((insert_at_row - 1))
+        rank = lb.rank_converter((insert_at_row - 1))
 
         user_list = [rank, self.username, self.score]
         leaderboard.insert_row(user_list, insert_at_row)
@@ -201,7 +201,7 @@ def main_menu_choice(current_user):
 
 def main():
     """
-    Main game function.
+    Main program function.
     Prints welcome message to the user.
     Calls 'setting_username()' function to set the user's username.
     Print's specific welcome with the username.
