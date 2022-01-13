@@ -105,6 +105,42 @@ class Player:
         except FileNotFoundError:
             print(f'Sorry, the {self.game_choice.capitalize()} instructions file could not be found.')
 
+    def play_again(self):
+        """
+        Prompts the user to enter anything to play the game again or 'quit'
+        to return to the Main Menu.
+        Returns 'quit'.
+        """
+        choice = input("Hit ENTER to play again or 'quit' to return to the Main Menu:\n")
+
+        if choice == 'quit':
+            self.quit_status = 'quit'
+
+        return 'quit'
+
+    def game_won(self, win_message):
+        """
+        Prints the game won message with specific win_message for the user's
+        type of score (depends on the game played).
+        Calls update_leaderboard() to update the game's leaderboard.
+        Returns self.play_again() which is 'quit'.
+        """
+        print(f"\nYOU WON!\nCongratulations {self.username}!\nYou completed the game with a score of: {self.score} {win_message}.")
+
+        self.update_leaderboard()
+
+        return self.play_again()
+
+    def game_lost(self, lose_message):
+        """
+        Prints the game lost message with specific lose_message for why the user
+        lost (depends on the game played).
+        Returns self.play_again() which is 'quit'.
+        """
+        print(f'Sorry {self.username}, {lose_message}!\n\nGAME OVER\n')
+
+        return self.play_again()
+
     # property decorator for quit_status getter/setter methods
     @property
     def quit_status(self):

@@ -216,36 +216,19 @@ def flag_check(coors, d_grid, h_grid):
     return d_grid, h_grid
 
 
-# game completion function finish docstring
-def game_complete(user):
-    """
-    """
-    print(f"YOU WON!\nCongratulations {user.username}!\nYou completed the game with {user.score} reveals")
-
-    # updating the 'minesweeper' leaderboard with user data
-    user.update_leaderboard()
-
-    choice = input("Hit ENTER to play again or 'quit' to return to the Main Menu:\n")
-    # to quit back to main menu or just to restart game
-    if choice == 'quit':
-        user.quit_status = 'quit'
-        return user.quit_status
-    else:
-        return 'quit'
-
-
 def mine_count(user, h_grid):
     """
     Takes the hidden_grid.
     Counts the occurances of 'M' in the grid.
     If there are no mines remaining (they're all flagged)
-    then the game_complete() function is called.
-    Returns the return of game_complete() (which is 'quit')
+    then the game_won() function is called.
+    Returns the return of game_won() (which is 'quit')
     """
     mines_remaining = np.count_nonzero(h_grid == 'M')
 
     if int(mines_remaining) == 0:
-        return game_complete(user)
+        win_message = 'reveals'
+        return user.game_won(win_message)
 
 
 def coor_reveal(user, user_coors, h_grid, d_grid):
@@ -263,12 +246,8 @@ def coor_reveal(user, user_coors, h_grid, d_grid):
     user.score += 1
 
     if coor_content == 'M':
-        print(f"Sorry {user.username}, there was a mine at {user_coors}!\n\nGAME OVER\n")
-        choice = input("Hit ENTER to play again or 'quit' to return to the Main Menu:\n")
-        # to quit back to main menu or just to restart game
-        if choice == 'quit':
-            user.quit_status = 'quit'
-        return 'quit'
+        lose_message = f'there was a mine at {user_coors}'
+        return user.game_lost(lose_message)
     else:
         print(f"You avoided the mines!\n'{coor_content}' has been revealed at {user_coors}\n")
         # inserting the revealed number and displaying the grid
@@ -276,7 +255,7 @@ def coor_reveal(user, user_coors, h_grid, d_grid):
         print_grid(d_grid)
 
 
-# function for chekcing flag or reveal
+# function for checking flag or reveal
 def flag_or_reveal(user, display_grid, hidden_grid):
     """  """
     user_choice = input("Hit ENTER to reveal the location or enter 'f' to insert/remove a flag:\n")
@@ -291,9 +270,9 @@ def flag_or_reveal(user, display_grid, hidden_grid):
         print_grid(display_grid)
 
         # check number of mines
-        game_win = mine_count(user, hidden_grid)
-        if game_win == 'quit':
-            return game_win
+        game_complete_check = mine_count(user, hidden_grid)
+        if game_complete_check == 'quit':
+            return game_complete_check
 
         # REMOVE AFTER TESTING
         # print('updated hidden_grid:\n', hidden_grid)
