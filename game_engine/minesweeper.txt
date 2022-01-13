@@ -1,4 +1,4 @@
-Minesweeper Minigame Instructions
+MINESWEEPER MINIGAME INSTRUCTIONS
 Based on the same basic logic of the full Minesweeper game, to play the
 Minesweeper Minigame, simply:
 1) Select a coordinate on the grid by entering a row number,
