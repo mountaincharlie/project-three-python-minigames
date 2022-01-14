@@ -11,8 +11,8 @@ from run import Player
 # minesweeper Player subclass
 class MinesweeperPlayer(Player):
     """ Creates instance of MinesweeperPlayer """
-    def __init__(self, username, score, user_quit, game_choice, coors):
-        super().__init__(username, score, user_quit, game_choice)
+    def __init__(self, username, score, user_quit, game_choice, score_order, coors):
+        super().__init__(username, score, user_quit, game_choice, score_order)
         self.coors = coors
 
     @classmethod
@@ -286,6 +286,8 @@ def main(user):
 
     # instance of MinesweeperPlayer SubClass (no current coors value)
     minesweeper_user = MinesweeperPlayer.from_current_user(user, None)
+    # setting score_order 'high_to_low' => lower scores are better
+    minesweeper_user.score_order = 'high_to_low'
 
     # overall while loop for starting the game
     while minesweeper_user.quit_status != 'quit':
