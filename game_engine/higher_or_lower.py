@@ -127,8 +127,8 @@ def main(user):
         # ----- SETTING UP THE GAME -----
 
         # build the deck list [make a function call so its reset at game start but not during game]
-        deck = ['A_spades', 'K_spades', 'Q_spades', 'J_spades', '10_spades', '9_spades', '8_spades', '7_spades', '6_spades', '5_spades', '4_spades', '3_spades', '2_spades', 'A_diamonds', 'K_diamonds', 'Q_diamonds', 'J_diamonds', '10_diamonds', '9_diamonds', '8_diamonds', '7_diamonds', '6_diamonds', '5_diamonds', '4_diamonds', '3_diamonds', '2_diamonds', 'A_clubs', 'K_clubs', 'Q_clubs', 'J_clubs', '10_clubs', '9_clubs', '8_clubs', '7_clubs', '6_clubs', '5_clubs', '4_clubs', '3_clubs', '2_clubs', 'A_hearts', 'K_hearts', 'Q_hearts', 'J_hearts', '10_hearts', '9_hearts', '8_hearts', '7_hearts', '6_hearts', '5_hearts', '4_hearts', '3_hearts', '2_hearts']
-        # deck = ['A_spades', 'A_diamonds', 'A_clubs', 'A_hearts']
+        #deck = ['A_spades', 'K_spades', 'Q_spades', 'J_spades', '10_spades', '9_spades', '8_spades', '7_spades', '6_spades', '5_spades', '4_spades', '3_spades', '2_spades', 'A_diamonds', 'K_diamonds', 'Q_diamonds', 'J_diamonds', '10_diamonds', '9_diamonds', '8_diamonds', '7_diamonds', '6_diamonds', '5_diamonds', '4_diamonds', '3_diamonds', '2_diamonds', 'A_clubs', 'K_clubs', 'Q_clubs', 'J_clubs', '10_clubs', '9_clubs', '8_clubs', '7_clubs', '6_clubs', '5_clubs', '4_clubs', '3_clubs', '2_clubs', 'A_hearts', 'K_hearts', 'Q_hearts', 'J_hearts', '10_hearts', '9_hearts', '8_hearts', '7_hearts', '6_hearts', '5_hearts', '4_hearts', '3_hearts', '2_hearts']
+        deck = ['A_spades', 'A_diamonds', 'A_clubs', 'A_hearts']
         cards_shown = []  # CHECK at end if we need this
 
         # printing the basic instructions (just a print)
@@ -136,7 +136,8 @@ def main(user):
 
         # print initial random card [random card choosing function]
         new_card = random_card(deck)
-        print(new_card)
+        print(f'\nThe first card from the deck is:\n{new_card}')
+        # print(new_card)
         # adds the new_card to the cards_shown list [done later]
         # cards_shown.append(new_card)
         # print(deck)
@@ -172,7 +173,7 @@ def main(user):
 
             if guess_check == 'wrong':
                 # make game_finished() function
-                print(f'\nSorry the {higher_or_lower_user.username}, {new_card} is not {user_guess} than the {revealed_card}.\nYour correct guess streak was: {len(cards_shown)}')
+                print(f'\nSorry {higher_or_lower_user.username}, the {new_card} is not {user_guess} than the {revealed_card}.\nYour correct guess streak was: {higher_or_lower_user.score}')
                 if len(cards_shown) != 0:
                     print(f'You made correct guesses for the following cards:\n{cards_shown}')
 
@@ -181,10 +182,13 @@ def main(user):
                 if choice == 'quit':
                     higher_or_lower_user.quit_status = 'quit'
                 break
+            else:
+                # updating number of shown cards if correctly guessed
+                cards_shown.append(new_card)
 
-            elif len(deck) == 0:
+            if len(deck) == 0:
                 # add to game_finished() function
-                print(f'\nCongratulations {higher_or_lower_user.username},\nYour correct guess streak was: {len(cards_shown)}')
+                print(f'\nCongratulations {higher_or_lower_user.username},\nYour correct guess streak was: {higher_or_lower_user.score}')
                 print(f'You made correct guesses for the following cards:\n{cards_shown}')
                 # trigger leaderboard update
 
@@ -193,9 +197,6 @@ def main(user):
                 if choice == 'quit':
                     higher_or_lower_user.quit_status = 'quit'
                 break
-
-            # updating number of shown cards correctly guessed
-            cards_shown.append(new_card)
 
             # updates the user's score [in a function]
             # prompts game_win or game_lost function
@@ -207,8 +208,8 @@ def main(user):
 
 
 # game constants
-CARD_ORDER = ('A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2')
-# CARD_ORDER = ('A')
+#CARD_ORDER = ('A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2')
+CARD_ORDER = ('A')
 
 # calling main()
 # main()
