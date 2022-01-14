@@ -17,11 +17,12 @@ menu_dict = {
 
 class Player:
     """ Creates an instance of Player """
-    def __init__(self, username, score, user_quit, game_choice):
+    def __init__(self, username, score, user_quit, game_choice, score_order):
         self.username = username
         self.score = score
         self.user_quit = user_quit
         self.game_choice = game_choice
+        self.score_order = score_order
 
     def update_leaderboard(self):
         """
@@ -49,7 +50,7 @@ class Player:
         leaderboard = lb.SHEET.worksheet(self.game_choice)
 
         score_list = leaderboard.col_values(3)
-        insert_at_row = lb.row_to_insert_at(score_list, self.score)
+        insert_at_row = lb.row_to_insert_at(score_list, self.score, self.score_order)
 
         rank = lb.rank_converter((insert_at_row - 1))
 
@@ -117,6 +118,18 @@ class Player:
             self.quit_status = 'quit'
 
         return 'quit'
+
+    # game finish function for games won differently to Minesweeper
+    def game_finish(self, cards_shown):
+        """
+        """
+        print(f'Your correct guess streak was: {self.score}')
+        if len(cards_shown) != 0:
+            print(f'You made correct guesses for the following cards:\n{cards_shown}')
+
+        self.update_leaderboard()
+
+        return self.play_again()
 
     def game_won(self, win_message):
         """
@@ -298,9 +311,9 @@ def main():
 
     print("Welcome to Python Minigames!\n\nLet's start by setting your username.")
     username = setting_username()
-    print(f"\nWelcome to Python Minigames {username}!\n")
+    print(f"\nWelcome to Python Minigames {username}!")
 
-    current_user = Player(username, 0, None, None)
+    current_user = Player(username, 0, None, None, 'low_to_high')
 
     while current_user.quit_status != 'quit':
         main_menu_choice(current_user)
