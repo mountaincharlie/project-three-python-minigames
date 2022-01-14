@@ -53,7 +53,7 @@ def unique_usernames(sheets):
     return usernames_dict
 
 
-def row_to_insert_at(score_list, user_score):
+def row_to_insert_at(score_list, user_score, score_order):
     """
     Finds which row in the leaderboard the user's data
     should be inserted at.
@@ -66,11 +66,19 @@ def row_to_insert_at(score_list, user_score):
     insert row will be the last one.
     Returns the insert_at_row.
     """
-    for i in range(1, len(score_list)):
-        if user_score <= int(score_list[i]):
-            insert_at_row = i+1
-            break
-        insert_at_row = len(score_list)+1
+    # if they game has reverse score (lower is better)
+    if score_order == 'high_to_low':
+        for i in range(1, len(score_list)):
+            if user_score <= int(score_list[i]):
+                insert_at_row = i+1
+                break
+            insert_at_row = len(score_list)
+    else:  # for regular scoring (higher is better)
+        for i in range(len(score_list)-1, 0, -1):
+            if user_score >= int(score_list[i]):
+                insert_at_row = i+1
+                break
+            insert_at_row = len(score_list)+1
 
     return insert_at_row
 
