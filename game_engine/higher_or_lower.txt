@@ -1,1 +1,18 @@
 HIGHER_OR_LOWER MINIGAME INSTRUCTIONS
+
+- order of the cards highest to lowest:
+'A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'
+regardless of suit
+
+- 'A' = Ace, 'K' = King, 'Q' = Queen, 'J' = Jack and the numbers
+are just the numbers they represent.
+
+- the deck of cards includes four of each type of card each with
+a different suit; spades, diamonds, clubs or hearts.
+
+1)
+2)
+n) The game will end once you make an incorrect guess and your
+score will be your guess streak (number of correct guesses).
+(The higher the score the better) 
+Enjoy the game!
