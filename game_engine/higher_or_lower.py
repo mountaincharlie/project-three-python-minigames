@@ -11,11 +11,28 @@ from run import Player
 # Higher_or_Lower Player subclass
 class Higher_or_LowerPlayer(Player):
     """ Creates instance of Higher_or_LowerPlayer """
-    def __init__(self, username, score, user_quit, game_choice, coors):
+    def __init__(self, username, score, user_quit, game_choice, guess):
         super().__init__(username, score, user_quit, game_choice)
-        self.coors = coors
+        self.guess = guess
 
     @classmethod
-    def from_current_user(cls, player_instance, coors):
-        return cls(**player_instance.__dict__, coors=coors)
+    def from_current_user(cls, player_instance, guess):
+        return cls(**player_instance.__dict__, guess=guess)
 
+
+# main function call
+def main(user):
+    """ main game function calls """
+    print('hello')
+
+    # instance of Higher_or_LowerPlayer SubClass (no current guess value)
+    higher_or_lower_user = Higher_or_LowerPlayer.from_current_user(user, None)
+    print(higher_or_lower_user.username)
+    print(higher_or_lower_user.score)
+    print(higher_or_lower_user.user_quit)
+    print(higher_or_lower_user.game_choice)
+    print(higher_or_lower_user.guess)
+
+
+# calling main()
+# main()
