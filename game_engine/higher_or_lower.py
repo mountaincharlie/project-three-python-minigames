@@ -40,10 +40,13 @@ def validate_guess():
     Returns the valid guess.
     """
 
-    options = ['h', 'l']
+    options = {
+        'h': 'higher',
+        'l': 'lower'
+        }
     while True:
         try:
-            guess = input("Enter 'h' (for higher) 'l' (for lower):\n")
+            guess = input("\nEnter 'h' (for higher) 'l' (for lower):\n")
             if guess not in options:
                 raise ValueError
             else:
@@ -51,7 +54,7 @@ def validate_guess():
         except ValueError:
             print(f"Invalid guess")
 
-    return guess
+    return options[guess]
 
 
 # main function call
@@ -71,7 +74,7 @@ def main(user):
         play_or_quit = higher_or_lower_user.welcome_msg()
         if play_or_quit == 'quit':
             break
-        print('\nBuilding the ... ...\n')
+        print('\nSetting up the game ...\n')
 
         # ----- SETTING UP THE GAME -----
 
@@ -85,31 +88,43 @@ def main(user):
         print(f'The first card from the deck is displayed below!\n\nChoose whether you think the next card to be revealed\nwill be higher or lower than this card.\nThe cards in order from highest to lowest are:\n{card_order}\n')
 
         # print initial random card [random card choosing function]
-        initial_card = random_card(deck)
-        print(initial_card)
-        # adds the initial_card to the cards_shown list
-        cards_shown.append(initial_card)
+        new_card = random_card(deck)
+        print(new_card)
+        # adds the new_card to the cards_shown list
+        cards_shown.append(new_card)
         # print(deck)
         # print(cards_shown)
 
         # while loop for prompting user guesses until they choose to quit
         while True:
 
+            # updates revealed_card
+            revealed_card = new_card
+
             # takes in and validates user guess [in a function]
             user_guess = validate_guess()
-            print('user guess: ', user_guess)
 
             # updates higher_or_lower_user.guess
+            higher_or_lower_user.guess = user_guess
 
-        # prints their guess??
-        # print(f"\nYou have guessed that the next card will be: {higher_or_lower_user.guess} than {current_card}\n")
+            # prints their guess??
+            print(f"\nYou have guessed that the next card will be\n{higher_or_lower_user.guess} than {revealed_card}\n")
 
-        # checks/updates the user's score [in a function]
+            # enter to continue
+            input('Hit Enter to reveal the next card:')
 
-        # prompts continue or quit
-        # cont_or_quit = input("\nHit ENTER to continue or 'quit' to restart the game:\n")
-            # if cont_or_quit.lower() == 'quit':
-                # break
+            # generates next random card and prints with message
+            new_card = random_card(deck)
+            print(f'\nThe next card from the deck is:\n{new_card}')
+
+            # checks if the revealed_card is h/l than new_card
+            # updates the user's score [in a function]
+            # prompts game_win or game_lost function
+
+            # prompts continue or quit
+            # cont_or_quit = input("\nHit ENTER to continue or 'quit' to restart the game:\n")
+                # if cont_or_quit.lower() == 'quit':
+                    # break
 
 
 # calling main()
