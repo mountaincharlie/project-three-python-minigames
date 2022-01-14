@@ -251,7 +251,7 @@ def main_menu_choice(current_user):
 
     while True:
         try:
-            print('Main Menu:')
+            print('\nMain Menu:')
             print_dict(menu_dict)
 
             menu_choice = input("\nEnter a number to select an option (or 'quit' to exit):\n")
