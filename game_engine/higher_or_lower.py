@@ -137,8 +137,8 @@ def main(user):
         # print initial random card [random card choosing function]
         new_card = random_card(deck)
         print(new_card)
-        # adds the new_card to the cards_shown list
-        cards_shown.append(new_card)
+        # adds the new_card to the cards_shown list [done later]
+        # cards_shown.append(new_card)
         # print(deck)
         # print(cards_shown)
 
@@ -162,7 +162,6 @@ def main(user):
 
             # generates next random card and prints with message
             new_card = random_card(deck)
-            cards_shown.append(new_card)
             print(f'\nThe next card from the deck is:\n{new_card}')
 
             # checks if the new_card is h/l than new_card
@@ -171,10 +170,37 @@ def main(user):
             print(guess_check)
             print(higher_or_lower_user.score)
 
+            if guess_check == 'wrong':
+                # make game_finished() function
+                print(f'\nSorry the {higher_or_lower_user.username}, {new_card} is not {user_guess} than the {revealed_card}.\nYour correct guess streak was: {len(cards_shown)}')
+                if len(cards_shown) != 0:
+                    print(f'You made correct guesses for the following cards:\n{cards_shown}')
+
+                # prompts play again or quit (in self.play_again())
+                choice = input("Hit ENTER to play again or 'quit' to return to the Main Menu:\n")
+                if choice == 'quit':
+                    higher_or_lower_user.quit_status = 'quit'
+                break
+
+            elif len(deck) == 0:
+                # add to game_finished() function
+                print(f'\nCongratulations {higher_or_lower_user.username},\nYour correct guess streak was: {len(cards_shown)}')
+                print(f'You made correct guesses for the following cards:\n{cards_shown}')
+                # trigger leaderboard update
+
+                # prompts play again or quit (in self.play_again())
+                choice = input("Hit ENTER to play again or 'quit' to return to the Main Menu:\n")
+                if choice == 'quit':
+                    higher_or_lower_user.quit_status = 'quit'
+                break
+
+            # updating number of shown cards correctly guessed
+            cards_shown.append(new_card)
+
             # updates the user's score [in a function]
             # prompts game_win or game_lost function
 
-            # prompts continue or quit
+            # prompts guess again or quit
             cont_or_quit = input("\nHit ENTER to guess again or 'quit' to restart the game:\n")
             if cont_or_quit.lower() == 'quit':
                 break
