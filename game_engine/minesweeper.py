@@ -294,7 +294,6 @@ def main(user):
         minesweeper_user.score = 0
 
         # welcome message
-        # play_or_quit = welcome_msg(minesweeper_user)
         play_or_quit = minesweeper_user.welcome_msg()
         if play_or_quit == 'quit':
             break
@@ -328,18 +327,15 @@ def main(user):
         while True:
             user_row = validate_row_col(ROWS, 'ROW')
             user_col = validate_row_col(COLS, 'COLUMN')
-            # user_coors = (user_row, user_col)
             minesweeper_user.coors = (user_row, user_col)
             print(f"\nYour chosen coordinate is: {minesweeper_user.coors}\n")
 
             # checks if user wants to insert a flag or reveal location
             f_or_r = flag_or_reveal(minesweeper_user, display_grid, hidden_grid)
             if f_or_r == 'quit':
-                # minesweeper_user.quit_status = f_or_r
                 break
             cont_or_quit = input("\nHit ENTER to continue or 'quit' to restart the game:\n")
             if cont_or_quit.lower() == 'quit':
-                # minesweeper_user.quit_status = cont_or_quit
                 break
 
     # game exit message
@@ -350,6 +346,3 @@ def main(user):
 ROWS = 8
 COLS = 8
 NUM_MINES = 10
-
-# calling the game (should be done in run.py)
-# main()
