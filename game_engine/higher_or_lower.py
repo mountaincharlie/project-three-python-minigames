@@ -33,7 +33,7 @@ def random_card(deck):
 
 # ----- PROCESSING USER INPUT -----
 
-def validate_guess():
+def validate_guess(new_card):
     """
     Keeps asking the user for a guess of h (higher),
     or l (lower) until a valid entry is given.
@@ -46,7 +46,7 @@ def validate_guess():
         }
     while True:
         try:
-            guess = input("\nEnter 'h' (for higher) 'l' (for lower):\n")
+            guess = input(f"\nEnter 'h' (for higher) or 'l' (for lower) than {new_card}:\n")
             if guess not in options:
                 raise ValueError
             else:
@@ -57,8 +57,37 @@ def validate_guess():
     return options[guess]
 
 
+# updating the user's score
+def score_update(user):
+    """
+    """
+    user.score += 1
+
+
+# finding the result from the user's guess
+def guess_result(user, user_guess, revealed_card_index, new_card_index):
+    """
+    """
+    # finding correct answer
+    if new_card_index == revealed_card_index:
+        score_update(user)
+        correct_answer = 'draw'
+        return correct_answer
+    elif new_card_index < revealed_card_index:
+        correct_answer = 'higher'
+    else:
+        correct_answer = 'lower'
+
+    # checking if the user's answer is correct
+    if user_guess == correct_answer:
+        score_update(user)
+        return 'correct'
+    else:
+        return 'wrong'
+
+
 # checking if the user's guess was correct
-def guess_checker(user_guess, revealed_card, new_card):
+def guess_checker(user, user_guess, revealed_card, new_card):
     """
     """
     # MAKE FUNCTION splitting revealed_card at the '_' and taking the first part
@@ -72,21 +101,8 @@ def guess_checker(user_guess, revealed_card, new_card):
     new_card_index = CARD_ORDER.index(new_card_value)
     # print('revealed_card_index: ', revealed_card_index, 'new_card_index', new_card_index)
 
-    # finding correct answer
-    if new_card_index == revealed_card_index:
-        correct_answer = 'draw'
-        return correct_answer
-    elif new_card_index < revealed_card_index:
-        correct_answer = 'higher'
-    else:
-        correct_answer = 'lower'
-
-    # checking if the user's answer is correct
-    if user_guess == correct_answer:
-        # CALL score update function
-        return 'correct'
-    else:
-        return 'wrong'
+    # guess_result returns 'draw'/'correct'/'wrong'
+    return guess_result(user, user_guess, revealed_card_index, new_card_index)
 
 
 # main function call
@@ -111,8 +127,8 @@ def main(user):
         # ----- SETTING UP THE GAME -----
 
         # build the deck list [make a function call so its reset at game start but not during game]
-        # deck = ['A_spades', 'K_spades', 'Q_spades', 'J_spades', '10_spades', '9_spades', '8_spades', '7_spades', '6_spades', '5_spades', '4_spades', '3_spades', '2_spades', 'A_diamonds', 'K_diamonds', 'Q_diamonds', 'J_diamonds', '10_diamonds', '9_diamonds', '8_diamonds', '7_diamonds', '6_diamonds', '5_diamonds', '4_diamonds', '3_diamonds', '2_diamonds', 'A_clubs', 'K_clubs', 'Q_clubs', 'J_clubs', '10_clubs', '9_clubs', '8_clubs', '7_clubs', '6_clubs', '5_clubs', '4_clubs', '3_clubs', '2_clubs', 'A_hearts', 'K_hearts', 'Q_hearts', 'J_hearts', '10_hearts', '9_hearts', '8_hearts', '7_hearts', '6_hearts', '5_hearts', '4_hearts', '3_hearts', '2_hearts']
-        deck = ['A_spades', 'A_diamonds', 'A_clubs', 'A_hearts']
+        deck = ['A_spades', 'K_spades', 'Q_spades', 'J_spades', '10_spades', '9_spades', '8_spades', '7_spades', '6_spades', '5_spades', '4_spades', '3_spades', '2_spades', 'A_diamonds', 'K_diamonds', 'Q_diamonds', 'J_diamonds', '10_diamonds', '9_diamonds', '8_diamonds', '7_diamonds', '6_diamonds', '5_diamonds', '4_diamonds', '3_diamonds', '2_diamonds', 'A_clubs', 'K_clubs', 'Q_clubs', 'J_clubs', '10_clubs', '9_clubs', '8_clubs', '7_clubs', '6_clubs', '5_clubs', '4_clubs', '3_clubs', '2_clubs', 'A_hearts', 'K_hearts', 'Q_hearts', 'J_hearts', '10_hearts', '9_hearts', '8_hearts', '7_hearts', '6_hearts', '5_hearts', '4_hearts', '3_hearts', '2_hearts']
+        # deck = ['A_spades', 'A_diamonds', 'A_clubs', 'A_hearts']
         cards_shown = []  # CHECK at end if we need this
 
         # printing the basic instructions (just a print)
@@ -122,7 +138,7 @@ def main(user):
         new_card = random_card(deck)
         print(new_card)
         # adds the new_card to the cards_shown list
-        # cards_shown.append(new_card)
+        cards_shown.append(new_card)
         # print(deck)
         # print(cards_shown)
 
@@ -133,7 +149,7 @@ def main(user):
             revealed_card = new_card
 
             # takes in and validates user guess [in a function]
-            user_guess = validate_guess()
+            user_guess = validate_guess(new_card)
 
             # updates higher_or_lower_user.guess
             higher_or_lower_user.guess = user_guess
@@ -146,24 +162,27 @@ def main(user):
 
             # generates next random card and prints with message
             new_card = random_card(deck)
+            cards_shown.append(new_card)
             print(f'\nThe next card from the deck is:\n{new_card}')
 
             # checks if the new_card is h/l than new_card
-            guess_check = guess_checker(user_guess, revealed_card, new_card)
+            guess_check = guess_checker(higher_or_lower_user, user_guess, revealed_card, new_card)
+            # displaying the results and the user's score
             print(guess_check)
+            print(higher_or_lower_user.score)
 
             # updates the user's score [in a function]
             # prompts game_win or game_lost function
 
             # prompts continue or quit
-            cont_or_quit = input("\nHit ENTER to continue or 'quit' to restart the game:\n")
+            cont_or_quit = input("\nHit ENTER to guess again or 'quit' to restart the game:\n")
             if cont_or_quit.lower() == 'quit':
                 break
 
 
 # game constants
-# CARD_ORDER = ('A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2')
-CARD_ORDER = ('A')
+CARD_ORDER = ('A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2')
+# CARD_ORDER = ('A')
 
 # calling main()
 # main()
