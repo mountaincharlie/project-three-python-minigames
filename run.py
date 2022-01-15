@@ -120,12 +120,10 @@ class Player:
         return 'quit'
 
     # game finish function for games won differently to Minesweeper
-    def game_finish(self, cards_shown):
+    def game_finish(self, message):
         """
         """
-        print(f'Your correct guess streak was: {self.score}')
-        if len(cards_shown) != 0:
-            print(f'You made correct guesses for the following cards:\n{cards_shown}')
+        print(f'{message}: {self.score}')
 
         self.update_leaderboard()
 
