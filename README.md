@@ -24,6 +24,9 @@ This app provides a fun and quick way to play a few small, popular games, with e
 To do:
 * descriptions/user value/screenshots 
 * menu/navigation
+* player class
+* game modules 
+* interactivity/user feedback
 * the games [Player Class model!] (link to instructions section)
 * the leaderboard (link to API section)
 
@@ -83,15 +86,6 @@ To do:
 * Used in:
     * run.py
 * Used to import a chosen module from the game_engine directory, from their full file path as a string 
-
-## User Experience Design [to finish]
----
-
-To do:
-* interactivity
-* navigation
-* user feedback
-* CI template for console style layout in the browser
 
 ## Testing [to finish]
 ---
