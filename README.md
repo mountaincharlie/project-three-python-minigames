@@ -91,8 +91,8 @@ To do:
     * **Solution:** I wrapped all of my non-function/class code in run.py into a function called main() and called it at the end of the script. I also put the function call in an if statement that if __ name __ == __ main() __ inorder to prevent the function being called when run.py was imported. [CREDIT - help from Jeremy's answer on Stack Overflow: <a href = "https://stackoverflow.com/questions/6523791/why-is-python-running-my-module-when-i-import-it-and-how-do-i-stop-it/6523855#6523855">prevent code in the module from being executed when imported</a>]
 * **Bug:** popping the final value from leaderboards_menu dictionary inside the leaderboards module's main() function meant that everytime game_engine.leaderboards.main(current_user) was called from run.py, another value was removed from leaderboards_menu dictionary.
     * **Solution:** defining leaderboards_menu outside of its main() function so that the last value is removed from its call of run.menu_dict instead of previous stored version of leaderboards_menu.
-* **Bug:**
-    * **Solution:**
+* **Bug:** when trying to find the row to add a user's score to in the leaderboard, if the game had a high to low scoring system (lower was better) then iterating through the column data in order was fine, but for the games where higher scores were better, the same loop didn't work.
+    * **Solution:** using range with a negative step value to iterate through a decreasing range in a for loop [CREDIT - help from Kite's post: <a href = "https://www.kite.com/python/answers/how-to-iterate-through-a-decreasing-range-with-a-for-loop-in-python">How to iterate through a decreasing range with a for-loop in Python</a>]
 
 ### Unfixed Bugs
 * SHOULD BE: No unfixed bugs
@@ -115,6 +115,7 @@ To do:
 * Chris' post on finxter: <a href = "https://blog.finxter.com/python-how-to-import-modules-from-another-folder/#:~:text=The%20most%20Pythonic%20way%20to,import%20module%20.">Method 3: Dot Notation with __ init __.py</a> for how to import modules from a sperate directory.
 * NanoDano's post on Dev_DUNGEON: <a href = "https://www.devdungeon.com/content/import-python-module-string-name">Import Python Module by String Name</a> for how to import a module using its name as a string.
 * Jeremy's answer on Stack Overflow: <a href = "https://stackoverflow.com/questions/6523791/why-is-python-running-my-module-when-i-import-it-and-how-do-i-stop-it/6523855#6523855">prevent code in the module from being executed when imported</a> for how to prevent a module's code being exectuted when its imported into another module.
+* Kite's post: <a href = "https://www.kite.com/python/answers/how-to-iterate-through-a-decreasing-range-with-a-for-loop-in-python">How to iterate through a decreasing range with a for-loop in Python</a> for how to iterate through a decreasing range with a for-loop.
 
 ### Code Snippets Borrowed From/Inspired By
 * GeeksforGeeks's post: <a href = "https://www.geeksforgeeks.org/python-remove-square-brackets-from-list/">Python | Remove square brackets from list</a> for how to remove the square brackets from a list, using the str() method and list slicing, which i used in minesweeer.py for displaying the display_grid to the user.
