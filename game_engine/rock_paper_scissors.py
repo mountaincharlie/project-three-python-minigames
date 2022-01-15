@@ -41,6 +41,17 @@ def validate_choice():
     return OPTIONS[choice]
 
 
+def rand_rps_choice():
+    """
+    Generates a random value from the OPTIONS
+    dict as the cpu's choice.
+    Returns the cpu's choice.
+    """
+    choice = np.random.choice(list(OPTIONS))
+
+    return choice
+
+
 # main function call
 def main(user):
     """ main game function calls """
@@ -73,7 +84,8 @@ def main(user):
             # takes in and validates user choice
             rock_paper_scissors_user.choice = validate_choice
 
-            # generates random cpu guess
+            # generates random cpu choice
+            cpu_choice = rand_rps_choice()
 
             # compares the two guesses
             # winner = 
