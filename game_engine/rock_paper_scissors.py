@@ -49,32 +49,37 @@ def rand_rps_choice():
     """
     choice = np.random.choice(list(OPTIONS))
 
-    return choice
+    return OPTIONS[choice]
 
 
 # compares the choices
-def choice_compare(user, cpu_choice):
+def choice_compare(user_choice, cpu_choice):
     """
     """
-    user_choice = user.choice
-    username = user.username
 
     if user_choice == cpu_choice:
-        winner = 'no one. It was a draw'
+        winner = 'It was a draw. No one'
     elif user_choice == 'rock' and cpu_choice == 'paper':
-        winner = 'the CPU'
+        winner = 'The CPU'
     elif user_choice == 'rock' and cpu_choice == 'scissors':
-        winner = username
+        winner = 'You'
     elif user_choice == 'paper' and cpu_choice == 'scissors':
-        winner = 'the CPU'
+        winner = 'The CPU'
     elif user_choice == 'paper' and cpu_choice == 'rock':
-        winner = username
+        winner = 'You'
     elif user_choice == 'scissors' and cpu_choice == 'rock':
-        winner = 'the CPU'
+        winner = 'The CPU'
     elif user_choice == 'scissors' and cpu_choice == 'paper':
-        winner = username
+        winner = 'You'
 
     return winner
+
+
+def score_update(user):
+    """
+    updates the user's score by 1 when guess is correct
+    """
+    user.score += 1
 
 
 # main function call
@@ -107,13 +112,20 @@ def main(user):
             print(f'Round {rounds_played}')
 
             # takes in and validates user choice
-            rock_paper_scissors_user.choice = validate_choice
+            rock_paper_scissors_user.choice = validate_choice()
+            print(rock_paper_scissors_user.choice)
 
             # generates random cpu choice
             cpu_choice = rand_rps_choice()
+            print(cpu_choice)
 
             # compares the two guesses
-            winner = choice_compare(rock_paper_scissors_user, cpu_choice)
+            winner = choice_compare(rock_paper_scissors_user.choice, cpu_choice)
+
+            # tracking the user's score (+1 for wins only)
+            if winner == 'You':
+                score_update(rock_paper_scissors_user)
+            # ADD LATER? adds one for any draws (15 - draws is total, then 50% or more of total = win for the user)
 
             # prints the result
             print(f"\nYou chose {rock_paper_scissors_user.choice}\nThe CPU chose {cpu_choice}\n{winner} won this round.")
