@@ -52,6 +52,31 @@ def rand_rps_choice():
     return choice
 
 
+# compares the choices
+def choice_compare(user, cpu_choice):
+    """
+    """
+    user_choice = user.choice
+    username = user.username
+
+    if user_choice == cpu_choice:
+        winner = 'no one. It was a draw'
+    elif user_choice == 'rock' and cpu_choice == 'paper':
+        winner = 'the CPU'
+    elif user_choice == 'rock' and cpu_choice == 'scissors':
+        winner = username
+    elif user_choice == 'paper' and cpu_choice == 'scissors':
+        winner = 'the CPU'
+    elif user_choice == 'paper' and cpu_choice == 'rock':
+        winner = username
+    elif user_choice == 'scissors' and cpu_choice == 'rock':
+        winner = 'the CPU'
+    elif user_choice == 'scissors' and cpu_choice == 'paper':
+        winner = username
+
+    return winner
+
+
 # main function call
 def main(user):
     """ main game function calls """
@@ -88,7 +113,7 @@ def main(user):
             cpu_choice = rand_rps_choice()
 
             # compares the two guesses
-            # winner = 
+            winner = choice_compare(rock_paper_scissors_user, cpu_choice)
 
             # prints the result
             print(f"\nYou chose {rock_paper_scissors_user.choice}\nThe CPU chose {cpu_choice}\n{winner} won this round.")
