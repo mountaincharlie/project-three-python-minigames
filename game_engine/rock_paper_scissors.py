@@ -75,13 +75,6 @@ def choice_compare(user_choice, cpu_choice):
     return winner
 
 
-def score_update(user):
-    """
-    updates the user's score by 1 when guess is correct
-    """
-    user.score += 1
-
-
 # main function call
 def main(user):
     """ main game function calls """
@@ -91,8 +84,11 @@ def main(user):
 
     # overall while loop for starting the game
     while rock_paper_scissors_user.quit_status != 'quit':
+
         # resetting the user's score everytime they play again
         rock_paper_scissors_user.score = 0
+        # resetting cpu score
+        cpu_score = 0
 
         # welcome message
         play_or_quit = rock_paper_scissors_user.welcome_msg()
@@ -104,7 +100,7 @@ def main(user):
         rounds_played = 0
 
         # printing the basic instructions
-        print(f"Choose whether you want to play one of: {OPTIONS}\nThe computer will also make a choice\nand the winner will be displayed.\nThe game is out of 15 rounds.\n")
+        print(f"Choose to play: rock, paper or scissor.\nThe computer will also make a choice\nand the winner will be displayed.\nThe game is out of 15 rounds.\n")
 
         # while loop for prompting user choices until they choose to quit
         while True:
@@ -113,28 +109,30 @@ def main(user):
 
             # takes in and validates user choice
             rock_paper_scissors_user.choice = validate_choice()
-            print(rock_paper_scissors_user.choice)
 
             # generates random cpu choice
             cpu_choice = rand_rps_choice()
-            print(cpu_choice)
 
             # compares the two guesses
-            winner = choice_compare(rock_paper_scissors_user.choice, cpu_choice)
+            round_winner = choice_compare(rock_paper_scissors_user.choice, cpu_choice)
 
             # tracking the user's score (+1 for wins only)
-            if winner == 'You':
-                score_update(rock_paper_scissors_user)
-            # ADD LATER? adds one for any draws (15 - draws is total, then 50% or more of total = win for the user)
+            if round_winner == 'You':
+                rock_paper_scissors_user.score += 1
+            elif round_winner == 'The CPU':
+                cpu_score += 1
+            # ADD LATER? compares cpu and user wins for winner
 
             # prints the result
-            print(f"\nYou chose {rock_paper_scissors_user.choice}\nThe CPU chose {cpu_choice}\n{winner} won this round.")
+            print(f"\nYou chose {rock_paper_scissors_user.choice}\nThe CPU chose {cpu_choice}\n{round_winner} won this round.\n{rock_paper_scissors_user.username}: {rock_paper_scissors_user.score}\nCPU: {cpu_score}")
 
             # ending the game
-            # if rounds_played == 15: game_finish()
+            if rounds_played == 15:
+                rock_paper_scissors_user.game_finish('Your total number of winning rounds was')
+                break
 
             # prompts play next round or quit
-            cont_or_quit = input("\nHit ENTER to guess again or 'quit' to restart the game:\n")
+            cont_or_quit = input(f"\nHit ENTER for round {rounds_played+1} or 'quit' to restart the game:\n")
             if cont_or_quit.lower() == 'quit':
                 break
 
