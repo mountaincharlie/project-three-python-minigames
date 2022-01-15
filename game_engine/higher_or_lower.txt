@@ -20,5 +20,4 @@ whether the next card will be 'higher' or 'lower' than this
 newly revealed card.
 4) The game will end once you make an incorrect guess and your
 score will be your guess streak (number of correct guesses).
-(The higher the score the better) 
 Enjoy the game!

@@ -9,5 +9,4 @@ won.
 current scores will be displayed.
 4) The game will end after a set number of rounds and your
 score will be the number of rounds you won.
-(The higher the score the better) 
 Enjoy the game!
