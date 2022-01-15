@@ -169,6 +169,7 @@ def main(user):
                 if len(cards_shown) != 0:
                     print(f'You made correct guesses for the following cards:\n{cards_shown}')
                 higher_or_lower_user.game_finish('Your correct guess streak was')
+                break
             else:
                 # updating number of shown cards if correctly guessed
                 cards_shown.append(new_card)
@@ -180,6 +181,7 @@ def main(user):
             if len(deck) == 0:
                 print(f'\nCongratulations {higher_or_lower_user.username}!\nYou made correct guesses for the following cards:\n{cards_shown}')
                 higher_or_lower_user.game_finish('Your correct guess streak was')
+                break
 
 
 # game constants and global vars
