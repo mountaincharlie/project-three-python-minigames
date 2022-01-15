@@ -91,8 +91,8 @@ To do:
     * **Solution:** I wrapped all of my non-function/class code in run.py into a function called main() and called it at the end of the script. I also put the function call in an if statement that if __ name __ == __ main() __ inorder to prevent the function being called when run.py was imported. [CREDIT - help from Jeremy's answer on Stack Overflow: <a href = "https://stackoverflow.com/questions/6523791/why-is-python-running-my-module-when-i-import-it-and-how-do-i-stop-it/6523855#6523855">prevent code in the module from being executed when imported</a>]
 * **Bug:** popping the final value from leaderboards_menu dictionary inside the leaderboards module's main() function meant that everytime game_engine.leaderboards.main(current_user) was called from run.py, another value was removed from leaderboards_menu dictionary.
     * **Solution:** defining leaderboards_menu outside of its main() function so that the last value is removed from its call of run.menu_dict instead of previous stored version of leaderboards_menu.
-* **Bug:** when trying to find the row to add a user's score to in the leaderboard, if the game had a high to low scoring system (lower was better) then iterating through the column data in order was fine, but for the games where higher scores were better, the same loop didn't work.
-    * **Solution:** using range with a negative step value to iterate through a decreasing range in a for loop [CREDIT - help from Kite's post: <a href = "https://www.kite.com/python/answers/how-to-iterate-through-a-decreasing-range-with-a-for-loop-in-python">How to iterate through a decreasing range with a for-loop in Python</a>]
+* **Bug:**
+    * **Solution:**
 
 ### Unfixed Bugs
 * SHOULD BE: No unfixed bugs
