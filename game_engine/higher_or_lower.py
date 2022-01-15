@@ -146,6 +146,7 @@ def main(user):
 
             # takes in and validates user guess [in a function]
             higher_or_lower_user.guess = validate_guess(new_card)
+            user_guess = higher_or_lower_user.guess
 
             # prints their guess??
             print(f"\nYou have guessed that the next card will be\n{higher_or_lower_user.guess} than {revealed_card}\n")
@@ -160,8 +161,8 @@ def main(user):
             # checks if the new_card is h/l than new_card
             guess_check = guess_checker(higher_or_lower_user, user_guess, revealed_card, new_card)
             # displaying the results and the user's score
-            print(guess_check)
-            print(higher_or_lower_user.score)
+            # print(guess_check)
+            # print(higher_or_lower_user.score)
 
             if guess_check == 'wrong':
                 print(f'\nSorry {higher_or_lower_user.username}, the {new_card} is not {user_guess} than the {revealed_card}.\n')
