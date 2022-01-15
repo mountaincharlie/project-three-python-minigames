@@ -1,1 +1,13 @@
 ROCK_PAPER_SCISSORS MINIGAME INSTRUCTIONS
+Based on the classic game by the same name, to play the
+Rock_Paper_Scissors Minigame, simply:
+1) Make a choice of 'rock', 'paper' or 'scissors'. The
+CPU will also make a random choice.
+2) Your choice will be compared to the CPU's to see who
+won.
+3) The round's outcome and both yours and the CPU's
+current scores will be displayed.
+4) The game will end after a set number of rounds and your
+score will be the number of rounds you won.
+(The higher the score the better) 
+Enjoy the game!
