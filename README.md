@@ -139,11 +139,18 @@ To do:
 * <a href = "https://python-minigames.herokuapp.com/">Python Minigames App</a>
 * <a href = "https://docs.google.com/spreadsheets/d/124GeJ30MEkNUFtQfglxCuBO7tjc0yuUZdYpwh5PHQwE/edit?usp=sharing">leaderboards Google Sheet</a>
 
-## Credits [to finish]
+## Credits
 ---
 
-To do:
-* other credits
+### Code Institute
+* API setup videos:
+    * <a href = "https://youtu.be/WTll5p4N7hE">Activating API credentials</a>
+    * <a href = "https://youtu.be/lPTKUiafTRY">Connecting to the API with Python</a>
+* Deployment to Heroku videos:
+    * <a href = "https://youtu.be/BhW26FryaYI">Deploying Our Project Part 1</a>
+    * <a href = "https://youtu.be/ONx3iEqAOM4">Deploying Our Project Part 2</a> 
+* GitHub Template: 
+    * <a href = "https://github.com/Code-Institute-Org/python-essentials-template">Python Essentials Template</a> 
 
 ### Help With Bug Fixes
 * Corey Schafer's video: <a href = "https://www.youtube.com/watch?v=jCzT9XFZ5bw">Python OOP Tutorial 6: Property Decorators - Getters, Setters, and Deleters</a> for creating a getter and setter in my Player Class.
