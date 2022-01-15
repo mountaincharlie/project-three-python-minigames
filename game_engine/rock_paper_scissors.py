@@ -128,7 +128,15 @@ def main(user):
 
             # ending the game
             if rounds_played == NUM_ROUNDS:
-                rock_paper_scissors_user.game_finish('Your total number of winning rounds was')
+                if rock_paper_scissors_user.score == cpu_score:
+                    outcome = 'drew with'
+                elif rock_paper_scissors_user.score < cpu_score:
+                    outcome = 'lost to'
+                elif rock_paper_scissors_user.score > cpu_score:
+                    outcome = 'beat'
+
+                print(f'\nYou {outcome} the CPU.\nYou scored {rock_paper_scissors_user.score} rounds.')
+                rock_paper_scissors_user.game_finish()
                 break
 
             # prompts play next round or quit

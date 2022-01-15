@@ -168,9 +168,14 @@ def main(user):
                 print(f'\nSorry {higher_or_lower_user.username}, the {new_card} is not {user_guess} than the {revealed_card}.\n')
                 if len(cards_shown) != 0:
                     print(f'You made correct guesses for the following cards:\n{cards_shown}')
-                higher_or_lower_user.game_finish('Your correct guess streak was')
+                print(f'Your correct guess streak was: {higher_or_lower_user.score}')
+                higher_or_lower_user.game_finish()
                 break
             else:
+                if guess_check == 'draw':
+                    print(f'\nYou passed!\n{new_card} is neither higher or lower than {revealed_card}')
+                else:
+                    print(f'\nYou were correct!\n{new_card} is {higher_or_lower_user.guess} than {revealed_card}')
                 # updating number of shown cards if correctly guessed
                 cards_shown.append(new_card)
                 # prompts guess again or quit
@@ -179,8 +184,8 @@ def main(user):
                     break
 
             if len(deck) == 0:
-                print(f'\nCongratulations {higher_or_lower_user.username}!\nYou made correct guesses for the following cards:\n{cards_shown}')
-                higher_or_lower_user.game_finish('Your correct guess streak was')
+                print(f'\nCongratulations {higher_or_lower_user.username}!\nYou made correct guesses for the following cards:\n{cards_shown}\nYour correct guess streak was: {higher_or_lower_user.score}')
+                higher_or_lower_user.game_finish()
                 break
 
 
