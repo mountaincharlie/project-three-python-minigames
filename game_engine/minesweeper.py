@@ -318,7 +318,7 @@ def main(user):
         # print('with mines:\n', hidden_grid)
 
         # looping through the other coors and inserting their number
-        print('completed hidden_grid:\n', hidden_grid)
+        # print('completed hidden_grid:\n', hidden_grid)
         examine_coors(hidden_grid)
 
         # generating the display grid
@@ -351,4 +351,4 @@ def main(user):
 # game constants
 ROWS = 8
 COLS = 8
-NUM_MINES = 1
+NUM_MINES = 10
