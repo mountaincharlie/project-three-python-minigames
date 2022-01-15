@@ -61,11 +61,6 @@ To do:
 * user feedback
 * CI template for console style layout in the browser
 
-## Accessability [to finish]
----
-
-* ?
-
 ## Testing [to finish]
 ---
 
@@ -97,11 +92,25 @@ To do:
 ### Unfixed Bugs
 * SHOULD BE: No unfixed bugs
 
-## Deployment [to finish]
+## Deployment
 ---
 
-To do:
-* fully describe process to deploy to Heroku
+### Deploying To Heroku
+* Using 'pips freeze > requirements.txt' to create a list of dependencies for the project, to ensure that Heroku installs these when building the project.
+* Creating a <a href = "https://signup.heroku.com/login">Heroku account</a>
+* Adding 2 sets of Config Vars in Heroku's Settings Tab (for data important to the project but not pushed to the GitHub repo):
+    * KEY = CREDS, VALUE = 'contents of creds.json file'
+    * KEY = PORT, VALUE = 8000
+* Adding 2 Buildpacks in Heroku's Settings Tab:
+    * heroku/python
+    * heroku/nodejs
+* Choosing Deployment Method in Heroku's Deploy Tab: 
+    * selecting GitHub
+    * searching for the correct repo name and choosing to connect it
+    * enabling Automatic Deploys (everytime changes are pushed to GitHub)
+
+### Live Link 
+* <a href = "https://python-minigames.herokuapp.com/">Python Minigames</a>
 
 ## Credits [to finish]
 ---
