@@ -23,8 +23,9 @@ class Higher_or_LowerPlayer(Player):
 # random card choosing function
 def random_card(deck):
     """
+    randomly chooses and removes card from deck
     """
-    # randomly chooses and removes card from deck
+
     card = np.random.choice(deck)
     deck.remove(card)
 
@@ -57,9 +58,9 @@ def validate_guess(new_card):
     return options[guess]
 
 
-# updating the user's score
 def score_update(user):
     """
+    updates the user's score by 1 when guess is correct
     """
     user.score += 1
 
@@ -90,7 +91,7 @@ def guess_result(user, user_guess, revealed_card_index, new_card_index):
 def guess_checker(user, user_guess, revealed_card, new_card):
     """
     """
-    # MAKE FUNCTION splitting revealed_card at the '_' and taking the first part
+    # getting the values without the suits of the cards
     revealed_card_value = revealed_card.split('_', 1)[0]
     # print(revealed_card_value)
     new_card_value = new_card.split('_', 1)[0]
@@ -99,7 +100,6 @@ def guess_checker(user, user_guess, revealed_card, new_card):
     # getting and comparing the cards' indexes from CARD_ORDER
     revealed_card_index = CARD_ORDER.index(revealed_card_value)
     new_card_index = CARD_ORDER.index(new_card_value)
-    # print('revealed_card_index: ', revealed_card_index, 'new_card_index', new_card_index)
 
     # guess_result returns 'draw'/'correct'/'wrong'
     return guess_result(user, user_guess, revealed_card_index, new_card_index)
@@ -114,7 +114,7 @@ def main(user):
 
     # overall while loop for starting the game
     while higher_or_lower_user.quit_status != 'quit':
-        username = higher_or_lower_user.username
+        # username = higher_or_lower_user.username
         # resetting the user's score everytime they play again
         higher_or_lower_user.score = 0
 
@@ -126,22 +126,17 @@ def main(user):
 
         # ----- SETTING UP THE GAME -----
 
-        # build the deck list [make a function call so its reset at game start but not during game]
+        # defining the deck list
         deck = ['A_spades', 'K_spades', 'Q_spades', 'J_spades', '10_spades', '9_spades', '8_spades', '7_spades', '6_spades', '5_spades', '4_spades', '3_spades', '2_spades', 'A_diamonds', 'K_diamonds', 'Q_diamonds', 'J_diamonds', '10_diamonds', '9_diamonds', '8_diamonds', '7_diamonds', '6_diamonds', '5_diamonds', '4_diamonds', '3_diamonds', '2_diamonds', 'A_clubs', 'K_clubs', 'Q_clubs', 'J_clubs', '10_clubs', '9_clubs', '8_clubs', '7_clubs', '6_clubs', '5_clubs', '4_clubs', '3_clubs', '2_clubs', 'A_hearts', 'K_hearts', 'Q_hearts', 'J_hearts', '10_hearts', '9_hearts', '8_hearts', '7_hearts', '6_hearts', '5_hearts', '4_hearts', '3_hearts', '2_hearts']
         # deck = ['A_spades', 'A_diamonds', 'A_clubs', 'A_hearts']
-        cards_shown = []  # CHECK at end if we need this
+        cards_shown = []
 
-        # printing the basic instructions (just a print)
+        # printing the basic instructions
         print(f'The first card from the deck is displayed below!\n\nChoose whether you think the next card to be revealed\nwill be higher or lower than this card.\nThe cards in order from highest to lowest are:\n{CARD_ORDER}\n')
 
-        # print initial random card [random card choosing function]
+        # print initial random card
         new_card = random_card(deck)
         print(f'\nThe first card from the deck is:\n{new_card}')
-        # print(new_card)
-        # adds the new_card to the cards_shown list [done later]
-        # cards_shown.append(new_card)
-        # print(deck)
-        # print(cards_shown)
 
         # while loop for prompting user guesses until they choose to quit
         while True:
@@ -150,10 +145,7 @@ def main(user):
             revealed_card = new_card
 
             # takes in and validates user guess [in a function]
-            user_guess = validate_guess(new_card)
-
-            # updates higher_or_lower_user.guess
-            higher_or_lower_user.guess = user_guess
+            higher_or_lower_user.guess = validate_guess(new_card)
 
             # prints their guess??
             print(f"\nYou have guessed that the next card will be\n{higher_or_lower_user.guess} than {revealed_card}\n")
@@ -173,8 +165,9 @@ def main(user):
 
             if guess_check == 'wrong':
                 print(f'\nSorry {higher_or_lower_user.username}, the {new_card} is not {user_guess} than the {revealed_card}.\n')
-                higher_or_lower_user.game_finish(cards_shown)
-                # make game_finished() function
+                if len(cards_shown) != 0:
+                    print(f'You made correct guesses for the following cards:\n{cards_shown}')
+                higher_or_lower_user.game_finish('Your correct guess streak was')
             else:
                 # updating number of shown cards if correctly guessed
                 cards_shown.append(new_card)
@@ -184,21 +177,10 @@ def main(user):
                     break
 
             if len(deck) == 0:
-                print(f'\nCongratulations {higher_or_lower_user.username}!\n')
-                higher_or_lower_user.game_finish(cards_shown)
-
-            # updates the user's score [in a function]
-            # prompts game_win or game_lost function
-
-            # prompts guess again or quit
-            # cont_or_quit = input("\nHit ENTER to guess again or 'quit' to restart the game:\n")
-            # if cont_or_quit.lower() == 'quit':
-            #    break
+                print(f'\nCongratulations {higher_or_lower_user.username}!\nYou made correct guesses for the following cards:\n{cards_shown}')
+                higher_or_lower_user.game_finish('Your correct guess streak was')
 
 
-# game constants
+# game constants and global vars
 CARD_ORDER = ('A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2')
 # CARD_ORDER = ('A')
-
-# calling main()
-# main()
