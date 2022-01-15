@@ -100,7 +100,7 @@ def main(user):
         rounds_played = 0
 
         # printing the basic instructions
-        print(f"Choose to play: rock, paper or scissor.\nThe computer will also make a choice\nand the winner will be displayed.\nThe game is out of 15 rounds.\n")
+        print(f"Choose to play: rock, paper or scissor.\nThe computer will also make a choice\nand the winner will be displayed.\nThe game is out of {NUM_ROUNDS} rounds.\n")
 
         # while loop for prompting user choices until they choose to quit
         while True:
@@ -127,7 +127,7 @@ def main(user):
             print(f"\nYou chose {rock_paper_scissors_user.choice}\nThe CPU chose {cpu_choice}\n{round_winner} won this round.\n{rock_paper_scissors_user.username}: {rock_paper_scissors_user.score}\nCPU: {cpu_score}")
 
             # ending the game
-            if rounds_played == 15:
+            if rounds_played == NUM_ROUNDS:
                 rock_paper_scissors_user.game_finish('Your total number of winning rounds was')
                 break
 
@@ -143,3 +143,4 @@ OPTIONS = {
     'p': 'paper',
     's': 'scissors'
     }
+NUM_ROUNDS = 15
