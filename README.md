@@ -1,6 +1,6 @@
 # Python Minigames [to finish]
 
-Python Minigames are a collection of ___ mini version of classic logic games and mini games of skill/chance, built in Python, including; Minesweeper, __, __ ... The option to set or reuse a username enables the user to personalise their experience and the ability to save and view scores in the leaderboard feature, allows for the games to be played casually, to track progress, or competatively, against others.
+Python Minigames are a collection of 3 mini version of games of logic, skill and chance, built in Python, including; Minesweeper, __, __ ... The option to set or reuse a username enables the user to personalise their experience and the ability to save and view scores in the leaderboard feature, allows for the games to be played casually, to track progress, or competatively, against others.
 
 This app provides a fun and quick way to play a few small, popular games, with easy to follow instructions and user feedback allowing all kinds of user's to get started straight away. 
 
@@ -35,14 +35,26 @@ To do:
 * Minesweeper
 * ...
 
-## Google Drive and Sheets APIs [to finish]
+## Google Drive and Sheets APIs
 ---
 
-To do:
-* explain steps/purpose and screenshots 
-* setup?
-* interacting with the leaderboards
-* each leaderboard and read/writing from/to it
+### APIs Used
+* Google Drive
+* Google Sheets
+* Used in:
+    * game_engine/leaderboards.py
+* For:
+    * Reading/updating the worksheets representing each game's leaderboard
+
+### Setting up
+* The APIs:
+    * Using Code Institute's video on: <a href = "https://youtu.be/WTll5p4N7hE">Activating API credentials</a>
+* The Python code/files to connect to the APIs:
+    * Using Code Institute's video on: <a href = "https://youtu.be/lPTKUiafTRY">Connecting to the API with Python</a>
+
+### Google Sheets Link
+* <a href = "https://docs.google.com/spreadsheets/d/124GeJ30MEkNUFtQfglxCuBO7tjc0yuUZdYpwh5PHQwE/edit?usp=sharing">leaderboards Google Sheet</a>
+
 
 ## Imported Python Libraries/Modules/Packages
 ---
@@ -129,8 +141,9 @@ To do:
     * searching for the correct repo name and choosing to connect it
     * enabling Automatic Deploys (everytime changes are pushed to GitHub)
 
-### Live Link 
-* <a href = "https://python-minigames.herokuapp.com/">Python Minigames</a>
+### Live Links
+* <a href = "https://python-minigames.herokuapp.com/">Python Minigames App</a>
+* <a href = "https://docs.google.com/spreadsheets/d/124GeJ30MEkNUFtQfglxCuBO7tjc0yuUZdYpwh5PHQwE/edit?usp=sharing">leaderboards Google Sheet</a>
 
 ## Credits [to finish]
 ---
