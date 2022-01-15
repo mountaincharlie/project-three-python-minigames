@@ -217,7 +217,7 @@ def main(user):
     A final thank you message is printed before the user returns to Main Menu. 
     """
     username = user.username
-    leaderboard_user = run.Player(username, 0, None, None)
+    leaderboard_user = run.Player(username, 0, None, None, 'low_to_high')
     print(f'Welcome to the Python Minigames Leaderboards {leaderboard_user.username}!\n')
 
     while leaderboard_user.quit_status != 'quit':
