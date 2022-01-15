@@ -74,7 +74,7 @@ def row_to_insert_at(score_list, user_score, score_order):
                 break
             insert_at_row = len(score_list)
     else:  # for regular scoring (higher is better)
-        for i in range(len(score_list)-1, 0, -1):
+        for i in range(1, len(score_list)):
             if user_score >= int(score_list[i]):
                 insert_at_row = i+1
                 break
