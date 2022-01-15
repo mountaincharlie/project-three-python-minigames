@@ -44,13 +44,33 @@ To do:
 * interacting with the leaderboards
 * each leaderboard and read/writing from/to it
 
-## Python Libraries [to finish]
+## Imported Python Libraries/Modules/Packages
 ---
 
-To do:
-* uses and credit for
-* Numpy?
-* PyDictionary?
+### Numpy - library
+* Used in the following modules within the game_engine directory:
+    * minesweeper.py
+    * higher_or_lower.py
+    * rock_paper_scissors.py
+* Used functions:
+    * .random.choice()
+    * .zeros()
+    * .random.randint()
+    * .random.insert()
+    * .random.count_nonzero()
+
+### Sys - module
+* Used in the following modules within the game_engine directory:
+    * leaderboards.py
+    * minesweeper.py
+    * higher_or_lower.py
+    * rock_paper_scissors.py
+* Used in importing the Player Class from run.py which is in the directory above the game_engine directory
+
+### Importlib - package
+* Used in:
+    * run.py
+* Used to import a chosen module from the game_engine directory, from their full file path as a string 
 
 ## User Experience Design [to finish]
 ---
