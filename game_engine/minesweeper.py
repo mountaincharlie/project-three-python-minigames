@@ -216,6 +216,7 @@ def flag_check(coors, d_grid, h_grid):
     return d_grid, h_grid
 
 
+# calls game_finish now
 def mine_count(user, h_grid):
     """
     Takes the hidden_grid.
@@ -227,8 +228,10 @@ def mine_count(user, h_grid):
     mines_remaining = np.count_nonzero(h_grid == 'M')
 
     if int(mines_remaining) == 0:
-        win_message = 'reveals'
-        return user.game_won(win_message)
+        # win_message = 'reveals'
+        # return user.game_won(win_message)
+        print(f"\nCongratulations {user.username}!\nYou completed the game with a score of: {user.score} reveals.")
+        return user.game_finish()
 
 
 def coor_reveal(user, user_coors, h_grid, d_grid):
@@ -246,8 +249,9 @@ def coor_reveal(user, user_coors, h_grid, d_grid):
     user.score += 1
 
     if coor_content == 'M':
-        lose_message = f'there was a mine at {user_coors}'
-        return user.game_lost(lose_message)
+        # prints lose message and doesn't need to call game_finish
+        print(f'Sorry {user.username}, there was a mine at {user_coors}!\n\nGAME OVER\n')
+        return user.play_again()
     else:
         print(f"You avoided the mines!\n'{coor_content}' has been revealed at {user_coors}\n")
         # inserting the revealed number and displaying the grid
@@ -314,7 +318,7 @@ def main(user):
         # print('with mines:\n', hidden_grid)
 
         # looping through the other coors and inserting their number
-        # print('completed hidden_grid:\n', hidden_grid)
+        print('completed hidden_grid:\n', hidden_grid)
         examine_coors(hidden_grid)
 
         # generating the display grid
@@ -347,4 +351,4 @@ def main(user):
 # game constants
 ROWS = 8
 COLS = 8
-NUM_MINES = 10
+NUM_MINES = 1

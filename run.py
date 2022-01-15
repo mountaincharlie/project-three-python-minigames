@@ -119,36 +119,10 @@ class Player:
 
         return 'quit'
 
-    # game finish function for games won differently to Minesweeper
-    def game_finish(self, message):
+    def game_finish(self):
         """
         """
-        print(f'{message}: {self.score}')
-
         self.update_leaderboard()
-
-        return self.play_again()
-
-    def game_won(self, win_message):
-        """
-        Prints the game won message with specific win_message for the user's
-        type of score (depends on the game played).
-        Calls update_leaderboard() to update the game's leaderboard.
-        Returns self.play_again() which is 'quit'.
-        """
-        print(f"\nYOU WON!\nCongratulations {self.username}!\nYou completed the game with a score of: {self.score} {win_message}.")
-
-        self.update_leaderboard()
-
-        return self.play_again()
-
-    def game_lost(self, lose_message):
-        """
-        Prints the game lost message with specific lose_message for why the user
-        lost (depends on the game played).
-        Returns self.play_again() which is 'quit'.
-        """
-        print(f'Sorry {self.username}, {lose_message}!\n\nGAME OVER\n')
 
         return self.play_again()
 
