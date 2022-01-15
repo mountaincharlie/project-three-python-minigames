@@ -11,13 +11,34 @@ from run import Player
 # Rock_Paper_Scissors Player subclass
 class Rock_Paper_ScissorsPlayer(Player):
     """ Creates instance of Rock_Paper_ScissorsPlayer """
-    def __init__(self, username, score, user_quit, game_choice, score_order, guess):
+    def __init__(self, username, score, user_quit, game_choice, score_order, choice):
         super().__init__(username, score, user_quit, game_choice, score_order)
-        self.guess = guess
+        self.choice = choice
 
     @classmethod
-    def from_current_user(cls, player_instance, guess):
-        return cls(**player_instance.__dict__, guess=guess)
+    def from_current_user(cls, player_instance, choice):
+        return cls(**player_instance.__dict__, choice=choice)
+
+
+def validate_choice():
+    """
+    Keeps asking the user for a choice of r (rock),
+    p (paper) or s (scissors) until a valid entry
+    is given.
+    Returns the valid choice.
+    """
+
+    while True:
+        try:
+            choice = input("\nEnter 'r' (rock), 'p' (paper) or 's' (scissors):\n")
+            if choice not in OPTIONS:
+                raise ValueError
+            else:
+                break
+        except ValueError:
+            print("Invalid choice")
+
+    return OPTIONS[choice]
 
 
 # main function call
@@ -44,14 +65,13 @@ def main(user):
         # printing the basic instructions
         print(f"Choose whether you want to play one of: {OPTIONS}\nThe computer will also make a choice\nand the winner will be displayed.\nThe game is out of 15 rounds.\n")
 
-        # while loop for prompting user guesses until they choose to quit
+        # while loop for prompting user choices until they choose to quit
         while True:
+            rounds_played += 1
+            print(f'Round {rounds_played}')
 
-            # takes in and validates user guess [in a function]
-            # user_guess = validate_guess(new_card)
-
-            # updates rock_paper_scissors_user.guess
-            # rock_paper_scissors_user.guess = user_guess
+            # takes in and validates user choice
+            rock_paper_scissors_user.choice = validate_choice
 
             # generates random cpu guess
 
@@ -59,7 +79,7 @@ def main(user):
             # winner = 
 
             # prints the result
-            print(f"\nYou chose {rock_paper_scissors_user.guess}\nThe CPU chose {cpu_guess}\n{winner} won this round.")
+            print(f"\nYou chose {rock_paper_scissors_user.choice}\nThe CPU chose {cpu_choice}\n{winner} won this round.")
 
             # ending the game
             # if rounds_played == 15: game_finish()
@@ -71,4 +91,8 @@ def main(user):
 
 
 # constants and global vars
-OPTIONS = ('rock', 'paper', 'scissors')
+OPTIONS = {
+    'r': 'rock',
+    'p': 'paper',
+    's': 'scissors'
+    }
