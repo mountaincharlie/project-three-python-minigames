@@ -140,17 +140,22 @@ This app provides a fun and quick way to play a few small, popular games, with e
 
 ### Higher_or_Lower Minigame
 * How To Play:
-    * instructions
+    * ![Walkthrough Screeenshots](./images/instructions_h_or_l_game.jpg "Walkthrough Screeenshots")
 * Walkthrough Screeenshots
     * welcome/instructions
-    * set up/initial instructions/first card reveal
-    * choosing 'higher' or 'lower'
-    * feedback and revealing next card
-    * you were correct message (higher/lower/draw)
-    * guess again/restart message
+    * ![Walkthrough Screeenshots](./images/welcome_msg_h_or_l_game.jpg "Walkthrough Screeenshots")
+    * setting up the game, the initial instructions and first card reveal
+    * ![Walkthrough Screeenshots](./images/first_round_h_or_l_game.jpg "Walkthrough Screeenshots")
+    * choosing 'higher' or 'lower', feedback and revealing next card
+    * ![Walkthrough Screeenshots](./images/guessing_h_or_l_game.jpg "Walkthrough Screeenshots")
+    * correct guess and guess again/restart message 
+    * ![Walkthrough Screeenshots](./images/guess_check_h_or_l_game.jpg "Walkthrough Screeenshots")
     * guessing wrong message (and guess streak)
-    * guessing whole deck message
+    * ![Walkthrough Screeenshots](./images/wrong_guess_h_or_l_game.jpg "Walkthrough Screeenshots")
+    * when the next card is neither higher or lower
+    * ![Walkthrough Screeenshots](./images/neither_h_or_l_h_or_l_game.jpg "Walkthrough Screeenshots")
     * leaderboard update and play again/quit to Main Menu
+    * ![Walkthrough Screeenshots](./images/update_leaderboard_h_or_l_game.jpg "Walkthrough Screeenshots")
 
 ### Rock_Paper_Scissors Minigame
 * How To Play:
