@@ -24,11 +24,19 @@ This app provides a fun and quick way to play a few small, popular games, with e
 ### Program Overview and Value to Users
 * 
 
-### Welcome Message and Setting Username
-* 
+### Welcome Message
+* Initial message and prompt to the user
+    * ![Welcome Message message](./images/welcome_message.jpg "Welcome Message message")
+
+### Setting Username
+* Choosing a previous username
+    * ![Setting Username message](./images/previous_username.jpg "Setting Username message")
+* Choosing a new username
+    * ![Setting Username message](./images/new_username.jpg "Setting Username message")
 
 ### The Main Menu
-* 
+* Personal welcome message, Main Menu display and prompt for choosing an option
+    * ![The Main Menu](./images/main_menu.jpg "The Main Menu")
 
 ### Navigation
 * always option to return to game start or main menu
