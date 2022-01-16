@@ -1,17 +1,21 @@
-# Python Minigames [to finish]
+# Python Minigames
 
-Python Minigames are a collection of 3 mini version of games of logic, skill and chance, built in Python, including; Minesweeper, __, __ ... The option to set or reuse a username enables the user to personalise their experience and the ability to save and view scores in the leaderboard feature, allows for the games to be played casually, to track progress, or competatively, against others.
+Python Minigames is a collection of 3 mini versions of games of logic, skill and chance, built in Python. The collection includes; Minesweeper, Higher or Lower, Rock/Paper/Scissors. The option to set or reuse a username enables the user to personalise their experience and the ability to save and view scores in the leaderboards feature, allows for the games to be played casually, to track progress, or competatively against others.
 
-This app provides a fun and quick way to play a few small, popular games, with easy to follow instructions and user feedback allowing all kinds of user's to get started straight away. 
+This app provides a fun and quick way to play a few small versions of popular games, with easy to follow instructions, clear user feedback and error handling to allow all kinds of user's to get started straight away. 
 
-![Viewing my website on the Am I Responsive site](##IMAGE LOCATION## "Python Minigames website on the Am I Responsive site")
-
-[Image made using <a href = "http://ami.responsivedesign.is/">Am I Responsive Website</a>]
-
-## Contents [to finish]
+## Contents
 ---
 
 * [Technologies Used](https://github.com/mountaincharlie/project-three-python-minigames#technologies-used)
+* [Features](https://github.com/mountaincharlie/project-three-python-minigames#features)
+* [The Minigames](https://github.com/mountaincharlie/project-three-python-minigames#the-minigames)
+* [Google Drive and Sheets APIs](https://github.com/mountaincharlie/project-three-python-minigames#google-drive-and-sheets-apis)
+* [Imported Python Libraries Modules Packages](https://github.com/mountaincharlie/project-three-python-minigames#imported-python-libraries-modules-packages)
+* [Testing](https://github.com/mountaincharlie/project-three-python-minigames#testing)
+* [Deployment](https://github.com/mountaincharlie/project-three-python-minigames#deployment)
+* [Credits](https://github.com/mountaincharlie/project-three-python-minigames#credits)
+* [Program Expansion Ideas](https://github.com/mountaincharlie/project-three-python-minigames#program-expansion-ideas)
 
 ## Technologies Used 
 ---
@@ -118,7 +122,7 @@ This app provides a fun and quick way to play a few small, popular games, with e
 * For choosing from the Leaderboards Menu
     * ![Invalid input messages](./images/leaderboard_menu_validation.jpg "Invalid input message")
 
-## The Minigames [to finish]
+## The Minigames
 ---
 
 ### Minesweeper Minigame
@@ -196,7 +200,7 @@ This app provides a fun and quick way to play a few small, popular games, with e
 ### Google Sheets Link
 * <a href = "https://docs.google.com/spreadsheets/d/124GeJ30MEkNUFtQfglxCuBO7tjc0yuUZdYpwh5PHQwE/edit?usp=sharing">leaderboards Google Sheet</a>
 
-## Imported Python Libraries/Modules/Packages
+## Imported Python Libraries Modules Packages
 ---
 
 ### Numpy - library
@@ -249,11 +253,9 @@ To do:
     * **Solution:** I wrapped all of my non-function/class code in run.py into a function called main() and called it at the end of the script. I also put the function call in an if statement that if __ name __ == __ main() __ inorder to prevent the function being called when run.py was imported. [CREDIT - help from Jeremy's answer on Stack Overflow: <a href = "https://stackoverflow.com/questions/6523791/why-is-python-running-my-module-when-i-import-it-and-how-do-i-stop-it/6523855#6523855">prevent code in the module from being executed when imported</a>]
 * **Bug:** popping the final value from leaderboards_menu dictionary inside the leaderboards module's main() function meant that everytime game_engine.leaderboards.main(current_user) was called from run.py, another value was removed from leaderboards_menu dictionary.
     * **Solution:** defining leaderboards_menu outside of its main() function so that the last value is removed from its call of run.menu_dict instead of previous stored version of leaderboards_menu.
-* **Bug:**
-    * **Solution:**
 
 ### Unfixed Bugs
-* SHOULD BE: No unfixed bugs
+* No unfixed bugs
 
 ## Deployment
 ---
