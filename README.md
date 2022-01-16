@@ -46,7 +46,26 @@ This app provides a fun and quick way to play a few small, popular games, with e
 * link to The Games section
 
 ### The Leaderboards
-* link to API section
+* Link to the Google APIs setup and connection
+    * [Google Drive and Sheets APIs](https://github.com/mountaincharlie/project-three-python-minigames#google-drive-and-sheets-apis)
+* Google Sheets Spreadsheet Link
+     * <a href = "https://docs.google.com/spreadsheets/d/124GeJ30MEkNUFtQfglxCuBO7tjc0yuUZdYpwh5PHQwE/edit?usp=sharing">leaderboards Google Sheet</a>
+* Using Try/Excepts blocks for if the spreadsheet cannot be found:
+     * At the start of the program
+     ![Error handling messages](./images/spreadsheet_error_start_msg.jpg "Error handling message")
+     * When trying to see previous usernames
+     ![Error handling messages](./images/spreadsheet_error_username_msg.jpg "Error handling message")
+     * When trying to update the leaderboard with scores
+     ![Error handling messages](./images/spreadsheet_error_update_msg.jpg "Error handling message")
+     * When trying to view the leaderboards
+     ![Error handling messages](./images/spreadsheet_error_view_msg.jpg "Error handling message")
+* Using Try/Excepts blocks for if a worksheet cannot be found:
+     * When trying to see previous usernames
+     ![Error handling messages](./images/worksheet_error_username_msg.jpg "Error handling message")
+     * When trying to update the leaderboard with scores
+     ![Error handling messages](./images/worksheet_error_update_msg.jpg "Error handling message")
+     * When trying to view the leaderboards
+     ![Error handling messages](./images/worksheet_error_view_msg.jpg "Error handling message")
 
 ### User Feedback
 * when opening/updating etc
@@ -121,7 +140,6 @@ This app provides a fun and quick way to play a few small, popular games, with e
 
 ### Google Sheets Link
 * <a href = "https://docs.google.com/spreadsheets/d/124GeJ30MEkNUFtQfglxCuBO7tjc0yuUZdYpwh5PHQwE/edit?usp=sharing">leaderboards Google Sheet</a>
-
 
 ## Imported Python Libraries/Modules/Packages
 ---
