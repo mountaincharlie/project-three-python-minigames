@@ -194,7 +194,7 @@ def remove_flag(coors, d_grid, h_grid):
         d_grid[coors] = '#'
         print(f"Flag removed at {coors}")
     else:
-        print(f"There is no flag to remove at {coors}")
+        print(f"\nThere is no flag to remove at {coors}\n")
 
     return d_grid, h_grid
 
@@ -303,7 +303,7 @@ def main(user):
         play_or_quit = minesweeper_user.welcome_msg()
         if play_or_quit == 'quit':
             break
-        print('\nBuilding the minesweeper grid ...\n')
+        print('\n --- Building the minesweeper grid ...\n')
 
         # generating the hidden_grid
         hidden_grid = generate_grid()

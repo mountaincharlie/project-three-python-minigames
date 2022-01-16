@@ -218,7 +218,7 @@ def main(user):
     """
     username = user.username
     leaderboard_user = run.Player(username, 0, None, None, 'low_to_high')
-    print(f'Welcome to the Python Minigames Leaderboards {leaderboard_user.username}!\n')
+    print(f' ----- Welcome to the Python Minigames Leaderboards {leaderboard_user.username}! ----- \n')
 
     while leaderboard_user.quit_status != 'quit':
         leaderboard_choice(leaderboard_user, leaderboards_menu)

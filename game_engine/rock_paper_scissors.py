@@ -94,7 +94,7 @@ def main(user):
         play_or_quit = rock_paper_scissors_user.welcome_msg()
         if play_or_quit == 'quit':
             break
-        print('\nSetting up the game ...\n')
+        print('\n --- Setting up the game ...\n')
 
         # defining/resetting counter for number of rounds
         rounds_played = 0

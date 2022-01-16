@@ -122,7 +122,7 @@ def main(user):
         play_or_quit = higher_or_lower_user.welcome_msg()
         if play_or_quit == 'quit':
             break
-        print('\nSetting up the game ...\n')
+        print('\n --- Setting up the game ...\n')
 
         # ----- SETTING UP THE GAME -----
 

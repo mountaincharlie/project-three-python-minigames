@@ -46,7 +46,7 @@ class Player:
         worksheet.
         """
 
-        print(f"\nUpdating the {self.game_choice} leaderboard ...\n")
+        print(f"\n --- Updating the {self.game_choice} leaderboard ...\n")
         leaderboard = lb.SHEET.worksheet(self.game_choice)
 
         score_list = leaderboard.col_values(3)
@@ -74,12 +74,12 @@ class Player:
         quit to Main Menu (enter 'quit').
         Returns the user's quit_status.
         """
-        print(f'\nWelcome to the {self.game_choice.capitalize()} minigame {self.username}!\n')
+        print(f'\n ----- Welcome to the {self.game_choice.capitalize()} minigame {self.username}! ----- \n')
 
         user_choice = input("Hit ENTER to begin or 'i' to see the Minigame instructions, or 'quit' to return to the Main Menu:\n")
 
         if user_choice == 'i':
-            print()
+            print(f'\n --- Opening the {self.game_choice.capitalize()} minigame instructions ...\n')
             self.read_instructions()
             user_choice = input("\nHit ENTER to start the game or 'quit' to return to the Main Menu:\n")
 
@@ -177,7 +177,7 @@ def setting_username():
     username_choice = input("Enter 'y' to reuse a previous username, or anything to choose a new name:\n")
 
     if username_choice.lower() == 'y':
-        print('\nFinding previous usernames from the Leaderboards...')
+        print('\n --- Finding previous usernames from the Leaderboards...')
         menu_dict_values = [*menu_dict.values()]
 
         lb_sheet_names = []
@@ -249,7 +249,7 @@ def main_menu_choice(current_user):
 
                 choice_name = menu_choice[5:]
 
-                print(f'\nOpening {choice_name} ... \n')
+                print(f'\n --- Opening {choice_name} ... \n')
 
                 current_user.user_game_choice = choice_name
 
@@ -283,7 +283,7 @@ def main():
 
     print("Welcome to Python Minigames!\n\nLet's start by setting your username.")
     username = setting_username()
-    print(f"\nWelcome to Python Minigames {username}!")
+    print(f"\n ----- Welcome to Python Minigames {username}! ----- ")
 
     current_user = Player(username, 0, None, None, 'low_to_high')
 
