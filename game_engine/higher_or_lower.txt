@@ -1,14 +1,16 @@
 HIGHER_OR_LOWER MINIGAME INSTRUCTIONS
 Understanding the 'deck' of cards:
-- order of the types of card, highest to lowest;
+- the order of the types of card (highest to lowest);
 'A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4',
 '3', '2'
-(regardless of suit)
 - 'A' = Ace, 'K' = King, 'Q' = Queen, 'J' = Jack and the
-numbers are just the numbers they represent.
-- the deck of cards includes four of each type of card
-each with a different suit; spades, diamonds, clubs or
-hearts.
+numbers are just the numbers they represent
+- like a regular deck, the deck of cards includes the four
+suits; spades, diamonds, clubs or hearts for each card type.
+(the suits has no affect on whether the card is higher/lower)
+- where a revealed card is of the same type but a different
+suit to the previous card, it will be counted as a correct
+guess.
 To play:
 1) At the start, a random card will be displayed from the
 deck of cards and you will be asked if you think the next
