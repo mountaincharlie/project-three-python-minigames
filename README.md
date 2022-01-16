@@ -127,25 +127,22 @@ This app provides a fun and quick way to play a few small, popular games, with e
 * Walkthrough Screeenshots
     * opening the modules and the personalised welcome messages
     * ![Walkthrough Screeenshots](./images/welcome_msg_minesweeper_game.jpg "Walkthrough Screeenshots")
-    * initial instructions/game build
-    * 
+    * building the game and the initial instructions
+    * ![Walkthrough Screeenshots](./images/first_round_minesweeper_game.jpg "Walkthrough Screeenshots")
     * choosing coordinates and feedback
-    * 
-    * revealing a location (where there isnt a mine)
-    * 
-    * continue game/restart message
-    * 
-    * revealing a location (where there is a mine)
-    * 
-    * game over screen and play again/quit to Main Menu message
-    * 
-    * inserting a flag
-    * 
-    * removing a flag (when there isnt a flag to remove)
-    * 
+    * ![Walkthrough Screeenshots](./images/guessing_minesweeper_game.jpg "Walkthrough Screeenshots")
+    * revealing a location (where there isnt a mine) and continue game/restart message
+    * ![Walkthrough Screeenshots](./images/no_mine_reveal_minesweeper_game.jpg "Walkthrough Screeenshots")
+    * revealing a location (where there is a mine), game over screen and play again/quit to Main Menu message
+    * ![Walkthrough Screeenshots](./images/mine_reveal_minesweeper_game.jpg "Walkthrough Screeenshots")
+    * inserting a flag 
+    * ![Walkthrough Screeenshots](./images/insert_flag_minesweeper_game.jpg "Walkthrough Screeenshots")
+    * removing a flag (when there isnt a flag to remove) 
+    * ![Walkthrough Screeenshots](./images/cant_remove_flag_minesweeper_game.jpg "Walkthrough Screeenshots")
     * removing a flag (when it is possible to remove a flag)
-    * 
-    * winning screen (flagging all the mines) and leaderboard update message
+    * ![Walkthrough Screeenshots](./images/can_remove_flag_minesweeper_game.jpg "Walkthrough Screeenshots")
+    * winning screen (flagging all the mines) and leaderboard update message 
+    * ![Walkthrough Screeenshots](./images/update_leaderboard_minesweeper_game.jpg "Walkthrough Screeenshots")
 
 ### Higher_or_Lower Minigame
 * How To Play:
