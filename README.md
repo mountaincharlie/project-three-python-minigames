@@ -18,11 +18,8 @@ This app provides a fun and quick way to play a few small, popular games, with e
 
 * Python
 
-## Features [to finish]
+## Features
 ---
-
-### Program Overview and Value to Users
-* 
 
 ### Welcome Message
 * Initial message and prompt to the user
@@ -93,12 +90,33 @@ This app provides a fun and quick way to play a few small, popular games, with e
      ![Error handling messages](./images/worksheet_error_view_msg.jpg "Error handling message")
 
 ### User Feedback
-* when opening/updating etc
-* scores/right/wrong
+* Specific user feedback is provided when:
+    * opening the minigames
+    * setting up/building the minigame
+    * opening a leaderboard to view it
+    * updating a leaderboard with the user's score
+    * opening the game instructions
+    * informing the user of their scores
+    * the user guesses correct/incorrectly or wins a round etc
+    * the user makes an invalid entry (and prompts input untils its valid)
+    * the leaderboards spreadsheet is required but cannot be found
+    * the a leaderboard worksheet is required but cannot be found
+    * the instructions txt file is required but cannot be found
 
 ### Validating User Input
-* for each game/menu and the leaderboards
-* instructions not found message
+* For entering a new username
+    * ![Invalid input messages](./images/username_validation.jpg "Invalid input message")
+* For entering a ROW/COLUMN in Minesweeper
+    * ![Invalid input messages](./images/row_validation.jpg "Invalid input message")
+    * ![Invalid input messages](./images/col_validation.jpg "Invalid input message")
+* For choosing higher/lower in Higher_or_Lower
+    * ![Invalid input messages](./images/h_or_l_validation.jpg "Invalid input message")
+* For choosing rock/paper/scissors in Rock_Paper_Scissors
+    * ![Invalid input messages](./images/r_p_or_s_validation.jpg "Invalid input message")
+* For choosing from the Main Menu
+    * ![Invalid input messages](./images/main_menu_validation.jpg "Invalid input message")
+* For choosing from the Leaderboards Menu
+    * ![Invalid input messages](./images/leaderboard_menu_validation.jpg "Invalid input message")
 
 ## The Minigames [to finish]
 ---
