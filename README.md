@@ -39,19 +39,36 @@ This app provides a fun and quick way to play a few small, popular games, with e
     * ![The Main Menu](./images/main_menu.jpg "The Main Menu")
 
 ### Navigation
-* always option to return to game start or main menu
+* During the games, the user has the option to play/continue/replay the game or return to the Main Menu
+    * ![Quit messages](./images/start_instructions_or_quit.jpg "Quit messages")
+    * ![Quit messages](./images/continue_or_quit.jpg "Quit messages")
+    * ![Quit messages](./images/play_again_or_quit.jpg "Quit messages")
 
-### The Player Class
-* allows for personalisation of messages
-* allows for not having to re-enter the name of the game to access the instructions or leaderboard
-* allows for setting a quit attribute to exit to the Main Menu from within 2 while loops
-* allows for the score order to be set to 'high_to_low' for games where low scores are better (default of 'low_to_high')
-
-### The Games Player Subclasses
-* allows for dealing with the game specific user input (coordinates for Minesweeper etc...)
+### The Player Class and Subclasses
+![The Player Class](./images/player_class.jpg "The Player Class")
+* username
+     * allows for personalisation of messages
+* score
+    * allows for the user's score to be updated and stored in the game subclass and accessed when updating the leaderboards
+* user_quit
+    * allows for setting a quit attribute to exit to the Main Menu from within 2 while loops
+* game_choice
+    * allows for not having to re-enter the name of the game to access the instructions or leaderboard
+* score_order
+    * allows for the score order to be set to 'high_to_low' for games where low scores are better (default of 'low_to_high')
+* The Player Class also contains functions reused for every game
+* The game specific subclasses (Minesweeper example)
+    * ![The Minesweeper Subclass](./images/minesweeper_subclass.jpg "The Minesweeper Subclass")
+    * allow for dealing with the game specific user input (coordinates 'coors' for Minesweeper etc...)
+    * contains a classmethod for creating the instance of the subclass from the Player Class and including the new attribute
 
 ### The Games Modules
-* link to The Games section
+* Included Minigames:
+    * Minesweeper
+    * Higher_or_Lower
+    * Rock_Paper_Scissors
+* Link to the Minigame instructions and features 
+    * [The Minigames](https://github.com/mountaincharlie/project-three-python-minigames#the_minigames)
 
 ### The Leaderboards
 * Link to the Google APIs setup and connection
@@ -83,7 +100,7 @@ This app provides a fun and quick way to play a few small, popular games, with e
 * for each game/menu and the leaderboards
 * instructions not found message
 
-## The Games [to finish]
+## The Minigames [to finish]
 ---
 
 ### Minesweeper Minigame
