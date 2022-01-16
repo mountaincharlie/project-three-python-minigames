@@ -33,10 +33,48 @@ To do:
 ## The Games [to finish]
 ---
 
-To do:
-* instructions and screenshots
-* Minesweeper
-* ...
+### Minesweeper Minigame
+* How To Play:
+    * instructions (paste in)
+* Walkthrough Screeenshots
+    * welcome/instructions
+    * initial instructions/game build
+    * choosing coors and feedback
+    * revealing a location (no mine)
+    * continue/restart message
+    * revealing a location (mine)
+    * game over screen/ play again/quit to Main Menu message
+    * inserting a flag
+    * removing a flag (when you cant)
+    * removing a flag (when you can)
+    * flagging all the mines
+    * winning screen and leaderboard update msg
+
+### Higher_or_Lower Minigame
+* How To Play:
+    * instructions
+* Walkthrough Screeenshots
+    * welcome/instructions
+    * set up/initial instructions/first card reveal
+    * choosing 'higher' or 'lower'
+    * feedback and revealing next card
+    * you were correct message (higher/lower/draw)
+    * guess again/restart message
+    * guessing wrong message (and guess streak)
+    * guessing whole deck message
+    * leaderboard update and play again/quit to Main Menu
+
+### Rock_Paper_Scissors Minigame
+* How To Play:
+    * instructions
+* Walkthrough Screeenshots
+    * welcome/instructions
+    * set up/initial instructions/round 1
+    * choosing 'rock', 'paper' or 'scissors'
+    * feedback and current scores (user or CPU wins or draw)
+    * next round/restart message
+    * winner screen (you won, CPU won, draw)
+    * leaderboard update and play again/quit
 
 ## Google Drive and Sheets APIs
 ---
