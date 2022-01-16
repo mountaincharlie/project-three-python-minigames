@@ -306,12 +306,28 @@ To do:
 * Help from peterz's answer on Stack Overflow: <a href = "https://stackoverflow.com/questions/63117963/how-to-instantiate-a-subclass-type-variable-from-an-existing-superclass-type-obj/63173689#63173689">instantiate a subclass type variable from an existing superclass type object in Python</a> for how to create an instance of a SubClass which used the attribute values from an instance of a SuperClass, which I used inorder to create an instance of the SubClass in each game module, from the Player SuperClass in run.py, using the attribute values from the current_user instance of Player in run.py. 
 * Using Sepero's answer on Stack Overflow: <a href = "https://stackoverflow.com/questions/1054271/how-to-import-a-python-class-that-is-in-a-directory-above/11096846#11096846">How to import a Python class that is in a directory above?</a> for how to import a class from a directory above the one it was being imported into, which I used to import my Player Class from run.py into my game modules.
 
-## Program Expansion Ideas [to finish]
+## Program Expansion Ideas
 ---
 
 Features that could be added to expand and improve the program in the future.
 
-to do:
-* menu option to change user name without exiting the program
-* other games to include ...
-* easy/med/hard version of the games (change some params of the game e.g. bigger grid and more mines in minesweeper) and seperate leaderboards for each mode OR a multiplier so that hard modes yeild better scores 
+### Change Username
+* Main Menu option to change to a different user or enter a new username
+
+### Easy/Medium/Hard modes
+* 3 difficulty levels for each game, with the user asked to choose at the start of the game
+* For the leaderboard scores there could either be a score mulitplier for those that play on a harder difficulty or could be a seperate worksheet for each mode
+
+### Hangman Game
+* Using the PyDictionary library to generate a random word
+* Creating the Hangman 'image' with just keyboard characters
+* The length of the random word is used to make a string of '_' of the same length which is displayed to the user
+* A list of the full alphabet is displayed to the user and they're prompted to enter a chosen letter
+* The input is validated and the user is prompted for input until it is valid
+* A check is made if the letter is is in the word and how many times 
+* If the letter is in the word it replaces the '_'s in the correct places and is displayed to the user for the next guess 
+* If the letter isnt in the word, then next bit of the hangman 'image' is added and displayed with the prompt for the next guess
+* The chosen letter is removed from the full alphabet list and added to the 'chosen letters' list which is also diplayed to the user 
+* The user either 'runs out of lives', guesses the whole word or choses to quit at some point
+* The user's score is the number of guesses they made (the lower the better)
+* (additionally, the definition of the word could be displayed in the game finish message)
