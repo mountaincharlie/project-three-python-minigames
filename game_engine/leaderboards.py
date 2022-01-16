@@ -17,7 +17,11 @@ SCOPE = [
 ]
 CREDS = ServiceAccountCredentials.from_json_keyfile_name("creds.json", SCOPE)
 CLIENT = gspread.authorize(CREDS)
-SHEET = CLIENT.open("leaderboards")
+# catching error if the spreadsheet cannot be found
+try:
+    SHEET = CLIENT.open("leaderboards")
+except gspread.exceptions.SpreadsheetNotFound:
+    print('[NOTE: Sorry, the leaderboards spreadsheets could not be found.\nIt will not be possible to update or view any leaderboards at this time.]\n')
 
 # defining the leaderboards_menu outside main()
 leaderboards_menu = run.menu_dict
@@ -41,10 +45,18 @@ def unique_usernames(sheets):
     Returns the usernames_dict.
     """
     usernames = set()
-    for sheet in sheets:
-        worksheet = SHEET.worksheet(sheet)
-        data = worksheet.col_values(2)
-        usernames |= set(data[1:])
+    # catching errors if the spreadsheet or the worksheets cannot be found
+    try:
+        for sheet in sheets:
+            worksheet = SHEET.worksheet(sheet)
+            data = worksheet.col_values(2)
+            usernames |= set(data[1:])
+    except gspread.exceptions.WorksheetNotFound:
+        print(f'\nSorry, one of the leaderboards could not be found.\nUnable to access previous usernames at this time.\n')
+        return  'new_username_req'
+    except NameError:
+        print('\nSorry, since the leaderboards spreadsheets could not be found,\nit will not be possible to access previous usernames at this time.\n')
+        return  'new_username_req'
 
     usernames_dict = {}
     for i, name in enumerate(usernames):
@@ -187,14 +199,20 @@ def leaderboard_choice(user, menu):
             elif leaderboard in menu:
                 leaderboard_name = menu[leaderboard][5:]
 
-                print(f'\nOpening the {leaderboard_name} leaderboard ...\n')
+                print(f'\n --- Opening the {leaderboard_name} leaderboard ...\n')
 
-                # MAKE display_leaderboard() function?
-                print(f'{leaderboard_name.upper()} LEADERBOARD:')
-                leaderboard_worksheet = SHEET.worksheet(leaderboard_name)
-                data = leaderboard_worksheet.get_all_values()
-                for row in data:
-                    print(row[0], '--', row[1], '--', row[2])
+                # catching errors if the spreadsheet or the worksheets cannot be found
+                try:
+                    leaderboard_worksheet = SHEET.worksheet(leaderboard_name)
+                    data = leaderboard_worksheet.get_all_values()
+                    print(f'{leaderboard_name.upper()} LEADERBOARD:')
+                    for row in data:
+                        print(row[0], '--', row[1], '--', row[2])
+                except gspread.exceptions.WorksheetNotFound:
+                    print(f'\nSorry, the {leaderboard_name} leaderboard could not be found.\nUnable to view the {leaderboard_name} leaderboard at this time.\n')
+                except NameError:
+                    print('\nSorry, since the leaderboards spreadsheets could not be found,\nit will not be possible to view any leaderboards at this time.\n')
+
                 choice = input("\nHit ENTER to return to the Leaderboards Menu or 'quit' to return to the Main Menu:\n")
 
                 if choice == 'quit':

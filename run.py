@@ -1,7 +1,7 @@
 """ Project 3 - Python Minigames """
 
 # imports (modules and other needed py libraries)
-from pprint import pprint
+import gspread
 import importlib as il
 from game_engine import leaderboards as lb
 
@@ -46,8 +46,14 @@ class Player:
         worksheet.
         """
 
-        print(f"\n --- Updating the {self.game_choice} leaderboard ...\n")
-        leaderboard = lb.SHEET.worksheet(self.game_choice)
+        # catching errors if the spreadsheet or the worksheets cannot be found
+        try:
+            print(f"\n --- Updating the {self.game_choice} leaderboard ...\n")
+            leaderboard = lb.SHEET.worksheet(self.game_choice)
+        except gspread.exceptions.WorksheetNotFound:
+            return print(f'Sorry, the {self.game_choice.capitalize()} leaderboard could not be found.\nUnable to update the {self.game_choice.capitalize()} leaderboard at this time.\n')
+        except AttributeError:
+            return print('Sorry, since the leaderboards spreadsheets could not be found,\nit will not be possible to update or view any leaderboards at this time.\n')
 
         score_list = leaderboard.col_values(3)
         insert_at_row = lb.row_to_insert_at(score_list, self.score, self.score_order)
@@ -187,20 +193,30 @@ def setting_username():
 
         # slicing the last Main Menu item which is 'leaderboards'
         usernames_dict = lb.unique_usernames(lb_sheet_names[:-1])
+        if usernames_dict == 'new_username_req':
+            while True:
+                try:
+                    username = input("\nEnter a username (without spaces & less than 15 characters):\n")
+                    if (len(username) > 15) or (' ' in username):
+                        raise ValueError
+                    else:
+                        break
+                except ValueError:
+                    print("\nInvalid username\n")
+        else:
+            while True:
+                try:
+                    print('\nPrevious usernames:')
+                    print_dict(usernames_dict)
 
-        while True:
-            try:
-                print('\nPrevious usernames:')
-                print_dict(usernames_dict)
-
-                prev_user = int(input("\nPlease enter the number for a previous username:\n"))
-                if prev_user in usernames_dict:
-                    username = usernames_dict[prev_user]
-                    break
-                else:
-                    raise ValueError
-            except ValueError:
-                print('\nInvalid entry. Enter a number from the options below.')
+                    prev_user = int(input("\nPlease enter the number for a previous username:\n"))
+                    if prev_user in usernames_dict:
+                        username = usernames_dict[prev_user]
+                        break
+                    else:
+                        raise ValueError
+                except ValueError:
+                    print('\nInvalid entry. Enter a number from the options below.')
 
     else:
         while True:
