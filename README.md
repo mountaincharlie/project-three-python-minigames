@@ -123,51 +123,61 @@ This app provides a fun and quick way to play a few small, popular games, with e
 
 ### Minesweeper Minigame
 * How To Play:
-    * instructions (paste in)
+    * ![Walkthrough Screeenshots](./images/instructions_minesweeper_game.jpg "Walkthrough Screeenshots")
 * Walkthrough Screeenshots
-    * welcome/instructions
+    * opening the modules and the personalised welcome messages
+    * ![Walkthrough Screeenshots](./images/welcome_msg_minesweeper_game.jpg "Walkthrough Screeenshots")
     * initial instructions/game build
-    * choosing coors and feedback
-    * revealing a location (no mine)
-    * continue/restart message
-    * revealing a location (mine)
-    * game over screen/ play again/quit to Main Menu message
+    * 
+    * choosing coordinates and feedback
+    * 
+    * revealing a location (where there isnt a mine)
+    * 
+    * continue game/restart message
+    * 
+    * revealing a location (where there is a mine)
+    * 
+    * game over screen and play again/quit to Main Menu message
+    * 
     * inserting a flag
-    * removing a flag (when you cant)
-    * removing a flag (when you can)
-    * flagging all the mines
-    * winning screen and leaderboard update msg
+    * 
+    * removing a flag (when there isnt a flag to remove)
+    * 
+    * removing a flag (when it is possible to remove a flag)
+    * 
+    * winning screen (flagging all the mines) and leaderboard update message
 
 ### Higher_or_Lower Minigame
 * How To Play:
     * ![Walkthrough Screeenshots](./images/instructions_h_or_l_game.jpg "Walkthrough Screeenshots")
 * Walkthrough Screeenshots
-    * welcome/instructions
+    * opening the modules and the personalised welcome messages
     * ![Walkthrough Screeenshots](./images/welcome_msg_h_or_l_game.jpg "Walkthrough Screeenshots")
     * setting up the game, the initial instructions and first card reveal
     * ![Walkthrough Screeenshots](./images/first_round_h_or_l_game.jpg "Walkthrough Screeenshots")
-    * choosing 'higher' or 'lower', feedback and revealing next card
+    * choosing 'higher' or 'lower', user feedback and revealing next card
     * ![Walkthrough Screeenshots](./images/guessing_h_or_l_game.jpg "Walkthrough Screeenshots")
-    * correct guess and guess again/restart message 
+    * guessing correctly and guess again/restart message 
     * ![Walkthrough Screeenshots](./images/guess_check_h_or_l_game.jpg "Walkthrough Screeenshots")
-    * guessing wrong message (and guess streak)
-    * ![Walkthrough Screeenshots](./images/wrong_guess_h_or_l_game.jpg "Walkthrough Screeenshots")
     * when the next card is neither higher or lower
     * ![Walkthrough Screeenshots](./images/neither_h_or_l_h_or_l_game.jpg "Walkthrough Screeenshots")
+    * guessing wrong message (and the guess streak)
+    * ![Walkthrough Screeenshots](./images/wrong_guess_h_or_l_game.jpg "Walkthrough Screeenshots")
     * leaderboard update and play again/quit to Main Menu
     * ![Walkthrough Screeenshots](./images/update_leaderboard_h_or_l_game.jpg "Walkthrough Screeenshots")
 
 ### Rock_Paper_Scissors Minigame
 * How To Play:
-    * instructions
+    * ![Walkthrough Screeenshots](./images/instructions_rps_game.jpg "Walkthrough Screeenshots")
 * Walkthrough Screeenshots
-    * welcome/instructions
-    * set up/initial instructions/round 1
-    * choosing 'rock', 'paper' or 'scissors'
-    * feedback and current scores (user or CPU wins or draw)
-    * next round/restart message
-    * winner screen (you won, CPU won, draw)
-    * leaderboard update and play again/quit
+    * opening the modules and the personalised welcome messages
+    * ![Walkthrough Screeenshots](./images/welcome_msg_rps_game.jpg "Walkthrough Screeenshots")
+    * setting up the game, the initial instructions and choosing 'rock', 'paper' or 'scissors'
+    * ![Walkthrough Screeenshots](./images/first_round_rps_game.jpg "Walkthrough Screeenshots")
+    * feedback, current scores (user or CPU wins or draw) and next round/restart message
+    * ![Walkthrough Screeenshots](./images/guess_check_rps_game.jpg "Walkthrough Screeenshots")
+    * finish message (you won, CPU won or you drew) leaderboard update and play again/quit message
+    * ![Walkthrough Screeenshots](./images/update_leaderboard_rps_game.jpg "Walkthrough Screeenshots")
 
 ## Google Drive and Sheets APIs
 ---
