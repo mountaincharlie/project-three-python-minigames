@@ -21,14 +21,40 @@ This app provides a fun and quick way to play a few small, popular games, with e
 ## Features [to finish]
 ---
 
-To do:
-* descriptions/user value/screenshots 
-* menu/navigation
-* player class
-* game modules 
-* interactivity/user feedback
-* the games [Player Class model!] (link to instructions section)
-* the leaderboard (link to API section)
+### Program Overview and Value to Users
+* 
+
+### Welcome Message and Setting Username
+* 
+
+### The Main Menu
+* 
+
+### Navigation
+* always option to return to game start or main menu
+
+### The Player Class
+* allows for personalisation of messages
+* allows for not having to re-enter the name of the game to access the instructions or leaderboard
+* allows for setting a quit attribute to exit to the Main Menu from within 2 while loops
+* allows for the score order to be set to 'high_to_low' for games where low scores are better (default of 'low_to_high')
+
+### The Games Player Subclasses
+* allows for dealing with the game specific user input (coordinates for Minesweeper etc...)
+
+### The Games Modules
+* link to The Games section
+
+### The Leaderboards
+* link to API section
+
+### User Feedback
+* when opening/updating etc
+* scores/right/wrong
+
+### Validating User Input
+* for each game/menu and the leaderboards
+* instructions not found message
 
 ## The Games [to finish]
 ---
