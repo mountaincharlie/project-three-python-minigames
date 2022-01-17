@@ -69,7 +69,7 @@ This app provides a fun and quick way to play a few small versions of popular ga
     * Higher_or_Lower
     * Rock_Paper_Scissors
 * Link to the Minigame instructions and features 
-    * [The Minigames](https://github.com/mountaincharlie/project-three-python-minigames#the_minigames)
+    * [The Minigames](https://github.com/mountaincharlie/project-three-python-minigames#the-minigames)
 
 ### The Leaderboards
 * Link to the Google APIs setup and connection
@@ -209,11 +209,11 @@ This app provides a fun and quick way to play a few small versions of popular ga
     * higher_or_lower.py
     * rock_paper_scissors.py
 * Used functions:
-    * .random.choice()
-    * .zeros()
-    * .random.randint()
-    * .random.insert()
-    * .random.count_nonzero()
+    * .random.choice() - for getting a random value from a list
+    * .zeros() - for generating a 2d array of zeros
+    * .random.randint() - for generating a random integer
+    * .random.insert() - for inserting a row into a 2d array
+    * .random.count_nonzero() - for finding the occurances of a value in a 2d array
 
 ### Sys - module
 * Used in the following modules within the game_engine directory:
@@ -310,15 +310,15 @@ This app provides a fun and quick way to play a few small versions of popular ga
 Features that could be added to expand and improve the program in the future.
 
 ### Change Username
-* Main Menu option to change to a different user or enter a new username
+* Main Menu option to change to a different user or enter a new username without restarting the program.
 
 ### Easy/Medium/Hard modes
-* 3 difficulty levels for each game, with the user asked to choose at the start of the game
+* 3 difficulty levels for each game, with the user asked to choose at the start of each game
 * For the leaderboard scores there could either be a score mulitplier for those that play on a harder difficulty or could be a seperate worksheet for each mode
 
 ### Hangman Game
 * Using the PyDictionary library to generate a random word
-* Creating the Hangman 'image' with just keyboard characters
+* The Hangman 'image' would be created with just keyboard characters
 * The length of the random word is used to make a string of '_' of the same length which is displayed to the user
 * A list of the full alphabet is displayed to the user and they're prompted to enter a chosen letter
 * The input is validated and the user is prompted for input until it is valid
@@ -327,5 +327,5 @@ Features that could be added to expand and improve the program in the future.
 * If the letter isnt in the word, then next bit of the hangman 'image' is added and displayed with the prompt for the next guess
 * The chosen letter is removed from the full alphabet list and added to the 'chosen letters' list which is also diplayed to the user 
 * The user either 'runs out of lives', guesses the whole word or choses to quit at some point
-* The user's score is the number of guesses they made (the lower the better)
+* The user's score is the number of lives they lost before correctly guessing the word (the lower the better)
 * (additionally, the definition of the word could be displayed in the game finish message)
