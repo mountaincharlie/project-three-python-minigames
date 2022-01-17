@@ -1,12 +1,12 @@
 """ Leaderboards module for Python Minigames """
 
-# imports
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import run
 # to import run.py from parent directory
 import sys
 sys.path.append('.')
-import run
+
 
 # setting up the constant variables for the API
 SCOPE = [
@@ -35,6 +35,8 @@ def unique_usernames(sheets):
     leaderboards worksheets.
     Defines an empty set to add the usernames to, which prevents
     duplicates.
+    Has a Try/Except block to catch errors if the spreadsheet or
+    any worksheets cannot be found.
     Loops through the list of 'sheet' names passed into the function.
     For each sheet, the data from the second column (contains usernames)
     is put into a set and sliced to remove the 'Usernames' heading and
@@ -45,18 +47,17 @@ def unique_usernames(sheets):
     Returns the usernames_dict.
     """
     usernames = set()
-    # catching errors if the spreadsheet or the worksheets cannot be found
     try:
         for sheet in sheets:
             worksheet = SHEET.worksheet(sheet)
             data = worksheet.col_values(2)
             usernames |= set(data[1:])
     except gspread.exceptions.WorksheetNotFound:
-        print(f'\nSorry, one of the leaderboards could not be found.\nUnable to access previous usernames at this time.\n')
-        return  'new_username_req'
+        print('\nSorry, one of the leaderboards could not be found.\nUnable to access previous usernames at this time.\n')
+        return 'new_username_req'
     except NameError:
         print('\nSorry, since the leaderboards spreadsheets could not be found,\nit will not be possible to access previous usernames at this time.\n')
-        return  'new_username_req'
+        return 'new_username_req'
 
     usernames_dict = {}
     for i, name in enumerate(usernames):
@@ -73,7 +74,7 @@ def row_to_insert_at(score_list, user_score, score_order):
     first value which is the heading, checks if the user's
     score is less than or equal to (a better or equal score).
     insert_at_row = i+1 since the sheet starts at row = 1 and
-    has a heading in the frist row.
+    has a heading in the first row.
     If the user's score isnt better than any in the list, the
     insert row will be the last one.
     Returns the insert_at_row.
@@ -169,7 +170,7 @@ def print_leaderboard_dict(menu):
 
 def leaderboard_choice(user, menu):
     """
-    Prompts the user for an option from the menu until a valid 
+    Prompts the user for an option from the menu until a valid
     option is chosen.
     Calls the print_leaderboard_dict() to display the menu for
     the user and requests an input for an option or 'quit.
@@ -179,6 +180,8 @@ def leaderboard_choice(user, menu):
     dict's keys.
     If its not a valid key, ValueError is raised, with a message
     to the user.
+    Has a Try/Except block to catch errors if the spreadsheet or
+    any worksheets cannot be found.
     If the user make a valid choice, that game's leaderboard
     worksheet is retrived and for each row of its data, the first
     (rank), second (username) and third (score) values are printed
@@ -201,7 +204,6 @@ def leaderboard_choice(user, menu):
 
                 print(f'\n --- Opening the {leaderboard_name} leaderboard ...\n')
 
-                # catching errors if the spreadsheet or the worksheets cannot be found
                 try:
                     leaderboard_worksheet = SHEET.worksheet(leaderboard_name)
                     data = leaderboard_worksheet.get_all_values()
@@ -232,7 +234,7 @@ def main(user):
     Personally welcomes the user.
     While the user doesn't want to quit, leaderboard_choice() is called with
     the user and the Leaderboards Menu as params.
-    A final thank you message is printed before the user returns to Main Menu. 
+    A final thank you message is printed before the user returns to Main Menu.
     """
     username = user.username
     leaderboard_user = run.Player(username, 0, None, None, 'low_to_high')

@@ -1,8 +1,7 @@
 """ Project 3 - Python Minigames """
 
-# imports (modules and other needed py libraries)
-import gspread
 import importlib as il
+import gspread
 from game_engine import leaderboards as lb
 
 
@@ -27,6 +26,8 @@ class Player:
     def update_leaderboard(self):
         """
         Updates the leaderboard after a game is complete.
+        Has a try/except block to catch errors if the
+        spreadsheet or the worksheets cannot be found.
         Sets the leaderboard as the worksheet from the leaderboard
         module's SHEET constant, using the player's game_choice
         attribute to access the correct worksheet.
@@ -46,7 +47,6 @@ class Player:
         worksheet.
         """
 
-        # catching errors if the spreadsheet or the worksheets cannot be found
         try:
             print(f"\n --- Updating the {self.game_choice} leaderboard ...\n")
             leaderboard = lb.SHEET.worksheet(self.game_choice)
@@ -127,6 +127,10 @@ class Player:
 
     def game_finish(self):
         """
+        Called at the end of a game.
+        Calls the player's update_leaderboard() function.
+        Returns the value from the player's play_again()
+        function to quit out of the while loop.
         """
         self.update_leaderboard()
 
@@ -172,6 +176,9 @@ def setting_username():
     The worksheet names are passed in the leaderboard module's
     function 'unique_usernames()' to create a dictionary of
     unique usernames.
+    If unique_usernames() has an error finding the leaderboards
+    spreadsheet or any worksheet, it returns 'new_username_req'
+    which triggers the code for the user to enter a new username.
     A try/except is used to get a valid option from the dict
     of previous usernames.
     If the user wants to choose a new username, a try/except is

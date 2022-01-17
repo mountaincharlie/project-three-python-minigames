@@ -1,11 +1,10 @@
 """ Rock_Paper_Scissors minigame module for Python Minigames """
 
-# imports
+from run import Player
 import numpy as np
 # to import run.py from parent directory
 import sys
 sys.path.append('.')
-from run import Player
 
 
 # Rock_Paper_Scissors Player subclass
@@ -52,9 +51,10 @@ def rand_rps_choice():
     return OPTIONS[choice]
 
 
-# compares the choices
 def choice_compare(user_choice, cpu_choice):
     """
+    Compares the user's and CPU's choice.
+    Returns winner
     """
 
     if user_choice == cpu_choice:
@@ -75,7 +75,6 @@ def choice_compare(user_choice, cpu_choice):
     return winner
 
 
-# main function call
 def main(user):
     """ main game function calls """
 
@@ -85,19 +84,15 @@ def main(user):
     # overall while loop for starting the game
     while rock_paper_scissors_user.quit_status != 'quit':
 
-        # resetting the user's score everytime they play again
         rock_paper_scissors_user.score = 0
-        # resetting cpu score
         cpu_score = 0
+        rounds_played = 0
 
         # welcome message
         play_or_quit = rock_paper_scissors_user.welcome_msg()
         if play_or_quit == 'quit':
             break
         print('\n --- Setting up the game ...\n')
-
-        # defining/resetting counter for number of rounds
-        rounds_played = 0
 
         # printing the basic instructions
         print(f"Choose to play: rock, paper or scissor.\nThe computer will also make a choice\nand the winner will be displayed.\nThe game is out of {NUM_ROUNDS} rounds.\n")
@@ -107,13 +102,9 @@ def main(user):
             rounds_played += 1
             print(f'Round {rounds_played}')
 
-            # takes in and validates user choice
             rock_paper_scissors_user.choice = validate_choice()
-
-            # generates random cpu choice
             cpu_choice = rand_rps_choice()
 
-            # compares the two guesses
             round_winner = choice_compare(rock_paper_scissors_user.choice, cpu_choice)
 
             # tracking the user's score (+1 for wins only)
@@ -121,9 +112,7 @@ def main(user):
                 rock_paper_scissors_user.score += 1
             elif round_winner == 'The CPU':
                 cpu_score += 1
-            # ADD LATER? compares cpu and user wins for winner
 
-            # prints the result
             print(f"\nYou chose {rock_paper_scissors_user.choice}\nThe CPU chose {cpu_choice}\n{round_winner} won this round.\n{rock_paper_scissors_user.username}: {rock_paper_scissors_user.score}\nCPU: {cpu_score}")
 
             # ending the game
@@ -145,7 +134,7 @@ def main(user):
                 break
 
 
-# constants and global vars
+# game constants
 OPTIONS = {
     'r': 'rock',
     'p': 'paper',

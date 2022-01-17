@@ -1,11 +1,10 @@
 """ Minesweeper minigame module for Python Minigames """
 
-# imports
+from run import Player
 import numpy as np
 # to import run.py from parent directory
 import sys
 sys.path.append('.')
-from run import Player
 
 
 # minesweeper Player subclass
@@ -18,9 +17,6 @@ class MinesweeperPlayer(Player):
     @classmethod
     def from_current_user(cls, player_instance, coors):
         return cls(**player_instance.__dict__, coors=coors)
-
-
-# ----- GRID GENERATING -----
 
 
 def generate_grid():
@@ -76,15 +72,16 @@ def insert_nums(i, j, hidden_grid):
     Creates a 2d array of the point and the coordinates around it, using
     index slicing and max() inorder to prevent including negative
     indexes which would access the list from the opposite end.
+    Uses Numpy's count_nonzero() function to find occurances of 'M' in
+    the 2d array.
+    Assigns the hidden_grid's (i, j) coor the number of mines around it.
     """
 
     # CREDIT - finding matrix of surrounding coors from MSeifert's solution on stackoverflow "https://stackoverflow.com/questions/36964875/sum-of-8-neighbors-in-2d-array/37026344#37026344"
     around = hidden_grid[max(0, i-1): i+2, max(0, j-1): j+2]
 
-    # count_nonzero function to find occurances of 'M' in the 2d array
     mines_around = np.count_nonzero(around == 'M')
 
-    # assigning the (i, j) coor with mine number
     hidden_grid[i, j] = mines_around
 
 
@@ -92,7 +89,8 @@ def examine_coors(hidden_grid):
     """
     Takes the hidden_grid 2d array.
     Loops through each coordinate, using enumerate instead of range(len()),
-    and calls the insert_nums() function.
+    and calls the insert_nums() function if the coordinate doesn't contain
+    a mine.
     Returns the updated hidden_grid.
     """
     for i, row in enumerate(hidden_grid):
@@ -108,7 +106,16 @@ def examine_coors(hidden_grid):
 def print_grid(grid):
     """
     Takes the display_grid 2d array.
-    Inserts a row of numbers to be printed first (when i==0).
+    Creates a list of numbers equal to the length of a row in
+    the grid.
+    Inserts a row of numbers into the grid to be printed first
+    (when i==0) which indicate to the user the column numbers.
+    Using numpy's insert() function, with arr = grid, obj = 0,
+    values = the list of numbers and axis=0 (rows).
+    Uses enumerate for the grid's rows and the number as well as
+    a counter 'm', used to avoid counting the row of inserted
+    numbers (for the user to clearly see the number for each
+    row)
     Prints it out by row with the row number then then the row.
     """
     nums = [i for i in range(len(grid[0]))]
@@ -129,11 +136,10 @@ def print_grid(grid):
             print(f"'{m}'", row)
 
 
-# ----- PROCESSING USER INPUT -----
-
 def validate_row_col(num, axis):
     """
-    Takes the number of ROWS or COLS and 'row' or 'column'.
+    Takes the number of ROWS or COLS and the 'axis'
+    which is 'row' or 'column'.
     Keeps asking the user for a row or column number,
     until a valid entry is given.
     Returns the valid coordinate.
@@ -216,20 +222,18 @@ def flag_check(coors, d_grid, h_grid):
     return d_grid, h_grid
 
 
-# calls game_finish now
 def mine_count(user, h_grid):
     """
     Takes the hidden_grid.
     Counts the occurances of 'M' in the grid.
     If there are no mines remaining (they're all flagged)
-    then the game_won() function is called.
-    Returns the return of game_won() (which is 'quit')
+    a personalised congratulations message is printed and
+    the game_finish() function is called.
+    Returns the return of game_finish() (which is 'quit')
     """
     mines_remaining = np.count_nonzero(h_grid == 'M')
 
     if int(mines_remaining) == 0:
-        # win_message = 'reveals'
-        # return user.game_won(win_message)
         print(f"\nCongratulations {user.username}!\nYou completed the game with a score of: {user.score} reveals.")
         return user.game_finish()
 
@@ -237,51 +241,54 @@ def mine_count(user, h_grid):
 def coor_reveal(user, user_coors, h_grid, d_grid):
     """
     Takes minesweeper_user, minesweeper_user.coors, hidden_grid, display_grid.
-    Checks the contents of the coordinate from in hidden_grid.
-    If the coordinate contains a mine, the game is over, otherwise, a
-    message to the user is displayed and the contents are written into the
-    coordinates in display_grid.
+    Checks the contents of the coordinate from in hidden_grid ('M' or number).
+    Adds one to the user's score (tracking the number of reveals).
+    If the coordinate contains a mine, the game is over and a personal GAME OVER
+    message is printed.
+    Otherwise, a message to the user is displayed and the contents are
+    written into the coordinates in display_grid.
     """
-    # finding the 'M' or number at user_coors in hidden_grid
+
     coor_content = h_grid[user_coors]
 
-    # adds one to the user's score (tracks number of reveals)
     user.score += 1
 
     if coor_content == 'M':
-        # prints lose message and doesn't need to call game_finish
         print(f'Sorry {user.username}, there was a mine at {user_coors}!\n\nGAME OVER\n')
         return user.play_again()
     else:
         print(f"You avoided the mines!\n'{coor_content}' has been revealed at {user_coors}\n")
-        # inserting the revealed number and displaying the grid
         d_grid[user_coors] = coor_content
         print_grid(d_grid)
 
 
 # function for checking flag or reveal
 def flag_or_reveal(user, display_grid, hidden_grid):
-    """  """
+    """
+    Asks user if they want to reveal their chosen location
+    or insert/remove a flag.
+    If they want to insert/remove a flag, the flag_check()
+    function is called, the display_grid is displayed and a
+    check is made to see if any mines remain (or if they have
+    all been flagged).
+    Otherwise it finds the value at the coordinates in the
+    hidden_grid and returns them to be 'revealed' to the user
+    (number or 'M').
+    """
     user_choice = input("Hit ENTER to reveal the location or enter 'f' to insert/remove a flag:\n")
 
     user_coors = user.coors
 
     if user_choice.lower() == 'f':
-        # call flag check for deciding insert/remove flag
         display_grid, hidden_grid = flag_check(user_coors, display_grid, hidden_grid)
 
-        # displaying display_grid
         print_grid(display_grid)
 
-        # check number of mines
         game_complete_check = mine_count(user, hidden_grid)
         if game_complete_check == 'quit':
             return game_complete_check
 
-        # REMOVE AFTER TESTING
-        # print('updated hidden_grid:\n', hidden_grid)
     else:
-        # calling function to check the content of the coor in the hidden_grid
         return coor_reveal(user, user_coors, hidden_grid, display_grid)
 
 
@@ -293,10 +300,9 @@ def main(user):
     # setting score_order 'high_to_low' => lower scores are better
     minesweeper_user.score_order = 'high_to_low'
 
-    # overall while loop for starting the game
+    # overall while loop for maintaing the game
     while minesweeper_user.quit_status != 'quit':
         username = minesweeper_user.username
-        # resetting the user's score everytime they play again
         minesweeper_user.score = 0
 
         # welcome message
@@ -307,18 +313,14 @@ def main(user):
 
         # generating the hidden_grid
         hidden_grid = generate_grid()
-        # print('initial grid:\n', hidden_grid)
 
         # generating the random and unique mine coors
         mine_coors = gen_mine_coors()
-        # print('mine coors', mine_coors)
 
         # inserting the mines into the grid
         hidden_grid = insert_mines(mine_coors, hidden_grid)
-        # print('with mines:\n', hidden_grid)
 
         # looping through the other coors and inserting their number
-        # print('completed hidden_grid:\n', hidden_grid)
         examine_coors(hidden_grid)
 
         # generating the display grid
@@ -329,7 +331,7 @@ def main(user):
 
         print_grid(display_grid)
 
-        # user selection for row and column until 'quit'
+        # user selection for rows and columns until 'quit'
         while True:
             user_row = validate_row_col(ROWS, 'ROW')
             user_col = validate_row_col(COLS, 'COLUMN')
