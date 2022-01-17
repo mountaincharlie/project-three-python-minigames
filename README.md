@@ -228,13 +228,12 @@ This app provides a fun and quick way to play a few small versions of popular ga
     * run.py
 * Used to import a chosen module from the game_engine directory, from their full file path as a string 
 
-## Testing [to finish]
+## Testing
 ---
 
-To do:
 ### PEP8 Python Validator
-* SHOULD BE: No errors or warnings
-* <a href = ##LINK##>Link to validator results</a>
+* No errors or warnings
+* The 'share' feature did not work on <a href = "http://pep8online.com/">PEP8 Online</a>
 
 ### Bugs and Fixes
 * **Bug:** when checking if the user's input was a key in the menu_dict dictionary, the if statement was never being triggered even by input I thought was correct.
