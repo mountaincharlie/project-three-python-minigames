@@ -232,7 +232,7 @@ This app provides a fun and quick way to play a few small versions of popular ga
 ---
 
 ### PEP8 Python Validator
-* No errors or warnings
+* No errors or warnings, only 'line too long' comments
 * The 'share' feature did not work on <a href = "http://pep8online.com/">PEP8 Online</a>
 
 ### Bugs and Fixes
