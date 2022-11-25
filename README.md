@@ -4,6 +4,9 @@ Python Minigames is a collection of 3 mini versions of games of logic, skill and
 
 This app provides a fun and quick way to play a few small versions of popular games, with easy to follow instructions, clear user feedback and error handling to allow all kinds of user's to get started straight away. 
 
+### Deployed Site link
+* [Python Minigames](https://python-minigames.herokuapp.com/)
+
 ## Contents
 ---
 
